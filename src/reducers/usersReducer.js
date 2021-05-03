@@ -1,4 +1,4 @@
-function usersReducer(state = { user: [], loading: false }, action) {
+export default function usersReducer(state = { user: [], loading: false }, action) {
     switch (action.type) {
 
         case 'LOADING_USER':
@@ -19,5 +19,3 @@ function usersReducer(state = { user: [], loading: false }, action) {
             return state;
     }
 }
-
-export default usersReducer;
