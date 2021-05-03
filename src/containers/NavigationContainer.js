@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
+import CategoriesContainer from './CategoriesContainer'
 
 class NavigationContainer extends Component {
 
@@ -8,8 +9,7 @@ class NavigationContainer extends Component {
             <BrowserRouter>
                 <div>
                     <h3>Navigation Container</h3>
-                    {/* <NavBar /> */}
-                    <Route path='/home' render={() => <h5>Home</h5>} />
+                    <Route path='/home' render={() => <CategoriesContainer />} />
                 </div>
             </BrowserRouter>
         )
