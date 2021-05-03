@@ -1,11 +1,12 @@
 import './App.css';
-import DisplayContainer from './containers/DisplayContainer'
+import NavigationContainer from './containers/NavigationContainer';
+import DisplayContainer from './containers/DisplayContainer';
 
 function App() {
   return (
     <div className="App">
-      {/* <NavigationContainer />
-      <EventListContainer /> */}
+      <NavigationContainer />
+      {/* <EventListContainer /> */}
       <DisplayContainer />
     </div>
   );
