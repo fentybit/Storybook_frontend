@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchUser } from '../actions/userActions';
+import { fetchUser } from '../redux/actions/userActions';
 // import DisplayList from '../components/DisplayList';
 
 class DisplayContainer extends Component {
