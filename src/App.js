@@ -1,13 +1,15 @@
 import './App.css';
 import NavigationContainer from './containers/NavigationContainer';
-import EventListContainer from './containers/EventListContainer';
+import EventViewContainer from './containers/EventViewContainer';
 import DisplayContainer from './containers/DisplayContainer';
 
 function App() {
   return (
     <div className="App">
       <NavigationContainer />
-      <EventListContainer />
+      <hr />
+      <EventViewContainer />
+      <hr />
       <DisplayContainer />
     </div>
   );
