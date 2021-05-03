@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 
-class NavigationContainer extends Component {
+class EventListContainer extends Component {
     render() {
         return (
             <div>
-                <h3>Navigation Container</h3>
+                <h3>Event List Container</h3>
             </div>
         )
     }
 }
 
-export default NavigationContainer;
+export default EventListContainer;
