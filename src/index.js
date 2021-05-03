@@ -1,15 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import './index.css';
 import App from './App';
-import rootReducer from './reducers/rootReducer';
+import './index.css';
+
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import usersReducer from './reducers/usersReducer';
 import reportWebVitals from './reportWebVitals';
 
 const store = createStore(
-  rootReducer,
+  usersReducer,
   applyMiddleware(thunk)
 );
 
