@@ -1,73 +1,112 @@
 import React, { Component } from 'react'
+import { Switch, Route } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import './App.css';
+import Form from './components/user/Form';
+import Home from './components/user/Home';
 // import NavigationContainer from './containers/NavigationContainer';
 // import EventViewContainer from './containers/EventViewContainer';
 // import DisplayContainer from './containers/DisplayContainer';
 
 class App extends Component {
   state = {
-    username: '',
-    firstname: '',
-    lastname: '',
-    password: '',
-    message: null
+    user: {},
+    token: ''
   }
 
-  handleLogin = () => {
-    console.log('Loggin In')
+  componentDidMount() {
+    if (localStorage.getItem('token')) {
+      let token = localStorage.getItem('token')
+
+      fetch('http://localhost:4000/persist', {
+        headers: {
+          'Authorization': `bearer ${token}`
+        }
+      })
+        .then(resp => resp.json())
+        .then(data => {
+          if (data.token) {
+            localStorage.setItem('token', data.token);
+            this.setState({
+              user: data.user,
+              token: data.token
+            }, () => {
+              this.props.history.push('/profile')
+            })
+          }
+        })
+    }
+  }
+
+  handleLogin = (user) => {
+    fetch('http://localhost:3000/api/v1/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+      .then(resp => resp.json())
+      .then(data => {
+        if (!data.error) {
+          localStorage.setItem('token', data.token);
+          this.setState({
+            user: data.user,
+            token: data.token
+          }, () => {
+            this.props.history.push('/profile')
+          })
+        }
+      })
   }
 
   handleOnChange = (event) => {
     this.setState({ [event.target.name]: event.target.value })
   }
 
-  handleSignup = (event) => {
-    event.preventDefault()
-
+  handleSignup = (user) => {
     fetch('http://localhost:3000/api/v1/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json'
       },
-      body: JSON.stringify({
-        user: {
-          username: this.state.username,
-          firstname: this.state.firstname,
-          lastname: this.state.lastname,
-          password: this.state.password
-        }
-      })
+      body: JSON.stringify(user)
     })
       .then(resp => resp.json())
-      .then(data => this.setState({ message: data.error }))
+      .then(data => {
+        if (!data.error) {
+          localStorage.setItem('token', data.token);
+          this.setState({
+            user: data.user,
+            token: data.token
+          }, () => {
+            this.props.history.push('/profile')
+          })
+        }
+      })
+  }
 
-    this.setState({ username: '', firstname: '', lastname: '', password: '' })
+  renderForm = (routerProps) => {
+    if (routerProps.location.pathname === '/login') {
+      return <Form {...routerProps} formName='Login Form' handleSubmit={this.handleLogin} />
+    } else if (routerProps.location.pathname === '/register') {
+      return <Form {...routerProps} formName='Register Form' handleSubmit={this.handleSignup} />
+    }
   }
 
   render() {
     return (
       <div className="App">
-
-        {/* Controlled Form for New User Sign Up */}
-        <form onSubmit={this.handleSignup}>
-          <input type='text' name='username' placeholder='Username' onChange={this.handleOnChange} value={this.state.username} />
-          <input type='text' name='firstname' placeholder='Firstname' onChange={this.handleOnChange} value={this.state.firstname} />
-          <input type='text' name='lastname' placeholder='Lastname' onChange={this.handleOnChange} value={this.state.lastname} />
-          <input type='password' name='password' placeholder='Password' onChange={this.handleOnChange} value={this.state.password} />
-          <input type="submit" value="Sign Up" />
-        </form>
-        {(this.state.message) ? <h6>{this.state.message}</h6> : null}
-
-        <hr />
-
-        {/* Controlled Form for User Login */}
-        <form onSubmit={this.handleLogin}>
-          <input type='text' name='username' placeholder='Username' onChange={this.handleOnChange} value={this.state.username} />
-          <input type='password' name='password' placeholder='Password' onChange={this.handleOnChange} value={this.state.password} />
-          <input type="submit" value="Login" />
-        </form>
+        <Switch>
+          <Route path='/login' render={this.renderForm} />
+          <Route path='/register' render={this.renderForm} />
+          <Route path='/profile' render={this.renderProfile} />
+          <Route path='/' exact render={() => <Home />} />
+          <Route render={() => <p>Page not Found.</p>} />
+        </Switch>
 
         {/* <NavigationContainer />
         <hr />
@@ -79,4 +118,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);
