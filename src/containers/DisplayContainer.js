@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { fetchUser } from '../redux/actions/userActions';
+import { connect } from 'react-redux';
 // import DisplayList from '../components/DisplayList';
 
 class DisplayContainer extends Component {
@@ -9,8 +9,7 @@ class DisplayContainer extends Component {
     }
 
     handleLoading = () => {
-
-        if (this.props.loading) {
+        if (this.props.user.length === 0) {
             return <div>Loading...</div>
         } else {
             return <div>{this.props.user.fullname}</div>
@@ -29,8 +28,7 @@ class DisplayContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        user: state.user,
-        loading: state.loading
+        user: state.user
     }
 }
 
