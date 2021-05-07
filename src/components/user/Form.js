@@ -8,12 +8,21 @@ export default class Form extends Component {
         lastname: ''
     }
 
+    handleOnChange = (event) => {
+        this.setState({ [event.target.name]: event.target.value })
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault()
+        this.props.handleSubmit(this.state)
+    }
+
     render() {
         return (
             <div>
                 console.log(this.props.match.url)
                 {/* Controlled Form for New User Sign Up */}
-                <form onSubmit={this.handleSignup}>
+                <form onSubmit={this.handleSubmit}>
                     <input type='text' name='username' placeholder='Username' onChange={this.handleOnChange} value={this.state.username} />
                     <input type='text' name='firstname' placeholder='Firstname' onChange={this.handleOnChange} value={this.state.firstname} />
                     <input type='text' name='lastname' placeholder='Lastname' onChange={this.handleOnChange} value={this.state.lastname} />
@@ -25,7 +34,7 @@ export default class Form extends Component {
                 <hr />
 
                 {/* Controlled Form for User Login */}
-                <form onSubmit={this.handleLogin}>
+                <form onSubmit={this.handleSubmit}>
                     <input type='text' name='username' placeholder='Username' onChange={this.handleOnChange} value={this.state.username} />
                     <input type='password' name='password' placeholder='Password' onChange={this.handleOnChange} value={this.state.password} />
                     <input type="submit" value="Login" />

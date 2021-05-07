@@ -5,9 +5,8 @@ import { withRouter } from 'react-router-dom';
 import './App.css';
 import Form from './components/user/Form';
 import Home from './components/user/Home';
-// import NavigationContainer from './containers/NavigationContainer';
-// import EventViewContainer from './containers/EventViewContainer';
-// import DisplayContainer from './containers/DisplayContainer';
+import NavBar from './components/user/NavBar';
+import ProfileContainer from './containers/ProfileContainer';
 
 class App extends Component {
   state = {
@@ -62,10 +61,6 @@ class App extends Component {
       })
   }
 
-  handleOnChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value })
-  }
-
   handleSignup = (user) => {
     fetch('http://localhost:3000/api/v1/users', {
       method: 'POST',
@@ -97,9 +92,14 @@ class App extends Component {
     }
   }
 
+  renderProfile = (routerProps) => {
+    return <ProfileContainer token={this.state.token} user={this.state.user} />
+  }
+
   render() {
     return (
       <div className="App">
+        <NavBar />
         <Switch>
           <Route path='/login' render={this.renderForm} />
           <Route path='/register' render={this.renderForm} />
@@ -107,12 +107,6 @@ class App extends Component {
           <Route path='/' exact render={() => <Home />} />
           <Route render={() => <p>Page not Found.</p>} />
         </Switch>
-
-        {/* <NavigationContainer />
-        <hr />
-        <EventViewContainer />
-        <hr />
-        <DisplayContainer /> */}
       </div>
     );
   }
