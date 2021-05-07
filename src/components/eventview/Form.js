@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import uuid from 'uuid'; // unique number
 // firebase, entire backend by itself
 
@@ -19,7 +19,10 @@ export default class Form extends Component {
     render() {
         return (
             <div>
-                <input type='text' name='category' placeholder=''>
+                <form>
+                    <input type='text' name='category' placeholder='' />
+
+                </form>
             </div>
         )
     }
