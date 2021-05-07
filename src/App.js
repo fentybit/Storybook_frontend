@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 import './App.css';
 import Form from './components/user/Form';
-import Home from './components/user/Home';
+import Welcome from './components/user/Welcome';
 import NavBar from './components/user/NavBar';
 import ProfileContainer from './containers/ProfileContainer';
 
@@ -18,15 +18,16 @@ class App extends Component {
     if (localStorage.getItem('token')) {
       let token = localStorage.getItem('token')
 
-      fetch('http://localhost:4000/persist', {
+      fetch('http://localhost:3000/api/v1/profile', {
         headers: {
           'Authorization': `bearer ${token}`
         }
       })
         .then(resp => resp.json())
         .then(data => {
+          console.log(data)
           if (data.token) {
-            localStorage.setItem('token', data.token);
+            localStorage.setItem("token", data.token);
             this.setState({
               user: data.user,
               token: data.token
@@ -45,15 +46,20 @@ class App extends Component {
         'Content-Type': 'application/json',
         Accept: 'application/json'
       },
-      body: JSON.stringify(user)
+      body: JSON.stringify({
+        user: {
+          username: user.username,
+          password: user.password
+        }
+      })
     })
       .then(resp => resp.json())
       .then(data => {
         if (!data.error) {
-          localStorage.setItem('token', data.token);
+          localStorage.setItem('token', data.jwt);
           this.setState({
             user: data.user,
-            token: data.token
+            token: data.jwt
           }, () => {
             this.props.history.push('/profile')
           })
@@ -68,20 +74,32 @@ class App extends Component {
         'Content-Type': 'application/json',
         Accept: 'application/json'
       },
-      body: JSON.stringify(user)
+      body: JSON.stringify({
+        user: {
+          username: user.username,
+          firstname: user.firstname,
+          lastname: user.lastname,
+          password: user.password
+        }
+      })
     })
       .then(resp => resp.json())
       .then(data => {
         if (!data.error) {
-          localStorage.setItem('token', data.token);
+          localStorage.setItem('token', data.jwt);
           this.setState({
             user: data.user,
-            token: data.token
+            token: data.jwt
           }, () => {
             this.props.history.push('/profile')
           })
         }
       })
+  }
+
+  logout = () => {
+    localStorage.clear()
+    window.location.href = '/'
   }
 
   renderForm = (routerProps) => {
@@ -102,9 +120,10 @@ class App extends Component {
         <NavBar />
         <Switch>
           <Route path='/login' render={this.renderForm} />
+          <Route path='/logout' render={this.logout} />
           <Route path='/register' render={this.renderForm} />
           <Route path='/profile' render={this.renderProfile} />
-          <Route path='/' exact render={() => <Home />} />
+          <Route path='/' exact render={() => <Welcome />} />
           <Route render={() => <p>Page not Found.</p>} />
         </Switch>
       </div>
