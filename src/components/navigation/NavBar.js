@@ -4,12 +4,12 @@ import { NavLink } from 'react-router-dom';
 const NavBar = ({ user }) => {
     return (
         <div>
-            <h3>Hello, {user.fullname}</h3>
-            Categories Link here
-            <hr />
+            <h5>Hello, {user.fullname}</h5>
+            <p>Categories Link here</p>
+
             <NavLink to='/events/newentry'>New Entry</NavLink>
-            <hr />
-            Event View Link here
+
+            <p>Event View Link here</p>
         </div>
     )
 }
