@@ -6,7 +6,9 @@ const NavBar = () => {
         <div>
             { localStorage.getItem('token')
                 ?
-                <NavLink to='/logout'>Logout</NavLink>
+                <>
+                    <NavLink to='/profile'>Home</NavLink> | <NavLink to='/logout'>Logout</NavLink>
+                </>
                 :
                 <>
                     <NavLink to='/login'>Login</NavLink> | <NavLink to='/register'>Sign Up</NavLink>

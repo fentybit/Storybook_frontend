@@ -4,6 +4,9 @@ import userReducer from './reducers/userReducer';
 
 const rootReducer = combineReducers({
     user: userReducer,
+
+
+
 });
 
 const store = createStore(

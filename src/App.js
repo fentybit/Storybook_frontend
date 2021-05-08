@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
+// import { fetchUser, loginUser } from './redux/actions/userActions';
+import { connect } from 'react-redux';
+
 import './App.css';
 import Form from './components/user/Form';
 import Welcome from './components/user/Welcome';
@@ -26,8 +29,8 @@ class App extends Component {
         .then(resp => resp.json())
         .then(data => {
           console.log(data)
-          if (data.token) {
-            localStorage.setItem("token", data.token);
+          if (data.jwt) {
+            localStorage.setItem("token", data.jwt);
             this.setState({
               user: data.user,
               token: data.token
@@ -111,7 +114,7 @@ class App extends Component {
   }
 
   renderProfile = (routerProps) => {
-    return <ProfileContainer token={this.state.token} user={this.state.user} />
+    return <ProfileContainer token={this.state.user} user={this.state.token} />
   }
 
   render() {
