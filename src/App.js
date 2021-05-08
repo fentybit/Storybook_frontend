@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
-// import { fetchUser, loginUser } from './redux/actions/userActions';
+import { fetchUser, loginUser, signupUser } from './redux/actions/userActions';
 import { connect } from 'react-redux';
 
 import './App.css';
@@ -12,92 +12,21 @@ import NavBar from './components/user/NavBar';
 import ProfileContainer from './containers/ProfileContainer';
 
 class App extends Component {
-  state = {
-    user: {},
-    token: ''
-  }
+  // state = {
+  //   user: {},
+  //   token: ''
+  // }
 
   componentDidMount() {
-    if (localStorage.getItem('token')) {
-      let token = localStorage.getItem('token')
-
-      fetch('http://localhost:3000/api/v1/profile', {
-        headers: {
-          'Authorization': `bearer ${token}`
-        }
-      })
-        .then(resp => resp.json())
-        .then(data => {
-          console.log(data)
-          if (data.jwt) {
-            localStorage.setItem("token", data.jwt);
-            this.setState({
-              user: data.user,
-              token: data.token
-            }, () => {
-              this.props.history.push('/profile')
-            })
-          }
-        })
-    }
+    this.props.fetchUser(this.props.history)
   }
 
   handleLogin = (user) => {
-    fetch('http://localhost:3000/api/v1/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      },
-      body: JSON.stringify({
-        user: {
-          username: user.username,
-          password: user.password
-        }
-      })
-    })
-      .then(resp => resp.json())
-      .then(data => {
-        if (!data.error) {
-          localStorage.setItem('token', data.jwt);
-          this.setState({
-            user: data.user,
-            token: data.jwt
-          }, () => {
-            this.props.history.push('/profile')
-          })
-        }
-      })
+    this.props.loginUser(user, this.props.history)
   }
 
   handleSignup = (user) => {
-    fetch('http://localhost:3000/api/v1/users', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      },
-      body: JSON.stringify({
-        user: {
-          username: user.username,
-          firstname: user.firstname,
-          lastname: user.lastname,
-          password: user.password
-        }
-      })
-    })
-      .then(resp => resp.json())
-      .then(data => {
-        if (!data.error) {
-          localStorage.setItem('token', data.jwt);
-          this.setState({
-            user: data.user,
-            token: data.jwt
-          }, () => {
-            this.props.history.push('/profile')
-          })
-        }
-      })
+    this.props.signupUser(user, this.props.history)
   }
 
   logout = () => {
@@ -114,12 +43,15 @@ class App extends Component {
   }
 
   renderProfile = (routerProps) => {
-    return <ProfileContainer token={this.state.user} user={this.state.token} />
+    return <ProfileContainer token={this.props.user.user} user={this.props.user.token} />
   }
 
   render() {
+    console.log(this.props.user.user)
+    console.log(this.props.user.token)
+
     return (
-      <div className="App">
+      <div div className="App" >
         <NavBar />
         <Switch>
           <Route path='/login' render={this.renderForm} />
@@ -129,9 +61,15 @@ class App extends Component {
           <Route path='/' exact render={() => <Welcome />} />
           <Route render={() => <p>Page not Found.</p>} />
         </Switch>
-      </div>
+      </div >
     );
   }
 }
 
-export default withRouter(App);
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
+
+export default withRouter(connect(mapStateToProps, { fetchUser, loginUser, signupUser })(App));
