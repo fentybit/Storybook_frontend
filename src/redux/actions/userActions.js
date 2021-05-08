@@ -18,7 +18,7 @@ export const fetchUser = (history) => {
                 .then(data => {
                     if (data.jwt) {
                         localStorage.setItem("token", data.jwt);
-                        dispatch({ type: 'SHOW_USER', data });
+                        dispatch({ type: 'GET_USER', payload: data });
                         history.push('/profile')
                     }
                 })
@@ -52,7 +52,7 @@ export const loginUser = (user, history) => {
             .then(data => {
                 if (!data.error) {
                     localStorage.setItem('token', data.jwt);
-                    dispatch({ type: 'SHOW_USER', data });
+                    dispatch({ type: 'GET_USER', payload: data });
                     history.push('/profile')
                 }
             })
@@ -87,7 +87,7 @@ export const signupUser = (user, history) => {
             .then(data => {
                 if (!data.error) {
                     localStorage.setItem('token', data.jwt);
-                    dispatch({ type: 'SHOW_USER', data });
+                    dispatch({ type: 'GET_USER', payload: data });
                     history.push('/profile')
                 }
             })

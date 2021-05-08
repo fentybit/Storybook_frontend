@@ -12,11 +12,6 @@ import NavBar from './components/user/NavBar';
 import ProfileContainer from './containers/ProfileContainer';
 
 class App extends Component {
-  // state = {
-  //   user: {},
-  //   token: ''
-  // }
-
   componentDidMount() {
     this.props.fetchUser(this.props.history)
   }
@@ -47,8 +42,8 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props.user.user)
-    console.log(this.props.user.token)
+    console.log(this.props.user)
+    console.log(this.props.token)
 
     return (
       <div div className="App" >
@@ -68,7 +63,8 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.user,
+    token: state.token
   }
 }
 

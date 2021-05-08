@@ -1,14 +1,8 @@
-function userReducer(state = { user: {}, token: '' }, action) {
-
-
+function userReducer(state = [], action) {
     switch (action.type) {
-        case 'SHOW_USER':
-            // return action.data
-            return {
-                ...state,
-                user: action.data.user,
-                token: action.data.jwt
-            }
+        case 'GET_USER':
+            console.log('in reducer ', action.payload.user)
+            return action.payload.user
 
         default:
             return state;
