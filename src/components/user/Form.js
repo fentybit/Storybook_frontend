@@ -21,6 +21,7 @@ export default class Form extends Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
+                    <label htmlFor="username">Username</label>
                     <input type='text' name='username' placeholder='Username' onChange={this.handleOnChange} value={this.state.username} />
 
                     {(this.props.match.url === '/login')
@@ -28,11 +29,14 @@ export default class Form extends Component {
                         null
                         :
                         <>
+                            <label htmlFor="firstname">Firstname</label>
                             <input type='text' name='firstname' placeholder='Firstname' onChange={this.handleOnChange} value={this.state.firstname} />
+                            <label htmlFor="lastname">Lastname</label>
                             <input type='text' name='lastname' placeholder='Lastname' onChange={this.handleOnChange} value={this.state.lastname} />
                         </>
                     }
 
+                    <label htmlFor="password">Password</label>
                     <input type='password' name='password' placeholder='Password' onChange={this.handleOnChange} value={this.state.password} />
                     <input type='submit' value={(this.props.match.url === '/login') ? "Login" : "Sign Up"} />
                 </form>

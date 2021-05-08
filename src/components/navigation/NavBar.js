@@ -1,12 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const NavBar = () => {
+const NavBar = ({ user }) => {
     return (
         <div>
+            <h3>Hello, {user.fullname}</h3>
             Categories Link here
             <hr />
-            New Entry Link here
+            <NavLink to='/events/newentry'>New Entry</NavLink>
             <hr />
             Event View Link here
         </div>

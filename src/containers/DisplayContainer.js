@@ -19,7 +19,7 @@ class DisplayContainer extends Component {
     render() {
         return (
             <div>
-                <h3>Display Container</h3>
+                <h3>Container 3</h3>
                 {/* {this.handleLoading()} */}
             </div>
         )

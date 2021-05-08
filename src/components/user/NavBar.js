@@ -7,11 +7,11 @@ const NavBar = () => {
             { localStorage.getItem('token')
                 ?
                 <>
-                    <NavLink to='/profile'>Home</NavLink> | <NavLink to='/logout'>Logout</NavLink>
+                    <NavLink to='/events'>Home</NavLink> | <NavLink to='/logout'>Logout</NavLink>
                 </>
                 :
                 <>
-                    <NavLink to='/login'>Login</NavLink> | <NavLink to='/register'>Sign Up</NavLink>
+                    <NavLink to='/login'>Login</NavLink> | <NavLink to='/signup'>Sign Up</NavLink>
                 </>
             }
             <hr />

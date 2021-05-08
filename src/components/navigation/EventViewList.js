@@ -6,7 +6,7 @@ class EventListContainer extends Component {
         return (
             <BrowserRouter>
                 <div>
-                    <h3>Event List Container</h3>
+                    <h3>Container 2</h3>
                     <Route path='/home' render={() => <h5>Home</h5>} />
                 </div>
             </BrowserRouter>
