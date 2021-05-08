@@ -38,13 +38,10 @@ class App extends Component {
   }
 
   renderProfile = (routerProps) => {
-    return <ProfileContainer token={this.props.user.user} user={this.props.user.token} />
+    return <ProfileContainer token={this.props.token} user={this.props.user} />
   }
 
   render() {
-    console.log(this.props.user)
-    console.log(this.props.token)
-
     return (
       <div div className="App" >
         <NavBar />
