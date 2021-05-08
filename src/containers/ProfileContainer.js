@@ -5,10 +5,6 @@ import EventViewContainer from './EventViewContainer';
 import DisplayContainer from './DisplayContainer';
 
 export default class ProfileContainer extends Component {
-    state = {
-        entry: {}
-    }
-
     render() {
         return (
             <div>

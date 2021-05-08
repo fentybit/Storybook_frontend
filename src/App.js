@@ -32,13 +32,17 @@ class App extends Component {
   renderForm = (routerProps) => {
     if (routerProps.location.pathname === '/login') {
       return <Form {...routerProps} formName='Login Form' handleSubmit={this.handleLogin} />
-    } else if (routerProps.location.pathname === '/register') {
-      return <Form {...routerProps} formName='Register Form' handleSubmit={this.handleSignup} />
+    } else if (routerProps.location.pathname === '/signup') {
+      return <Form {...routerProps} formName='SignUp Form' handleSubmit={this.handleSignup} />
     }
   }
 
   renderProfile = (routerProps) => {
-    return <ProfileContainer token={this.props.token} user={this.props.user} />
+    if (localStorage.getItem('token')) {
+      return <ProfileContainer {...routerProps} token={this.props.token} user={this.props.user} />
+    } else {
+      window.location.href = '/'
+    }
   }
 
   render() {
@@ -48,10 +52,10 @@ class App extends Component {
         <Switch>
           <Route path='/login' render={this.renderForm} />
           <Route path='/logout' render={this.logout} />
-          <Route path='/register' render={this.renderForm} />
+          <Route path='/signup' render={this.renderForm} />
           <Route path='/profile' render={this.renderProfile} />
           <Route path='/' exact render={() => <Welcome />} />
-          <Route render={() => <p>Page not Found.</p>} />
+          <Route render={() => <Welcome />} />
         </Switch>
       </div >
     );

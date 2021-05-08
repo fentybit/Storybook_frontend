@@ -15,6 +15,7 @@ class NavigationContainer extends Component {
                     <Route path='/categories' render={() => <CategoriesContainer />} />
                     <Route path='/newevent' render={() => <Form />} />
                     <Route path='/' render={() => <EventViewContainer />} />
+                    <Route render={() => <p>Page not found.</p>} />
                 </Switch>
             </div>
         )
