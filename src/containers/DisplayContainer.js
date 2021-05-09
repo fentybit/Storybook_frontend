@@ -1,35 +1,18 @@
 import React, { Component } from 'react';
-import { fetchUser } from '../redux/actions/userActions';
+import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import DisplayList from '../components/DisplayList';
+import Form from '../components/display/Form';
 
 class DisplayContainer extends Component {
-    // componentDidMount() {
-    //     this.props.fetchUser();
-    // }
-
-    // handleLoading = () => {
-    //     if (this.props.user.length === 0) {
-    //         return <div>Loading...</div>
-    //     } else {
-    //         return <div>{this.props.user.fullname}</div>
-    //     }
-    // }
 
     render() {
         return (
             <div>
                 <h3>Container 3</h3>
-                {/* {this.handleLoading()} */}
+                <Route path={`${this.props.url}/newentry`} render={() => <Form token={this.props.token} />} />
             </div>
         )
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        user: state.user
-    }
-}
-
-export default connect(mapStateToProps, { fetchUser })(DisplayContainer);
+export default DisplayContainer;
