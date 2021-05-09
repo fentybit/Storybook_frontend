@@ -21,11 +21,11 @@ export default class ProfileContainer extends Component {
             }
         })
             .then(resp => resp.json())
-            .then(data => this.setState({ categories: data.map(category => category.name) }))
+            .then(data => this.setState({ categories: data }))
     }
 
     render() {
-
+        console.log(this.state.categories)
         return (
             <div>
                 <h3>Container 1</h3>

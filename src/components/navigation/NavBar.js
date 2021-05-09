@@ -1,14 +1,17 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
-const NavBar = ({ user }) => {
+const NavBar = ({ user, categories }) => {
+    // Need to add conditions if Category is empty
+    const renderCategoriesLink = categories.map(category => <p><Link key={category.id} to={`/categories/${category.id}`}>{category.name}</Link></p>)
+
     return (
         <div>
             <h5>Hello, {user.fullname}</h5>
-            <p>Categories Link here</p>
-
+            {renderCategoriesLink}
+            <p>---------------</p>
             <NavLink to='/events/newentry'>New Entry</NavLink>
-
+            <p>---------------</p>
             <p>Event View Link here</p>
         </div>
     )
