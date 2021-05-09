@@ -65,8 +65,7 @@ export const signupUser = (user, history) => {
         fetch('http://localhost:3000/api/v1/users', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 user: {
@@ -79,17 +78,19 @@ export const signupUser = (user, history) => {
         })
             .then(resp => {
                 if (resp.ok) {
-                    resp.json()
+                    return resp.json()
                 } else {
-                    throw new Error(resp.statusText);
+                    throw new Error(resp.statusText)
                 }
             })
             .then(data => {
+                console.log(data)
                 if (!data.error) {
                     localStorage.setItem('token', data.jwt);
                     dispatch({ type: 'GET_USER', payload: data });
                     history.push('/events')
                 }
             })
+            .catch(err => dispatch({ type: 'ERROR', payload: '' }));
     }
 }

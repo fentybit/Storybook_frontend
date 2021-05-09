@@ -12,7 +12,6 @@ import DisplayContainer from './DisplayContainer';
 export default class ProfileContainer extends Component {
     render() {
         // let { match } = this.props;
-        console.log(`${this.props.match.url}/newentry`)
         return (
             <div>
                 <h3>Container 1</h3>
@@ -30,7 +29,7 @@ export default class ProfileContainer extends Component {
 
                 <hr />
                 <DisplayContainer />
-                <Route path={`${this.props.match.url}/newentry`} render={() => <Form />} />
+                <Route path={`${this.props.match.url}/newentry`} render={() => <Form token={this.props.token} />} />
             </div>
         )
     }
