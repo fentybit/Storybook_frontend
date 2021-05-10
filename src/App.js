@@ -38,10 +38,11 @@ class App extends Component {
 
   renderProfile = (routerProps) => {
     if (localStorage.getItem('token') && (this.props.user.length !== 0)) {
-      // REVIEW
       return <ProfileContainer {...routerProps} token={this.props.token} user={this.props.user} />
     } else {
-      window.location.href = '/'
+      return (
+        <h6>Loading...</h6>
+      )
     }
   }
 

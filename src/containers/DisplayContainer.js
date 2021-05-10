@@ -5,7 +5,6 @@ import Form from '../components/display/Form';
 import Summary from '../components/display/Summary';
 
 class DisplayContainer extends Component {
-
     render() {
         return (
             <div>
