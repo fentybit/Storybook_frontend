@@ -8,26 +8,30 @@ import EventViewList from '../components/navigation/EventViewList';
 import DisplayContainer from './DisplayContainer';
 
 export default class ProfileContainer extends Component {
-    state = {
-        categories: []
-    }
+    // state = {
+    //     user: []
+    // }
 
-    componentDidMount() {
-        fetch('http://localhost:3000/api/v1/categories', {
-            headers: {
-                'Authorization': `bearer ${this.props.token}`
-            }
-        })
-            .then(resp => resp.json())
-            .then(data => this.setState({ categories: data }))
-    }
+    // componentDidMount() {
+    //     if (localStorage.getItem('token')) {
+    //         let token = localStorage.getItem('token')
+
+    //         fetch('http://localhost:3000/api/v1/profile', {
+    //             headers: {
+    //                 'Authorization': `bearer ${token}`
+    //             }
+    //         })
+    //             .then(resp => resp.json())
+    //             .then(data => this.setState({ user: data.user }))
+    //     }
+    // }
 
     render() {
-        console.log(this.props)
+        // console.log(this.state.user)
         return (
             <div>
                 <h3>Container 1</h3>
-                <NavBar user={this.props.user} categories={this.state.categories} />
+                <NavBar user={this.props.user} />
 
                 {/* <Route path='/categories' render={(routerProps) => <CategoriesList />} /> */}
                 {/* <Route path='/eventview' render={(routerProps) => <EventViewList />} /> */}
@@ -39,7 +43,7 @@ export default class ProfileContainer extends Component {
 
 
                 <hr />
-                <DisplayContainer url={this.props.match.url} />
+                <DisplayContainer url={this.props.match.url} user={this.props.user} />
 
             </div>
         )

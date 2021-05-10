@@ -7,6 +7,7 @@ import 'react-calendar/dist/Calendar.css';
 function EventViewList({ url }) {
     const [value, onChange] = useState(new Date());
 
+    console.log(value)
     return (
         <div align="center">
             <h3>Container 2</h3>
