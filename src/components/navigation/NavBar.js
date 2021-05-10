@@ -7,6 +7,7 @@ const NavBar = ({ user }) => {
 
     return (
         <div>
+            <h3>Container 1</h3>
             <h5>Hello, {user.fullname}</h5>
             {renderCategoriesLink}
 

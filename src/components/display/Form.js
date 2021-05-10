@@ -70,6 +70,7 @@ export default class Form extends Component {
                     <label htmlFor='time'>Time</label>
                     <input type='time' name='time' placeholder='Event Time' onChange={this.handleOnChange} value={this.state.time} /><br />
 
+                    {/* <SeparateComponent /> */}
                     <label htmlFor='location'>Location</label>
                     <input type='location' name='location' placeholder='Enter Location' onChange={this.handleOnChange} value={this.state.location} /><br />
 

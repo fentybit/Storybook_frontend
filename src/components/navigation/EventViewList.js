@@ -5,6 +5,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
 function EventViewList({ url }) {
+    // not stateless
     const [value, onChange] = useState(new Date());
 
     console.log(value)
@@ -12,8 +13,8 @@ function EventViewList({ url }) {
         <div align="center">
             <h3>Container 2</h3>
             <Switch>
-                <Route exact path={url} render={() => <Calendar onChange={onChange} value={value} />} />
-                <Route path={`${url}/newentry`} render={() => <Calendar onChange={onChange} value={value} />} />
+                <Route exact path={url} render={() => <Calendar onChange={onChange} value={value} view='month' />} />
+                <Route path={`${url}/newentry`} render={() => <Calendar onChange={onChange} value={value} showNeighboringMonth='true' maxDetail='month' />} />
             </Switch>
         </div>
     )

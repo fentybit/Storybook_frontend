@@ -2,10 +2,12 @@ import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import userReducer from './reducers/userReducer';
 import tokenReducer from './reducers/tokenReducer';
+import errorReducer from './reducers/errorReducer';
 
 const rootReducer = combineReducers({
     user: userReducer,
-    token: tokenReducer
+    token: tokenReducer,
+    error: errorReducer
 });
 
 const store = createStore(

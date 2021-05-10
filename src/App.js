@@ -30,14 +30,15 @@ class App extends Component {
 
   renderForm = (routerProps) => {
     if (routerProps.location.pathname === '/login') {
-      return <Form {...routerProps} formName='Login Form' handleSubmit={this.handleLogin} />
+      return <Form {...routerProps} formName='Login Form' handleSubmit={this.handleLogin} error={this.props.error} />
     } else if (routerProps.location.pathname === '/signup') {
-      return <Form {...routerProps} formName='SignUp Form' handleSubmit={this.handleSignup} />
+      return <Form {...routerProps} formName='SignUp Form' handleSubmit={this.handleSignup} error={this.props.error} />
     }
   }
 
   renderProfile = (routerProps) => {
-    if (localStorage.getItem('token')) {
+    if (localStorage.getItem('token') && (this.props.user.length !== 0)) {
+      // REVIEW
       return <ProfileContainer {...routerProps} token={this.props.token} user={this.props.user} />
     } else {
       window.location.href = '/'
@@ -45,6 +46,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.props.error)
     return (
       <div div className="App" >
         <NavBar />
@@ -63,9 +65,11 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state)
   return {
     user: state.user,
-    token: state.token
+    token: state.token,
+    error: state.error
   }
 }
 

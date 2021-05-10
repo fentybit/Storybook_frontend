@@ -14,6 +14,7 @@ export default class Form extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault()
+        // add validation, check if username, or password, or firstname empty?
         this.props.handleSubmit(this.state)
     }
 
@@ -40,7 +41,7 @@ export default class Form extends Component {
                     <input type='password' name='password' placeholder='Password' onChange={this.handleOnChange} value={this.state.password} />
                     <input type='submit' value={(this.props.match.url === '/login') ? "Login" : "Sign Up"} />
                 </form>
-                {(this.state.message) ? <h6>{this.state.message}</h6> : null}
+                {(this.props.error) ? <h6>{this.props.error}</h6> : null}
             </div>
         )
     }

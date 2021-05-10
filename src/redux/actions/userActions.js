@@ -28,6 +28,12 @@ export const fetchUser = (history) => {
 }
 
 export const loginUser = (user, history) => {
+    if ((!user.username) || (!user.password)) {
+        return (dispatch) => {
+            dispatch({ type: 'ERROR', payload: 'Please enter both Username and Password.' })
+        }
+    }
+
     return (dispatch) => {
         fetch('http://localhost:3000/api/v1/login', {
             method: 'POST',
@@ -61,6 +67,12 @@ export const loginUser = (user, history) => {
 }
 
 export const signupUser = (user, history) => {
+    if ((!user.username) || (!user.firstname) || (!user.lastname) || (!user.password)) {
+        return (dispatch) => {
+            dispatch({ type: 'ERROR', payload: 'Please enter all fields.' })
+        }
+    }
+
     return (dispatch) => {
         fetch('http://localhost:3000/api/v1/users', {
             method: 'POST',
