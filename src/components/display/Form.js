@@ -37,19 +37,35 @@ export default class Form extends Component {
             })
                 .then(resp => resp.json())
                 .then(data => console.log(data))
+            // HERE
         } else {
             event.preventDefault();
         }
     }
 
     render() {
+        console.log(this.state.category)
+
+        let categoryOptions = this.props.user.categories.map(category => <option value={category.name}>{category.name}</option>);
 
         return (
             <div>
                 <h5>New Entry Form</h5>
                 <form onSubmit={this.handleSubmit}>
                     <label htmlFor='category'>Category</label>
-                    <input type='text' name='category' placeholder='New Category' onChange={this.handleOnChange} value={this.state.category} /><br />
+                    <input type='text' name='category' placeholder='New Category' onChange={this.handleOnChange} value={this.state.category} />
+
+                    {(this.props.user.categories.length)
+                        ?
+                        <>
+                            <select name='category' onChange={this.handleOnChange}>
+                                <option value='' selected disabled hidden>select category</option>
+                                {categoryOptions}
+                            </select><br />
+                        </>
+                        :
+                        null
+                    }
 
                     <label htmlFor='vibe'>Vibe</label>
                     <select name='vibe' id='vibe' onChange={this.handleOnChange}>

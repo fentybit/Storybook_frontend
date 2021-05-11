@@ -6,7 +6,7 @@ export default class MapView extends Component {
     }
 
     renderMap = () => {
-        loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyDWZB6XemnIGIhCcmT1Q5zDI6FAG6lhJB0&callback=initMap')
+        loadScript('')
         window.initMap = this.initMap
     }
 

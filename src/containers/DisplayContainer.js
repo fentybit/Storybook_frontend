@@ -9,7 +9,7 @@ class DisplayContainer extends Component {
             <div>
                 <h3>Container 3</h3>
                 <Route exact path={this.props.url} render={() => <Summary user={this.props.user} />} />
-                <Route path={`${this.props.url}/newentry`} render={() => <Form token={this.props.token} />} />
+                <Route path={`${this.props.url}/newentry`} render={() => <Form user={this.props.user} token={this.props.token} />} />
             </div>
         )
     }
