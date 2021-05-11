@@ -8,8 +8,7 @@ export default class Form extends Component {
         time: '',
         location: '',
         vibe: '',
-        description: '',
-        imageUploads: ''
+        description: ''
     }
 
     handleOnChange = (event) => {

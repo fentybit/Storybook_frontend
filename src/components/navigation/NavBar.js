@@ -3,7 +3,10 @@ import { NavLink, Link } from 'react-router-dom';
 
 const NavBar = ({ user }) => {
     // Need to add conditions if Category's Events are empty
-    const renderCategoriesLink = user.categories.map(category => <p><Link key={category.id} to={`/categories/${category.id}`}>{category.name}</Link></p>)
+    const userCategories = [...new Set(user.categories.map(category => category.name))]
+    console.log(userCategories)
+
+    const renderCategoriesLink = userCategories.map(category => <p><Link key={category} to={`/categories/${category}`}>{category}</Link></p>)
 
     return (
         <div>

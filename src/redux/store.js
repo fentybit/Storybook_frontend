@@ -1,13 +1,15 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import categoryReducer from './reducers/categoryReducer';
+import eventReducer from './reducers/eventReducer';
 import errorReducer from './reducers/errorReducer';
-import formReducer from './reducers/formReducer';
 import tokenReducer from './reducers/tokenReducer';
 import userReducer from './reducers/userReducer';
 
 const rootReducer = combineReducers({
+    category: categoryReducer,
+    event: eventReducer,
     error: errorReducer,
-    form: formReducer,
     token: tokenReducer,
     user: userReducer
 });

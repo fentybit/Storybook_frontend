@@ -1,12 +1,12 @@
-function formReducer(state = { formInputs: { username: '', password: '', firstname: '', lastname: '' } }, action) {
+function categoryReducer(state = [], action) {
     switch (action.type) {
-        case 'RESET_FORM':
-            console.log(state)
-            return state
+        case 'SHOW_EVENT':
+            console.log('in categoryReducer ', action.payload.category)
+            return action.payload.category
 
         default:
             return state
     }
 }
 
-export default formReducer;
+export default categoryReducer;

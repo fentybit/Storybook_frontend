@@ -3,7 +3,6 @@ import { Switch, Route } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchUser, loginUser, signupUser } from './redux/actions/userActions';
-import { resetForm } from './redux/actions/formActions';
 
 import './App.css';
 import Form from './components/user/Form';
@@ -69,10 +68,9 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     error: state.error,
-    formInputs: state.form,
     token: state.token,
     user: state.user
   }
 }
 
-export default withRouter(connect(mapStateToProps, { fetchUser, loginUser, signupUser, resetForm })(App));
+export default withRouter(connect(mapStateToProps, { fetchUser, loginUser, signupUser })(App));
