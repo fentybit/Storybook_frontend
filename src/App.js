@@ -52,6 +52,7 @@ class App extends Component {
       <div div className="App" >
         <NavBar />
         <Switch>
+          {/* use component */}
           <Route path='/login' render={this.renderForm} />
           <Route path='/logout' render={this.logout} />
           <Route path='/signup' render={this.renderForm} />

@@ -6,7 +6,7 @@ export default function Summary({ user }) {
 
     return (
         <div>
-            <p>All Entries</p>
+            <h5>All Entries</h5>
             <p>Entries | {user.events.length}</p>
             <p>Categories | {user.categories.length}</p>
             <p>Places | {places.length}</p>

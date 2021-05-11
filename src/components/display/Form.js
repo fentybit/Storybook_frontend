@@ -18,7 +18,7 @@ export default class Form extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        if (this.state.category) {
+        if ((this.state.category) && (this.state.category !== 'Please enter Category')) {
             fetch('http://localhost:3000/api/v1/events', {
                 method: 'POST',
                 headers: {
@@ -40,12 +40,11 @@ export default class Form extends Component {
             // HERE
         } else {
             event.preventDefault();
+            this.setState({ category: 'Please enter Category' });
         }
     }
 
     render() {
-        console.log(this.state.category)
-
         let categoryOptions = this.props.user.categories.map(category => <option value={category.name}>{category.name}</option>);
 
         return (
