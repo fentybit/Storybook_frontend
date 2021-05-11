@@ -10,22 +10,3 @@ function tokenReducer(state = [], action) {
 }
 
 export default tokenReducer;
-
-// function userReducer(state = { user: {}, token: '' }, action) {
-//     switch (action.type) {
-//         case 'SHOW_USER':
-//             console.log('in reducer ', action.payload.user)
-//             console.log('in reducer ', action.payload.jwt)
-
-//             return {
-//                 ...state,
-//                 user: action.payload.user,
-//                 token: action.payload.jwt
-//             }
-
-//         default:
-//             return state;
-//     }
-// }
-
-// export default userReducer;

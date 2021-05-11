@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchUser, loginUser, signupUser } from './redux/actions/userActions';
+import { resetForm } from './redux/actions/formActions';
 
 import './App.css';
 import Form from './components/user/Form';
@@ -47,7 +48,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props.error)
     return (
       <div div className="App" >
         <NavBar />
@@ -66,12 +66,12 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state)
   return {
-    user: state.user,
+    error: state.error,
+    formInputs: state.form,
     token: state.token,
-    error: state.error
+    user: state.user
   }
 }
 
-export default withRouter(connect(mapStateToProps, { fetchUser, loginUser, signupUser })(App));
+export default withRouter(connect(mapStateToProps, { fetchUser, loginUser, signupUser, resetForm })(App));

@@ -22,6 +22,7 @@ export const fetchUser = (history) => {
                         history.push('/events')
                     }
                 })
+                // do I need this?
                 .catch(err => dispatch({ type: 'ERROR', payload: '' }));
         }
     }
@@ -30,7 +31,7 @@ export const fetchUser = (history) => {
 export const loginUser = (user, history) => {
     if ((!user.username) || (!user.password)) {
         return (dispatch) => {
-            dispatch({ type: 'ERROR', payload: 'Please enter both Username and Password.' })
+            dispatch({ type: 'LOGIN_ERROR', payload: 'Please enter both Username and Password.' })
         }
     }
 
@@ -62,6 +63,7 @@ export const loginUser = (user, history) => {
                     history.push('/events')
                 }
             })
+            // do I need this?
             .catch(err => dispatch({ type: 'ERROR', payload: '' }));
     }
 }
@@ -69,7 +71,7 @@ export const loginUser = (user, history) => {
 export const signupUser = (user, history) => {
     if ((!user.username) || (!user.firstname) || (!user.lastname) || (!user.password)) {
         return (dispatch) => {
-            dispatch({ type: 'ERROR', payload: 'Please enter all fields.' })
+            dispatch({ type: 'SIGNUP_ERROR', payload: 'Please enter all fields.' })
         }
     }
 
@@ -103,6 +105,7 @@ export const signupUser = (user, history) => {
                     history.push('/events')
                 }
             })
+            // do I need this?
             .catch(err => dispatch({ type: 'ERROR', payload: '' }));
     }
 }

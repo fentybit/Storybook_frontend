@@ -61,7 +61,7 @@ export default class Form extends Component {
                         <option value='5 awful'>😩 awful</option>
                     </select><br />
 
-                    <label htmlFor='title'>Event</label>
+                    <label htmlFor='title'>Event Title</label>
                     <input type='text' name='title' placeholder='Event Title' onChange={this.handleOnChange} value={this.state.title} /><br />
 
                     <label htmlFor='date'>Date</label>

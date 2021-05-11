@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export default class Form extends Component {
+class Form extends Component {
     state = {
         username: '',
         password: '',
@@ -14,11 +15,11 @@ export default class Form extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault()
-        // add validation, check if username, or password, or firstname empty?
         this.props.handleSubmit(this.state)
     }
 
     render() {
+        console.log(this.props)
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
@@ -46,3 +47,5 @@ export default class Form extends Component {
         )
     }
 }
+
+export default Form;

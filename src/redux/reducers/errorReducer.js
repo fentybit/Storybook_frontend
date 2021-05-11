@@ -1,8 +1,10 @@
 function errorReducer(state = [], action) {
-    // CREATE DIFFERENT REDUCER
+
     switch (action.type) {
-        case 'ERROR':
-            console.log('in errorReducer ', action.payload)
+        case 'LOGIN_ERROR':
+            return action.payload
+
+        case 'SIGNUP_ERROR':
             return action.payload
 
         default:

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import { connect } from 'react-redux';
 import Form from '../components/display/Form';
 import Summary from '../components/display/Summary';
 
