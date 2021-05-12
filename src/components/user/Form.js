@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
 class Form extends Component {
     state = {
@@ -7,6 +6,15 @@ class Form extends Component {
         password: '',
         firstname: '',
         lastname: ''
+    }
+
+    componentDidMount() {
+        this.setState({
+            username: '',
+            password: '',
+            firstname: '',
+            lastname: ''
+        })
     }
 
     handleOnChange = (event) => {
@@ -19,7 +27,6 @@ class Form extends Component {
     }
 
     render() {
-        console.log(this.props)
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
