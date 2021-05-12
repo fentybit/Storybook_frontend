@@ -16,6 +16,7 @@ class DisplayContainer extends Component {
                     <Route path={`${this.props.url}/:eventId`} render={(routerProps) => <EventDisplay {...routerProps} user={this.props.user} token={this.props.token} />} />
 
                     <Route exact path={this.props.url} render={() => <Summary user={this.props.user} />} />
+                    <Route render={() => <Summary user={this.props.user} />} />
                 </Switch>
             </div>
         )

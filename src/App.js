@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -55,6 +55,7 @@ class App extends Component {
           <Route path='/login' render={this.renderForm} />
           <Route path='/logout' render={this.logout} />
           <Route path='/signup' render={this.renderForm} />
+          {/* <Route path='/categories' render={this.renderProfile} /> */}
           <Route path='/events' render={this.renderProfile} />
 
           <Route path='/' exact render={() => <Welcome />} />
