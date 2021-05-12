@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 export default class Form extends Component {
     state = {
         category: '',
+        vibe: '',
         title: '',
         date: '',
         time: '',
         location: '',
-        vibe: '',
         description: ''
     }
 
@@ -35,8 +35,17 @@ export default class Form extends Component {
                 })
             })
                 .then(resp => resp.json())
-                .then(data => console.log(data))
-            // HERE
+                .then(data => this.setState({
+                    category: data.category.name,
+                    vibe: data.event.vibe,
+                    title: data.event.title,
+                    date: data.event.date,
+                    time: data.event.time,
+                    location: data.event.location,
+                    description: data.event.description
+                }, () => {
+                    this.props.history.push(`/{data.event.id}`)
+                }))
         } else {
             event.preventDefault();
             this.setState({ category: 'Please enter Category' });
@@ -44,8 +53,12 @@ export default class Form extends Component {
     }
 
     render() {
-        let categoryOptions = this.props.user.categories.map(category => <option value={category.name}>{category.name}</option>);
+        console.log(this.props)
+        const userCategories = [...new Set(this.props.user.categories.map(category => category.name))].sort()
 
+        const renderCategoryOptions = userCategories.map(category => <option value={category}>{category}</option>);
+
+        console.log(this.props)
         return (
             <div>
                 <h5>New Entry Form</h5>
@@ -58,7 +71,7 @@ export default class Form extends Component {
                         <>
                             <select name='category' onChange={this.handleOnChange}>
                                 <option value='' selected disabled hidden>select category</option>
-                                {categoryOptions}
+                                {renderCategoryOptions}
                             </select><br />
                         </>
                         :
