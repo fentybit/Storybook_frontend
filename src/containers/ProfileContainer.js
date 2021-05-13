@@ -19,7 +19,7 @@ export default class ProfileContainer extends Component {
                             <EventViewList url={this.props.match.url} token={this.props.token} user={this.props.user} />
 
                             <hr />
-                            <DisplayContainer categories={this.props.categories} token={this.props.token} user={this.props.user} url={this.props.match.url} />
+                            <DisplayContainer categories={this.props.categories} events={this.props.events} token={this.props.token} user={this.props.user} url={this.props.match.url} />
                         </div>
 
                         :

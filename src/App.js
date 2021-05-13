@@ -3,7 +3,8 @@ import { Switch, Route } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchUser, loginUser, signupUser } from './redux/actions/userActions';
-import { fetchCategories } from './redux/actions/categoriesActions';
+import { fetchUserCategories } from './redux/actions/categoriesActions';
+import { fetchUserEvents } from './redux/actions/eventsActions';
 
 import './App.css';
 import Form from './components/user/Form';
@@ -14,7 +15,8 @@ import ProfileContainer from './containers/ProfileContainer';
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser(this.props.history);
-    this.props.fetchCategories();
+    this.props.fetchUserCategories();
+    this.props.fetchUserEvents();
   }
 
   handleLogin = (user) => {
@@ -40,7 +42,7 @@ class App extends Component {
 
   renderProfile = (routerProps) => {
     if (localStorage.getItem('token') && (this.props.user.length !== 0)) {
-      return <ProfileContainer {...routerProps} categories={this.props.categories} token={this.props.token} user={this.props.user} />
+      return <ProfileContainer {...routerProps} categories={this.props.categories} events={this.props.events} token={this.props.token} user={this.props.user} />
     } else {
       return (
         <h6>Loading...</h6>
@@ -70,9 +72,10 @@ const mapStateToProps = state => {
   return {
     categories: state.categories,
     error: state.error,
+    events: state.events,
     token: state.token,
     user: state.user
   }
 }
 
-export default withRouter(connect(mapStateToProps, { fetchUser, loginUser, signupUser, fetchCategories })(App));
+export default withRouter(connect(mapStateToProps, { fetchUser, loginUser, signupUser, fetchUserCategories, fetchUserEvents })(App));

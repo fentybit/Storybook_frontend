@@ -1,15 +1,15 @@
 import React from 'react';
 
-export default function Summary({ user }) {
-    const places = user.events.map(event => event.location)
+export default function Summary({ categories, events, user }) {
+    const places = events.filter(event => event.location !== '')
 
     return (
         <div>
             <h5>All Entries</h5>
-            {/* <p>Entries | {user.events.length}</p>
-            <p>Categories | {user.categories.length}</p>
+            <p>Entries | {events.length}</p>
+            <p>Categories | {categories.length}</p>
             <p>Places | {places.length}</p>
-            <p>Photos | TBD</p> */}
+            <p>Photos | TBD</p>
         </div>
     )
 }

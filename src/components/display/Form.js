@@ -64,17 +64,18 @@ export default class Form extends Component {
                     <label htmlFor='category'>Category</label>
                     <input type='text' name='category' placeholder='New Category' onChange={this.handleOnChange} value={this.state.category} />
 
-                    {(this.props.user.categories.length)
+                    {(this.props.categories.length)
                         ?
                         <>
                             <select name='category' onChange={this.handleOnChange}>
                                 <option value='' selected disabled hidden>select category</option>
                                 {renderCategoryOptions}
-                            </select><br />
+                            </select>
                         </>
                         :
                         null
                     }
+                    <br />
 
                     <label htmlFor='vibe'>Vibe</label>
                     <select name='vibe' id='vibe' onChange={this.handleOnChange}>

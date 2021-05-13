@@ -20,8 +20,9 @@ class DisplayContainer extends Component {
                     <Route path={`${this.props.url}/:categoryId`} render={(routerProps) => <CategorySummary {...routerProps} user={this.props.user} token={this.props.token} />} />
 
                     {/* working  */}
-                    <Route exact path={this.props.url} render={() => <Summary user={this.props.user} />} />
-                    <Route render={() => <Summary user={this.props.user} />} />
+                    <Route exact path={this.props.url} render={() => <Summary categories={this.props.categories} events={this.props.events} user={this.props.user} />} />
+
+                    <Route render={() => <Summary categories={this.props.categories} events={this.props.events} user={this.props.user} />} />
                 </Switch>
             </div>
         )

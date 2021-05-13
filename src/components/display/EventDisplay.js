@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchEvent } from '../../redux/actions/eventActions';
+import { fetchEvent } from '../../redux/actions/eventsActions';
 
 
 class EventDisplay extends Component {
@@ -29,7 +29,7 @@ class EventDisplay extends Component {
 const mapStateToProps = state => {
     return {
         category: state.category,
-        event: state.event
+        event: state.events
     }
 }
 

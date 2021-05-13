@@ -1,4 +1,4 @@
-export const fetchCategories = () => {
+export const fetchUserCategories = () => {
     return (dispatch) => {
         if (localStorage.getItem('token')) {
             let token = localStorage.getItem('token')

@@ -13,3 +13,19 @@ export const fetchEvent = (eventId) => {
         }
     }
 }
+
+export const fetchUserEvents = () => {
+    return (dispatch) => {
+        if (localStorage.getItem('token')) {
+            let token = localStorage.getItem('token')
+
+            fetch(`http://localhost:3000/api/v1/events`, {
+                headers: {
+                    'Authorization': `bearer ${token}`
+                }
+            })
+                .then(resp => resp.json())
+                .then(data => dispatch({ type: 'GET_USER_EVENTS', payload: data }))
+        }
+    }
+}
