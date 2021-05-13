@@ -44,7 +44,7 @@ export default class Form extends Component {
                     location: data.event.location,
                     description: data.event.description
                 }, () => {
-                    this.props.history.push(`/events/${data.event.id}`)
+                    this.props.history.push(`/events/${data.category.id}/${data.event.id}`)
                 }))
         } else {
             event.preventDefault();
@@ -53,7 +53,6 @@ export default class Form extends Component {
     }
 
     render() {
-        console.log(this.props.history)
         const userCategories = [...new Set(this.props.user.categories.map(category => category.name))].sort()
 
         const renderCategoryOptions = userCategories.map(category => <option value={category}>{category}</option>);
