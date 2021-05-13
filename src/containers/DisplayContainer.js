@@ -13,9 +13,9 @@ class DisplayContainer extends Component {
                 <h3>Container 3</h3>
                 <Switch>
                     {/* working */}
-                    <Route path={`${this.props.url}/newentry`} render={() => <Form categories={this.props.categories} history={this.props.history} user={this.props.user} token={this.props.token} />} />
+                    <Route path={`${this.props.url}/newentry`} render={() => <Form categories={this.props.categories} history={this.props.history} token={this.props.token} user={this.props.user} />} />
 
-                    <Route path={`${this.props.url}/:categoryId/:eventId`} render={(routerProps) => <EventDisplay {...routerProps} user={this.props.user} token={this.props.token} />} />
+                    <Route path={`${this.props.url}/:categoryId/:eventId`} render={(routerProps) => <EventDisplay {...routerProps} categories={this.props.categories} events={this.props.events} token={this.props.token} user={this.props.user} />} />
 
                     <Route path={`${this.props.url}/:categoryId`} render={(routerProps) => <CategorySummary {...routerProps} user={this.props.user} token={this.props.token} />} />
 

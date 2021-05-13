@@ -4,7 +4,6 @@ function eventsReducer(state = [], action) {
             return action.payload.event
 
         case 'GET_USER_EVENTS':
-            console.log('in eventReducer ', action.payload)
             return action.payload
 
         default:

@@ -2,9 +2,13 @@ import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 
 const NavBar = ({ categories, user }) => {
-    const userCategories = categories.sort((a, b) => (a.name > b.name) ? 1 : 0)
-
-    const renderCategoriesLink = userCategories.map(category => <p><Link key={category.id} to={`/categories/${category.id}`}>{category.name}</Link></p>)
+    const renderCategoriesLink = () => {
+        if (categories) {
+            let userCategories = categories.sort((a, b) => (a.name > b.name) ? 1 : 0)
+            console.log(userCategories)
+            return userCategories.map(category => <p><Link key={category.id} to={`/categories/${category.id}`}>{category.name}</Link></p>)
+        }
+    }
 
     return (
         <div>
@@ -12,7 +16,7 @@ const NavBar = ({ categories, user }) => {
             <h5>Hello, {user.fullname}</h5>
 
             { (categories.length === 0) ? <h6>Write your first journal entry!</h6> : <h6>All Events</h6>}
-            {renderCategoriesLink}
+            { renderCategoriesLink()}
 
             <p>---------------</p>
             <NavLink to='/events/newentry'>New Entry</NavLink>
