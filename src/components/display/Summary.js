@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function Summary({ categories, events, user }) {
-    const places = events.filter(event => event.location !== '')
+    const places = (events) ? events.filter(event => event.location !== '') : null
 
     return (
         <div>

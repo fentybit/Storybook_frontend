@@ -28,8 +28,8 @@ class EventDisplay extends Component {
 
 const mapStateToProps = state => {
     return {
-        category: state.categories,
-        event: state.events
+        category: state.category,
+        event: state.event
     }
 }
 

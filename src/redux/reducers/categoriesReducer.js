@@ -3,9 +3,6 @@ function categoriesReducer(state = [], action) {
         case 'GET_USER_CATEGORIES':
             return action.payload
 
-        case 'GET_EVENT':
-            return action.payload.category
-
         default:
             return state
     }

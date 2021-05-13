@@ -16,10 +16,10 @@ export default class ProfileContainer extends Component {
                             <NavBar categories={this.props.categories} user={this.props.user} />
 
                             <hr />
-                            <EventViewList url={this.props.match.url} token={this.props.token} user={this.props.user} />
+                            <EventViewList categories={this.props.categories} events={this.props.events} token={this.props.token} url={this.props.match.url} user={this.props.user} />
 
                             <hr />
-                            <DisplayContainer categories={this.props.categories} events={this.props.events} token={this.props.token} user={this.props.user} url={this.props.match.url} />
+                            <DisplayContainer categories={this.props.categories} events={this.props.events} token={this.props.token} url={this.props.match.url} user={this.props.user} />
                         </div>
 
                         :

@@ -8,7 +8,7 @@ import CalendarView from './CalendarView';
 import MapView from './MapView';
 
 
-function EventViewList({ url, user, token }) {
+function EventViewList({ categories, events, token, url, user }) {
     // not stateless
     const [value, onChange] = useState(new Date());
 
@@ -19,9 +19,9 @@ function EventViewList({ url, user, token }) {
                 {/* working */}
                 <Route path={`${url}/newentry`} render={() => <Calendar onChange={onChange} value={value} view='month' />} />
 
-                <Route path={`${url}/:categoryId/:eventId`} render={(routerProps) => <CalendarView {...routerProps} user={user} token={token} />} />
+                <Route path={`${url}/:categoryId/:eventId`} render={(routerProps) => <CalendarView {...routerProps} categories={categories} events={events} token={token} user={user} />} />
 
-                <Route path={`${url}/:categoryId`} render={(routerProps) => <CalendarView {...routerProps} user={user} token={token} />} />
+                <Route path={`${url}/:categoryId`} render={(routerProps) => <CalendarView {...routerProps} categories={categories} events={events} token={token} user={user} />} />
 
                 {/* working */}
                 <Route path={url} render={() => <Calendar onChange={onChange} value={value} view='month' />} />
