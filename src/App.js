@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchUser, loginUser, signupUser } from './redux/actions/userActions';
-import { fetchCategories } from './redux/actions/categoryActions';
+import { fetchCategories } from './redux/actions/categoriesActions';
 
 import './App.css';
 import Form from './components/user/Form';

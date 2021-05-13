@@ -53,7 +53,7 @@ export default class Form extends Component {
     }
 
     render() {
-        const userCategories = [...new Set(this.props.user.categories.map(category => category.name))].sort()
+        const userCategories = this.props.categories.map(category => category.name).sort()
 
         const renderCategoryOptions = userCategories.map(category => <option value={category}>{category}</option>);
 
