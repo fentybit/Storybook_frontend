@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { resetError } from '../../redux/actions/errorActions';
 
 class Form extends Component {
     state = {
@@ -15,6 +18,8 @@ class Form extends Component {
             firstname: '',
             lastname: ''
         })
+
+        this.props.resetError();
     }
 
     handleOnChange = (event) => {
@@ -55,4 +60,4 @@ class Form extends Component {
     }
 }
 
-export default Form;
+export default connect(null, { resetError })(Form);

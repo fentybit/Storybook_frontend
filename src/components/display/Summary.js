@@ -6,10 +6,10 @@ export default function Summary({ user }) {
     return (
         <div>
             <h5>All Entries</h5>
-            <p>Entries | {user.events.length}</p>
+            {/* <p>Entries | {user.events.length}</p>
             <p>Categories | {user.categories.length}</p>
             <p>Places | {places.length}</p>
-            <p>Photos | TBD</p>
+            <p>Photos | TBD</p> */}
         </div>
     )
 }

@@ -23,7 +23,7 @@ export const fetchUser = (history) => {
                     }
                 })
                 // do I need this?
-                .catch(err => dispatch({ type: 'ERROR', payload: '' }));
+                .catch(err => dispatch({ type: 'ERROR', payload: 'still working ' }));
         }
     }
 }
@@ -57,14 +57,16 @@ export const loginUser = (user, history) => {
                 }
             })
             .then(data => {
+                console.log(data)
                 if (!data.error) {
                     localStorage.setItem('token', data.jwt);
                     dispatch({ type: 'GET_USER', payload: data });
                     history.push('/events')
+                } else {
+                    dispatch({ type: 'LOGIN_BACKEND_ERROR', payload: data })
                 }
             })
-            // do I need this?
-            .catch(err => dispatch({ type: 'ERROR', payload: '' }));
+            .catch(error => dispatch({ type: 'LOGIN_BACKEND_ERROR', payload: error }));
     }
 }
 
@@ -103,6 +105,8 @@ export const signupUser = (user, history) => {
                     localStorage.setItem('token', data.jwt);
                     dispatch({ type: 'GET_USER', payload: data });
                     history.push('/events')
+                } else {
+                    dispatch({ type: 'SIGNUP_BACKEND_ERROR', payload: data })
                 }
             })
             // do I need this?
