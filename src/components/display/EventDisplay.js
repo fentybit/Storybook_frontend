@@ -10,17 +10,17 @@ class EventDisplay extends Component {
 
     render() {
         const { category, event } = this.props
-        console.log(this.props)
+
         return (
             <div>
-                <h4>Event Display</h4>
-                {/* <p>{category.name}</p>
+                <h5>Event Display</h5>
+                <p>{category.name}</p>
                 <p>{event.title}</p>
                 <p>{event.vibe}</p>
                 <p>{event.date}</p>
                 <p>{event.time}</p>
                 <p>{event.location}</p>
-                <p>{event.description}</p> */}
+                <p>{event.description}</p>
             </div>
         )
     }

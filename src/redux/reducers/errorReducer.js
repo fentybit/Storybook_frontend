@@ -5,13 +5,13 @@ function errorReducer(state = [], action) {
             return action.payload;
 
         case 'LOGIN_BACKEND_ERROR':
-            return action.payload;
+            return action.payload.error;
 
         case 'SIGNUP_ERROR':
             return action.payload;
 
         case 'SIGNUP_BACKEND_ERROR':
-            return action.payload;
+            return action.payload.error;
 
         case 'RESET_ERROR':
             return action.payload;
