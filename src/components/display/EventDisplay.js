@@ -4,17 +4,24 @@ import { fetchEvent } from '../../redux/actions/eventsActions';
 
 
 class EventDisplay extends Component {
-    componentDidMount() {
-        this.props.fetchEvent(this.props.match.params.eventId)
+    // componentDidMount() {
+    //     this.props.fetchEvent(this.props.match.params.eventId)
+    // }
+    renderEvent = () => {
+        if (this.props.events) {
+            const eventId = this.props.match.params.eventId;
+
+            return this.props.events.find(event => event.id == eventId);
+        }
     }
 
     render() {
-        const { category, event } = this.props
+        const event = this.renderEvent();
 
         return (
             <div>
                 <h5>Event Display</h5>
-                <p>{category.name}</p>
+                {/* <p>{event.category.name}</p> */}
                 <p>{event.title}</p>
                 <p>{event.vibe}</p>
                 <p>{event.date}</p>
@@ -26,11 +33,12 @@ class EventDisplay extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        category: state.category,
-        event: state.event
-    }
-}
+// const mapStateToProps = state => {
+//     return {
+//         category: state.category,
+//         event: state.event
+//     }
+// }
 
-export default connect(mapStateToProps, { fetchEvent })(EventDisplay);
+export default EventDisplay;
+// export default connect(mapStateToProps, { fetchEvent })(EventDisplay);
