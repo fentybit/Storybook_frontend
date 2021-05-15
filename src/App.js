@@ -51,6 +51,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.props.events)
     return (
       <div div className="App" >
         <NavBar />

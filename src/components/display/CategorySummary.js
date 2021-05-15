@@ -1,15 +1,30 @@
 import React from 'react';
 
-export default function CategorySummary({ user }) {
-    const places = user.events.map(event => event.location)
+export default function CategorySummary({ categories, events, match, user }) {
+    const renderCategoryEvents = () => {
+        if (events) {
+            const categoryId = match.params.categoryId;
+
+            return events.filter(event => event.category.id == categoryId);
+        }
+    }
+
+    console.log(renderCategoryEvents())
 
     return (
         <div>
-            <h5>Category Entries</h5>
-            {/* <p>Entries | {user.events.length}</p>
-            <p>Categories | {user.categories.length}</p>
-            <p>Places | {places.length}</p>
-            <p>Photos | TBD</p> */}
+            { (events)
+                ?
+                <>
+                    <h5>Category Summary</h5>
+                    <p>Categories | TBD</p>
+                    <p>Entries | {events.length}</p>
+                    <p>Places | TBD</p>
+                    <p>Photos | TBD</p>
+                </>
+                :
+                <h5>Loading...</h5>
+            }
         </div>
     )
 }

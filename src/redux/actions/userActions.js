@@ -63,8 +63,8 @@ export const loginUser = (user, history) => {
                     dispatch({ type: 'LOGIN_BACKEND_ERROR', payload: data })
                 }
             })
-            .catch(error => {
-                dispatch({ type: 'LOGIN_BACKEND_ERROR', payload: error });
+            .catch(data => {
+                dispatch({ type: 'LOGIN_BACKEND_ERROR', payload: data });
             })
     }
 }
@@ -108,8 +108,8 @@ export const signupUser = (user, history) => {
                     dispatch({ type: 'SIGNUP_BACKEND_ERROR', payload: data })
                 }
             })
-            .catch(error => {
-                dispatch({ type: 'SIGNUP_BACKEND_ERROR', payload: error });
+            .catch(data => {
+                dispatch({ type: 'SIGNUP_BACKEND_ERROR', payload: data });
             })
     }
 }

@@ -17,12 +17,13 @@ class DisplayContainer extends Component {
 
                     <Route path={`${this.props.url}/:categoryId/:eventId`} render={(routerProps) => <EventDisplay {...routerProps} categories={this.props.categories} events={this.props.events} token={this.props.token} user={this.props.user} />} />
 
-                    <Route path={`${this.props.url}/:categoryId`} render={(routerProps) => <CategorySummary {...routerProps} categories={this.props.categories} token={this.props.token} user={this.props.user} />} />
+                    {/* working */}
+                    <Route path={`${this.props.url}/:categoryId`} render={(routerProps) => <CategorySummary {...routerProps} categories={this.props.categories} events={this.props.events} token={this.props.token} user={this.props.user} />} />
 
                     {/* working  */}
-                    <Route exact path={this.props.url} render={() => <Summary categories={this.props.categories} events={this.props.events} user={this.props.user} />} />
+                    <Route exact path={this.props.url} render={() => <Summary categories={this.props.categories} user={this.props.user} />} />
 
-                    <Route render={() => <Summary categories={this.props.categories} events={this.props.events} user={this.props.user} />} />
+                    <Route render={() => <Summary categories={this.props.categories} user={this.props.user} />} />
                 </Switch>
             </div>
         )

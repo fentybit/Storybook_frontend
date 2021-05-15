@@ -1,15 +1,39 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchUserEvents } from '../../redux/actions/eventsActions';
 
-export default function Summary({ categories, events, user }) {
-    const places = (events) ? events.filter(event => event.location !== '') : null
+class Summary extends Component {
+    componentDidMount() {
+        this.props.fetchUserEvents();
+    }
 
-    return (
-        <div>
-            <h5>All Entries</h5>
-            <p>Entries | {events.length}</p>
-            <p>Categories | {categories.length}</p>
-            <p>Places | {places.length}</p>
-            <p>Photos | TBD</p>
-        </div>
-    )
+    render() {
+        const places = (this.props.events) ? this.props.events.filter(event => event.location !== '') : null
+
+        return (
+
+            <div>
+                { (this.props.events)
+                    ?
+                    <>
+                        <h5>All Entries</h5>
+                        <p>Entries | {this.props.events.length}</p>
+                        <p>Categories | {this.props.categories.length}</p>
+                        <p>Places | {places.length}</p>
+                        <p>Photos | TBD</p>
+                    </>
+                    :
+                    <h5>Loading...</h5>
+                }
+            </div>
+        )
+    }
 }
+
+const mapStateToProps = state => {
+    return {
+        events: state.events
+    }
+}
+
+export default connect(mapStateToProps, { fetchUserEvents })(Summary);
