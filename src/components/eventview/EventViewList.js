@@ -5,8 +5,6 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
 import CalendarView from './CalendarView';
-import MapView from './MapView';
-
 
 function EventViewList({ categories, events, token, url, user }) {
     // not stateless

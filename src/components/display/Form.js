@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
+import { GoogleApiWrapper } from 'google-maps-react';
+import PlacesAutocomplete, {
+    geocodeByAddress,
+    getLatLng,
+} from 'react-places-autocomplete';
 
-export default class Form extends Component {
+// import LocationSearchInput from './LocationSearchInput';
+// import MapContainer from './MapContainer';
+
+export class Form extends Component {
     state = {
         category: '',
         vibe: '',
@@ -14,6 +22,20 @@ export default class Form extends Component {
     handleOnChange = (event) => {
         this.setState({ [event.target.name]: event.target.value })
     }
+
+    handleAutocompleteChange = location => {
+        this.setState({ location })
+    }
+
+    handleSelect = location => {
+        geocodeByAddress(location)
+            .then(results => getLatLng(results[0]))
+            .then(latLng => {
+                console.log('Success', latLng)
+                this.setState({ location: this.state.location })
+            })
+            .catch(error => console.error('Error', error));
+    };
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -98,7 +120,47 @@ export default class Form extends Component {
 
                     {/* <SeparateComponent /> */}
                     <label htmlFor='location'>Location</label>
-                    <input type='location' name='location' placeholder='Enter Location' onChange={this.handleOnChange} value={this.state.location} /><br />
+                    {/* <LocationSearchInput type='location' name='location' placeholder='Enter Location' onChange={this.handleOnChange} value={this.state.location} /><br /> */}
+                    <PlacesAutocomplete
+                        name='location'
+                        value={this.state.location}
+                        onChange={this.handleAutocompleteChange}
+                        onSelect={this.handleSelect}
+                    >
+                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                            <div>
+                                <input
+                                    {...getInputProps({
+                                        placeholder: 'Search Places ...',
+                                        className: 'location-search-input',
+                                    })}
+                                />
+                                <div className="autocomplete-dropdown-container">
+                                    {loading && <div>Loading...</div>}
+                                    {suggestions.map(suggestion => {
+                                        const className = suggestion.active
+                                            ? 'suggestion-item--active'
+                                            : 'suggestion-item';
+                                        // inline style for demonstration purpose
+                                        const style = suggestion.active
+                                            ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                                            : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                                        return (
+                                            <div
+                                                {...getSuggestionItemProps(suggestion, {
+                                                    className,
+                                                    style,
+                                                })}
+                                            >
+                                                <span>{suggestion.description}</span>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        )}
+                    </PlacesAutocomplete>
+                    {/* <MapContainer /> */}
 
                     <label htmlFor='description'>Description</label>
                     <textarea name='description' placeholder='Event Description' onChange={this.handleOnChange} value={this.state.description} /><br />
@@ -109,3 +171,7 @@ export default class Form extends Component {
         )
     }
 }
+
+export default GoogleApiWrapper({
+    apiKey: ('')
+})(Form)

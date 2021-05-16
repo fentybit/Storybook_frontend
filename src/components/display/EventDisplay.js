@@ -8,7 +8,6 @@ class EventDisplay extends Component {
     }
 
     render() {
-        console.log(this.props)
         const { event } = this.props;
 
         return (

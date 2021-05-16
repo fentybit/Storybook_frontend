@@ -11,8 +11,6 @@ class CalendarView extends Component {
     }
 
     render() {
-        console.log(this.props)
-
         return (
             <div>
                 <h5>Calendar View</h5>
