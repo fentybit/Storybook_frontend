@@ -1,70 +1,109 @@
-# Getting Started with Create React App
+# Storybook
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align="center">
+  <img src="#">
+</div>
 
-## Available Scripts
+<br>
 
-In the project directory, you can run:
+<strong>Domain Modeling :: Digital Journaling</strong><br>
+Welcome to my simplistic version of digital journaling app.<br>
 
-### `yarn start`
+<p><a href="#">YouTube Demo</a></p>
+<p><a href="#">DEV Blog</a></p>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## About
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<p>I have been a long-advocate for having meaningful connection through self-reflection. While some journal apps I have seen simply record special memories and events, some focus more on mental health, mindfulness and self-care. I have decided to approach this app build with basic features of recorded events and necessary attributes. </p>
+<p>The Minimum Viable Product (MVP) of Storybook app is to allow the user to log events, places, moods and self-reflect from various points of views (calendar, map, photos).</p>
 
-### `yarn test`
+## Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<div align="center">
+  <img src="public/images/wireframe.png">
+</div>
 
-### `yarn build`
+<br>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<div align="center">
+  <img src="public/images/erd_present.png">
+</div>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<br>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Models** <br>
+User, Event, Category, Image<br>
 
-### `yarn eject`
+> user `has_many` :events
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+> event `belongs_to` :user<br>
+> event `belongs_to` :category<br>
+> event `has_many` :images
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+> category `has_many` :events
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+> image `belongs_to` :event
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+**Controller** <br>
+ApplicationController<br>
+UsersController<br>
+EventsController<br>
+CategoriesController<br>
+ImagesController<br>
 
-## Learn More
+**User Account and Validation** <br>
+JWT Authentication: Log In, Log Out, Sign Up.<br>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## API Database
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [x] <a href="https://developers.google.com/maps/documentation/javascript/places-autocomplete">Google Maps JavaScript API</a>
 
-### Code Splitting
+## Installation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<strong>Back-End</strong>
 
-### Analyzing the Bundle Size
+```ruby
+$ git clone 👾
+$ bundle install
+$ rails db:create && db:migrate
+$ rails db:seed
+$ rails s
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<strong>Front-End</strong>
 
-### Making a Progressive Web App
+<p>Open Chrome browser, and redirect to a new local host to start the app.</p>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Open Chrome browser, and redirect to 'http://localhost:3000' to start the app.
 
-### Advanced Configuration
+**Alternatively, it is fully deployed on Heroku!**
+<br>
+<a href="#">Storybook</a>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Build Status and Future Improvement
 
-### Deployment
+<p>Current project-built was completed in a 2-week timeframe from model association development, MVP for user interface and Material UI implementation. Future cycle of product development as follows:</p>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- [x]
+- [x]
+- [x]
+- [x]
+- [x]
+- [x]
 
-### `yarn build` fails to minify
+## Stack
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [x] Active Record
+- [x] Bcrypt
+- [x] PostgreSQL
+- [x] ActiveModel::Serializer
+- [x] React Router
+- [x] React Calendar
+- [x] Google Map React
+- [x] React Places Autocomplete
+- [x] Material-UI
+
+## Resources
+
+- [x] <a href="https://www.npmjs.com/package/react-calendar">React Calendar</a>
+- [x] <a href="https://material-ui.com/">Material-UI</a>
