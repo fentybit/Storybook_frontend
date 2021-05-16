@@ -20,13 +20,13 @@ Welcome to my simplistic version of digital journaling app.<br>
 ## Features
 
 <div align="center">
-  <img src="public/images/wireframe.png">
+  <img src="images/wireframe.png">
 </div>
 
 <br>
 
 <div align="center">
-  <img src="public/images/erd_present.png">
+  <img src="images/erd_present.png">
 </div>
 
 <br>
