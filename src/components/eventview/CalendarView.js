@@ -11,25 +11,30 @@ class CalendarView extends Component {
     }
 
     render() {
-        console.log(this.renderCategoryEvents())
+        console.log(this.props)
 
         return (
             <div>
                 <h5>Calendar View</h5>
-                {this.renderCategoryEvents().map(event => (
-                    <div key={event.id}>
-                        <p><Link key={event.id} to={`/events/${this.props.match.params.categoryId}/${event.id}`}>{event.title}</Link></p>
+                { (this.props.events)
+                    ?
+                    this.renderCategoryEvents().map(event => (
+                        <div key={event.id}>
+                            <p><Link key={event.id} to={`/events/${this.props.match.params.categoryId}/${event.id}`}>{event.title}</Link></p>
 
-                        <p>{event.date}</p>
-                        <p>{event.time}</p>
-                        <p>{event.vibe}</p>
-                        <p>{event.description}</p>
-                        <p>----</p>
-                    </div>
-                ))}
+                            <p>{event.date}</p>
+                            <p>{event.time}</p>
+                            <p>{event.vibe}</p>
+                            <p>{event.description}</p>
+                            <p>----</p>
+                        </div>
+                    ))
+                    :
+                    <h5>Loading...</h5>}
             </div>
         )
     }
 }
+
 
 export default CalendarView;

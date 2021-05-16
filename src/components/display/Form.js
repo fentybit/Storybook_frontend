@@ -105,7 +105,7 @@ export default class Form extends Component {
 
                     <input type='submit' value='Save' />
                 </form>
-            </div>
+            </div >
         )
     }
 }
