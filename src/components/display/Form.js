@@ -5,7 +5,6 @@ import PlacesAutocomplete, {
     getLatLng,
 } from 'react-places-autocomplete';
 
-// import LocationSearchInput from './LocationSearchInput';
 // import MapContainer from './MapContainer';
 
 export class Form extends Component {
@@ -19,6 +18,10 @@ export class Form extends Component {
         description: ''
     }
 
+    handleLocationChange = location => {
+        this.setState({ location })
+    }
+
     handleOnChange = (event) => {
         this.setState({ [event.target.name]: event.target.value })
     }
@@ -27,15 +30,15 @@ export class Form extends Component {
         this.setState({ location })
     }
 
-    handleSelect = location => {
-        geocodeByAddress(location)
-            .then(results => getLatLng(results[0]))
-            .then(latLng => {
-                console.log('Success', latLng)
-                this.setState({ location: this.state.location })
-            })
-            .catch(error => console.error('Error', error));
-    };
+    // handleSelect = location => {
+    //     geocodeByAddress(location)
+    //         .then(results => getLatLng(results[0]))
+    //         .then(latLng => {
+    //             console.log('Success', latLng)
+    //             this.setState({ location: this.state.location })
+    //         })
+    //         .catch(error => console.error('Error', error));
+    // };
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -122,9 +125,8 @@ export class Form extends Component {
                     <label htmlFor='location'>Location</label>
                     {/* <LocationSearchInput type='location' name='location' placeholder='Enter Location' onChange={this.handleOnChange} value={this.state.location} /><br /> */}
                     <PlacesAutocomplete
-                        name='location'
                         value={this.state.location}
-                        onChange={this.handleAutocompleteChange}
+                        onChange={this.handleLocationChange}
                         onSelect={this.handleSelect}
                     >
                         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (

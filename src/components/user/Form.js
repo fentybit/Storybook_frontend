@@ -72,7 +72,7 @@ class Form extends Component {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign in
+                        Log in
                     </Typography>
                     <form classname={classes.form} noValidate onSubmit={this.handleSubmit}>
                         <TextField

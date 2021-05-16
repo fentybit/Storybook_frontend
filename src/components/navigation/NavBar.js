@@ -19,7 +19,6 @@ class NavBar extends Component {
                 if (nameA > nameB) return 1;
                 return 0
             })
-            console.log(userCategories)
 
             return userCategories.map(category => <p><Link key={category.id} to={`/events/${category.id}`}>{category.name}</Link></p>)
         }
@@ -32,7 +31,6 @@ class NavBar extends Component {
     // }
 
     render() {
-        console.log(this.props.categories)
         return (
             <div>
                 <h3>Container 1</h3>
