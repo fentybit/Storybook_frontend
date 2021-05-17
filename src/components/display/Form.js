@@ -15,7 +15,25 @@ export class Form extends Component {
         date: '',
         time: '',
         location: '',
-        description: ''
+        description: '',
+        image: '',
+        image_link: '',
+    }
+
+    handleImageChange = (event) => {
+        const file = event.target.files[0];
+        this.previewFile(file);
+        this.setState({
+            image_link: event.target.value
+        })
+    }
+
+    previewFile = (file) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            this.setState({ image: reader.result })
+        }
     }
 
     handleLocationChange = location => {
@@ -56,7 +74,8 @@ export class Form extends Component {
                     date: this.state.date,
                     time: this.state.time,
                     location: this.state.location,
-                    description: this.state.description
+                    description: this.state.description,
+                    image: this.state.image
                 })
             })
                 .then(resp => resp.json())
@@ -67,7 +86,8 @@ export class Form extends Component {
                     date: data.event.date,
                     time: data.event.time,
                     location: data.event.location,
-                    description: data.event.description
+                    description: data.event.description,
+                    image: data.image.url
                 }, () => {
                     this.props.history.push(`/events/${data.category.id}/${data.event.id}`)
                 }))
@@ -166,6 +186,16 @@ export class Form extends Component {
 
                     <label htmlFor='description'>Description</label>
                     <textarea name='description' placeholder='Event Description' onChange={this.handleOnChange} value={this.state.description} /><br />
+
+                    <label htmlFor='image'>Image</label>
+                    <input type='file' name='image' onChange={this.handleImageChange} value={this.state.image_link} />
+                    {this.state.image && (
+                        <img
+                            src={this.state.image}
+                            alt='chosen'
+                            style={{ height: '200px' }} />
+                    )}
+                    <br />
 
                     <input type='submit' value='Save' />
                 </form>

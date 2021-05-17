@@ -23,6 +23,7 @@ class EventDisplay extends Component {
                         <p>{event.time}</p>
                         <p>{event.location}</p>
                         <p>{event.description}</p>
+                        {event.images.map(image => <img src={image.url} style={{ height: '200px' }} />)}
                     </>
                     :
                     <h5>Loading...</h5>

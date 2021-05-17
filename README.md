@@ -9,6 +9,7 @@
 <strong>Domain Modeling :: Digital Journaling</strong><br>
 Welcome to my simplistic version of digital journaling app.<br>
 
+<p><a href="https://github.com/fentybit/Storybook_backend">Back-End GitHub Repo</a></p>
 <p><a href="#">YouTube Demo</a></p>
 <p><a href="#">DEV Blog</a></p>
 
@@ -76,7 +77,7 @@ $ rails s
 
 Open Chrome browser, and redirect to 'http://localhost:3000' to start the app.
 
-**Alternatively, it is fully deployed on Heroku!**
+**Alternatively, it is fully deployed on Netlify!**
 <br>
 <a href="#">Storybook</a>
 
@@ -97,13 +98,16 @@ Open Chrome browser, and redirect to 'http://localhost:3000' to start the app.
 - [x] Bcrypt
 - [x] PostgreSQL
 - [x] ActiveModel::Serializer
+- [x] Rack CORS
 - [x] React Router
 - [x] React Calendar
 - [x] Google Map React
 - [x] React Places Autocomplete
+- [x] Cloudinary
 - [x] Material-UI
 
 ## Resources
 
+- [x] <a href="https://unsplash.com/">Unsplash</a>
 - [x] <a href="https://www.npmjs.com/package/react-calendar">React Calendar</a>
 - [x] <a href="https://material-ui.com/">Material-UI</a>

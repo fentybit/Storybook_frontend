@@ -9,8 +9,6 @@ export default function CategorySummary({ categories, events, match, user }) {
         }
     }
 
-    console.log(renderCategoryEvents())
-
     return (
         <div>
             { (events)
