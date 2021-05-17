@@ -17,15 +17,11 @@ export class Form extends Component {
         location: '',
         description: '',
         image: '',
-        image_link: '',
     }
 
     handleImageChange = (event) => {
         const file = event.target.files[0];
         this.previewFile(file);
-        this.setState({
-            image_link: event.target.value
-        })
     }
 
     previewFile = (file) => {
@@ -188,7 +184,7 @@ export class Form extends Component {
                     <textarea name='description' placeholder='Event Description' onChange={this.handleOnChange} value={this.state.description} /><br />
 
                     <label htmlFor='image'>Image</label>
-                    <input type='file' name='image' onChange={this.handleImageChange} value={this.state.image_link} />
+                    <input type='file' name='image' onChange={this.handleImageChange} />
                     {this.state.image && (
                         <img
                             src={this.state.image}
@@ -205,5 +201,5 @@ export class Form extends Component {
 }
 
 export default GoogleApiWrapper({
-    apiKey: ('')
+    apiKey: (process.env.REACT_APP_GOOGLE_API_KEY)
 })(Form)

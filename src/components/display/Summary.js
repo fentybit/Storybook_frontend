@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchUserEvents } from '../../redux/actions/eventsActions';
 
+// useEffect || React Hooks
+
 class Summary extends Component {
     componentDidMount() {
         this.props.fetchUserEvents();
