@@ -11,6 +11,7 @@ import 'react-infinite-calendar/styles.css';
 import { format } from 'date-fns'
 
 import CalendarView from './CalendarView';
+import MapView from './MapView';
 import PhotosView from './PhotosView';
 
 function EventViewList({ categories, events, props, token, url, user }) {
@@ -53,6 +54,8 @@ function EventViewList({ categories, events, props, token, url, user }) {
                     }
                 }} />} />
 
+                <Route path={`${url}/map`} render={() => <MapView />} />
+
                 {/* working */}
                 <Route path={`${url}/newentry`} render={() => <InfiniteCalendar width={400} height={600} selected={today} disabledDays={[0, 6]} minDate={lastWeek} />} />
 
@@ -61,6 +64,7 @@ function EventViewList({ categories, events, props, token, url, user }) {
                 {/* working */}
                 <Route path={`${url}/photos`} render={() => <PhotosView />} />
 
+                {/* working */}
                 <Route path={`${url}/:categoryId/:eventId`} render={(routerProps) => <CalendarView {...routerProps} categories={categories} events={events} token={token} user={user} />} />
 
                 {/* working */}
@@ -68,9 +72,6 @@ function EventViewList({ categories, events, props, token, url, user }) {
 
                 {/* working */}
                 <Route path={url} render={() => <InfiniteCalendar width={400} height={600} selected={today} disabledDays={[0, 6]} minDate={lastWeek} />} />
-
-
-                {/* <Route path={`${url}/map`} render={() => <MapView />} /> */}
             </Switch>
         </div>
     )
