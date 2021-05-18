@@ -11,6 +11,7 @@ import 'react-infinite-calendar/styles.css';
 import { format } from 'date-fns'
 
 import CalendarView from './CalendarView';
+import PhotosView from './PhotosView';
 
 function EventViewList({ categories, events, props, token, url, user }) {
     const today = new Date();
@@ -38,20 +39,24 @@ function EventViewList({ categories, events, props, token, url, user }) {
         <div div align="center">
             <h3>Container 2</h3>
             <Switch>
+                {/* working */}
                 <Route path={`${url}/calendar/:eventId`} render={() => <InfiniteCalendar Component={withMultipleDates(Calendar)} interpolateSelection={defaultMultipleDateInterpolation} onSelect={date => renderSelectedEventDate(date)} selected={selectedDatesArray} theme={{
                     selectionColor: date => {
-                        return (date) ? '#559FFF' : '#EC6150';
+                        return (date) ? '#559FFF' : '#559FFF';
                     }
                 }} />} />
 
+                {/* working */}
                 <Route path={`${url}/calendar`} render={() => <InfiniteCalendar Component={withMultipleDates(Calendar)} interpolateSelection={defaultMultipleDateInterpolation} onSelect={date => renderSelectedEventDate(date)} selected={selectedDatesArray} theme={{
                     selectionColor: date => {
-                        return (date) ? '#559FFF' : '#EC6150';
+                        return (date) ? '#559FFF' : '#559FFF';
                     }
                 }} />} />
 
                 {/* working */}
                 <Route path={`${url}/newentry`} render={() => <InfiniteCalendar width={400} height={600} selected={today} disabledDays={[0, 6]} minDate={lastWeek} />} />
+
+                <Route path={`${url}/photos`} render={() => <PhotosView />} />
 
                 <Route path={`${url}/:categoryId/:eventId`} render={(routerProps) => <CalendarView {...routerProps} categories={categories} events={events} token={token} user={user} />} />
 

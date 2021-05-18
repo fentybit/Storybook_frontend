@@ -5,6 +5,7 @@ import categoriesReducer from './reducers/categoriesReducer';
 import eventReducer from './reducers/eventReducer';
 import eventsReducer from './reducers/eventsReducer';
 import errorReducer from './reducers/errorReducer';
+import imagesReducer from './reducers/imagesReducer';
 import tokenReducer from './reducers/tokenReducer';
 import userReducer from './reducers/userReducer';
 
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     event: eventReducer,
     events: eventsReducer,
     error: errorReducer,
+    images: imagesReducer,
     token: tokenReducer,
     user: userReducer
 });
