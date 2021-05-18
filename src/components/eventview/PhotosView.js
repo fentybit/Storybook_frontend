@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 import { fetchUserPhotos } from '../../redux/actions/imagesActions';
 
 class PhotosView extends Component {
@@ -8,15 +10,15 @@ class PhotosView extends Component {
     }
 
     render() {
-        console.log(this.props.images)
         return (
             <div>
                 <h5>Photos View</h5>
                 { (this.props.images)
                     ?
-                    this.props.images.map(image => <img src={image.url} alt={image.id} style={{ height: '200px' }} />)
+                    this.props.images.map(image => <Link key={image.id} to={`/events/photos/${image.event_id}`}><img src={image.url} alt={image.id} style={{ height: '200px' }} /></Link>)
                     :
-                    <h6>Loading...</h6>}
+                    <h6>Loading...</h6>
+                }
             </div>
         )
     }

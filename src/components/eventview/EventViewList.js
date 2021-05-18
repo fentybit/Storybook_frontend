@@ -56,6 +56,9 @@ function EventViewList({ categories, events, props, token, url, user }) {
                 {/* working */}
                 <Route path={`${url}/newentry`} render={() => <InfiniteCalendar width={400} height={600} selected={today} disabledDays={[0, 6]} minDate={lastWeek} />} />
 
+                <Route path={`${url}/photos/:eventId`} render={() => <PhotosView />} />
+
+                {/* working */}
                 <Route path={`${url}/photos`} render={() => <PhotosView />} />
 
                 <Route path={`${url}/:categoryId/:eventId`} render={(routerProps) => <CalendarView {...routerProps} categories={categories} events={events} token={token} user={user} />} />
