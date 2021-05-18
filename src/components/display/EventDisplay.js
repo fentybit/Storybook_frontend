@@ -9,6 +9,7 @@ class EventDisplay extends Component {
 
     render() {
         const { event } = this.props;
+        console.log(event);
 
         return (
             <div>
@@ -23,7 +24,7 @@ class EventDisplay extends Component {
                         <p>{event.time}</p>
                         <p>{event.location}</p>
                         <p>{event.description}</p>
-                        {event.images.map(image => <img src={image.url} style={{ height: '200px' }} />)}
+                        { (event.images) ? event.images.map(image => <img src={image.url} style={{ height: '200px' }} />) : null}
                     </>
                     :
                     <h5>Loading...</h5>

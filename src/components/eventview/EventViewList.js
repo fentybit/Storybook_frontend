@@ -1,28 +1,64 @@
 import React, { useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
+
+import InfiniteCalendar, {
+    Calendar,
+    defaultMultipleDateInterpolation,
+    withMultipleDates,
+} from 'react-infinite-calendar';
+import 'react-infinite-calendar/styles.css';
+import { format } from 'date-fns'
 
 import CalendarView from './CalendarView';
 
-function EventViewList({ categories, events, token, url, user }) {
-    // not stateless
-    const [value, onChange] = useState(new Date());
+function EventViewList({ categories, events, props, token, url, user }) {
+    const today = new Date();
+    const lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
+
+    const dates = [...new Set(events.map(event => event.date))];
+    const filteredAndSortedDates = dates.filter(date => date !== null).sort();
+    const selectedDatesArray = filteredAndSortedDates.map(date => {
+        let eventDate = date.split('-');
+        return new Date(parseInt(eventDate[0]), parseInt(eventDate[1] - 1), parseInt(eventDate[2]));
+    })
+
+    const renderSelectedEventDate = (date) => {
+        let selectedDate = format(date, 'YYYY-MM-DD')
+        let findEvent = events.find(event => event.date === selectedDate)
+
+        if (findEvent) {
+            props.history.push(`/events/calendar/${findEvent.id}`)
+        } else {
+            props.history.push('/events/calendar')
+        }
+    }
 
     return (
-        <div align="center">
+        <div div align="center">
             <h3>Container 2</h3>
             <Switch>
+                <Route path={`${url}/calendar/:eventId`} render={() => <InfiniteCalendar Component={withMultipleDates(Calendar)} interpolateSelection={defaultMultipleDateInterpolation} onSelect={date => renderSelectedEventDate(date)} selected={selectedDatesArray} theme={{
+                    selectionColor: date => {
+                        return (date) ? '#559FFF' : '#EC6150';
+                    }
+                }} />} />
+
+                <Route path={`${url}/calendar`} render={() => <InfiniteCalendar Component={withMultipleDates(Calendar)} interpolateSelection={defaultMultipleDateInterpolation} onSelect={date => renderSelectedEventDate(date)} selected={selectedDatesArray} theme={{
+                    selectionColor: date => {
+                        return (date) ? '#559FFF' : '#EC6150';
+                    }
+                }} />} />
+
                 {/* working */}
-                <Route path={`${url}/newentry`} render={() => <Calendar onChange={onChange} value={value} view='month' />} />
+                <Route path={`${url}/newentry`} render={() => <InfiniteCalendar width={400} height={600} selected={today} disabledDays={[0, 6]} minDate={lastWeek} />} />
 
                 <Route path={`${url}/:categoryId/:eventId`} render={(routerProps) => <CalendarView {...routerProps} categories={categories} events={events} token={token} user={user} />} />
 
                 <Route path={`${url}/:categoryId`} render={(routerProps) => <CalendarView {...routerProps} categories={categories} events={events} token={token} user={user} />} />
 
                 {/* working */}
-                <Route path={url} render={() => <Calendar onChange={onChange} value={value} view='month' />} />
+                <Route path={url} render={() => <InfiniteCalendar width={400} height={600} selected={today} disabledDays={[0, 6]} minDate={lastWeek} />} />
 
 
                 {/* <Route path={`${url}/map`} render={() => <MapView />} /> */}

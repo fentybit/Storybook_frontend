@@ -6,7 +6,6 @@ import DisplayContainer from './DisplayContainer';
 
 export default class ProfileContainer extends Component {
     render() {
-
         return (
             <div>
                 {
@@ -16,7 +15,7 @@ export default class ProfileContainer extends Component {
                             <NavBar categories={this.props.categories} user={this.props.user} />
 
                             <hr />
-                            <EventViewList categories={this.props.categories} events={this.props.events} token={this.props.token} url={this.props.match.url} user={this.props.user} />
+                            <EventViewList categories={this.props.categories} events={this.props.events} props={this.props} token={this.props.token} url={this.props.match.url} user={this.props.user} />
 
                             <hr />
                             <DisplayContainer categories={this.props.categories} events={this.props.events} token={this.props.token} url={this.props.match.url} user={this.props.user} />
