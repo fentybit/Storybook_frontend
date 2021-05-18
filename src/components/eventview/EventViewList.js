@@ -55,6 +55,7 @@ function EventViewList({ categories, events, props, token, url, user }) {
 
                 <Route path={`${url}/:categoryId/:eventId`} render={(routerProps) => <CalendarView {...routerProps} categories={categories} events={events} token={token} user={user} />} />
 
+                {/* working */}
                 <Route path={`${url}/:categoryId`} render={(routerProps) => <CalendarView {...routerProps} categories={categories} events={events} token={token} user={user} />} />
 
                 {/* working */}

@@ -82,8 +82,7 @@ export class Form extends Component {
                     date: data.event.date,
                     time: data.event.time,
                     location: data.event.location,
-                    description: data.event.description,
-                    image: data.image.url
+                    description: data.event.description
                 }, () => {
                     this.props.history.push(`/events/${data.category.id}/${data.event.id}`)
                 }))
