@@ -6,7 +6,8 @@ import PlacesAutocomplete, {
     getLatLng,
 } from 'react-places-autocomplete';
 
-import { fetchUserEvents } from '../../redux/actions/eventsActions'
+import { fetchUserCategories } from '../../redux/actions/categoriesActions';
+import { fetchUserEvents } from '../../redux/actions/eventsActions';
 
 export class Form extends Component {
     state = {
@@ -53,6 +54,7 @@ export class Form extends Component {
             .then(latLng => {
                 this.handleLocationChange(location)
                 this.setState({ latitude: latLng.lat, longitude: latLng.lng })
+                console.log('SUCCESS: ', latLng.lat, latLng.lng)
             })
             .catch(error => console.error('Error', error));
     };
@@ -89,8 +91,9 @@ export class Form extends Component {
                     location: data.event.location,
                     description: data.event.description
                 }, () => {
-                    this.props.fetchUserEvents()
-                    this.props.history.push(`/events/${data.category.id}/${data.event.id}`)
+                    this.props.fetchUserCategories();
+                    this.props.fetchUserEvents();
+                    this.props.history.push(`/events/${data.category.id}/${data.event.id}`);
                 }))
         } else {
             event.preventDefault();
@@ -203,6 +206,6 @@ export class Form extends Component {
     }
 }
 
-export default connect(null, { fetchUserEvents })(GoogleApiWrapper({
+export default connect(null, { fetchUserCategories, fetchUserEvents })(GoogleApiWrapper({
     apiKey: (process.env.REACT_APP_GOOGLE_API_KEY)
 })(Form))
