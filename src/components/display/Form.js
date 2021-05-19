@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { GoogleApiWrapper } from 'google-maps-react';
 import PlacesAutocomplete, {
     geocodeByAddress,
     getLatLng,
 } from 'react-places-autocomplete';
 
-// import MapContainer from './MapContainer';
+import { fetchUserEvents } from '../../redux/actions/eventsActions'
 
 export class Form extends Component {
     state = {
@@ -15,6 +16,8 @@ export class Form extends Component {
         date: '',
         time: '',
         location: '',
+        latitude: '',
+        longitude: '',
         description: '',
         image: '',
     }
@@ -44,15 +47,15 @@ export class Form extends Component {
         this.setState({ location })
     }
 
-    // handleSelect = location => {
-    //     geocodeByAddress(location)
-    //         .then(results => getLatLng(results[0]))
-    //         .then(latLng => {
-    //             console.log('Success', latLng)
-    //             this.setState({ location: this.state.location })
-    //         })
-    //         .catch(error => console.error('Error', error));
-    // };
+    handleSelect = location => {
+        geocodeByAddress(location)
+            .then(results => getLatLng(results[0]))
+            .then(latLng => {
+                this.handleLocationChange(location)
+                this.setState({ latitude: latLng.lat, longitude: latLng.lng })
+            })
+            .catch(error => console.error('Error', error));
+    };
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -70,6 +73,8 @@ export class Form extends Component {
                     date: this.state.date,
                     time: this.state.time,
                     location: this.state.location,
+                    latitude: this.state.latitude,
+                    longitude: this.state.longitude,
                     description: this.state.description,
                     image: this.state.image
                 })
@@ -84,6 +89,7 @@ export class Form extends Component {
                     location: data.event.location,
                     description: data.event.description
                 }, () => {
+                    this.props.fetchUserEvents()
                     this.props.history.push(`/events/${data.category.id}/${data.event.id}`)
                 }))
         } else {
@@ -136,9 +142,7 @@ export class Form extends Component {
                     <label htmlFor='time'>Time</label>
                     <input type='time' name='time' placeholder='Event Time' onChange={this.handleOnChange} value={this.state.time} /><br />
 
-                    {/* <SeparateComponent /> */}
                     <label htmlFor='location'>Location</label>
-                    {/* <LocationSearchInput type='location' name='location' placeholder='Enter Location' onChange={this.handleOnChange} value={this.state.location} /><br /> */}
                     <PlacesAutocomplete
                         value={this.state.location}
                         onChange={this.handleLocationChange}
@@ -199,6 +203,6 @@ export class Form extends Component {
     }
 }
 
-export default GoogleApiWrapper({
+export default connect(null, { fetchUserEvents })(GoogleApiWrapper({
     apiKey: (process.env.REACT_APP_GOOGLE_API_KEY)
-})(Form)
+})(Form))

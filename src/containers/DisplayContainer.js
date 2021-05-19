@@ -18,6 +18,12 @@ class DisplayContainer extends Component {
                     <Route path={`${this.props.url}/calendar`} render={() => <Summary categories={this.props.categories} user={this.props.user} />} />
 
                     {/* working */}
+                    <Route path={`${this.props.url}/photos/:eventId`} render={(routerProps) => <EventDisplay {...routerProps} categories={this.props.categories} events={this.props.events} token={this.props.token} user={this.props.user} />} />
+
+
+                    <Route path={`${this.props.url}/map/:eventId`} render={(routerProps) => <EventDisplay {...routerProps} categories={this.props.categories} events={this.props.events} token={this.props.token} user={this.props.user} />} />
+
+                    {/* working */}
                     <Route path={`${this.props.url}/map`} render={() => <Summary categories={this.props.categories} user={this.props.user} />} />
 
                     {/* working */}

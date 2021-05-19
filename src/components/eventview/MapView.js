@@ -5,19 +5,29 @@ export class MapView extends Component {
     state = {
         showingInfoWindow: false,
         activeMarker: {},
-        selectedPlace: {},
+        eventTitle: {},
         mapCenter: {
-            lat: 34.0522,
-            lng: -118.2437
+            lat: '',
+            lng: ''
         },
+        eventId: null
     };
 
-    onMarkerClick = (props, marker, e) =>
+    eventLocations = () => {
+        return this.props.events.filter(event => event.location !== '')
+    }
+
+    onMarkerClick = (props, marker, e) => {
         this.setState({
-            selectedPlace: props,
+            eventTitle: props,
             activeMarker: marker,
-            showingInfoWindow: true
-        });
+            showingInfoWindow: true,
+            eventId: props.id
+        })
+
+        this.props.history.push(`/events/map/${this.state.eventId}`)
+    }
+
 
     onMapClicked = (props) => {
         if (this.state.showingInfoWindow) {
@@ -34,28 +44,31 @@ export class MapView extends Component {
                 <Map
                     google={this.props.google}
                     initialCenter={{
-                        lat: this.state.mapCenter.lat,
-                        lng: this.state.mapCenter.lng
-                    }}
-                    center={{
-                        lat: this.state.mapCenter.lat,
-                        lng: this.state.mapCenter.lng
+                        lat: '37.09024',
+                        lng: '-95.712891'
                     }}
                     onClick={this.onMapClicked}
+                    zoom={4}
                 >
-                    <Marker
-                        onClick={this.onMarkerClick}
-                        position={{
-                            lat: this.state.mapCenter.lat,
-                            lng: this.state.mapCenter.lng
-                        }}
-                        name={'Current location'} />
+
+                    {this.eventLocations().map(event => {
+                        return (< Marker
+                            id={event.id}
+                            name={event.title}
+                            onClick={this.onMarkerClick}
+                            position={{
+                                lat: event.latitude,
+                                lng: event.longitude
+                            }}
+                        />)
+                    }
+                    )}
 
                     <InfoWindow
                         marker={this.state.activeMarker}
                         visible={this.state.showingInfoWindow}>
                         <div>
-                            <h1>{this.state.selectedPlace.name}</h1>
+                            <h3>{this.state.eventTitle.name}</h3>
                         </div>
                     </InfoWindow>
                 </Map>

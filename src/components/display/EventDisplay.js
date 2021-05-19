@@ -11,7 +11,7 @@ class EventDisplay extends Component {
 
     render() {
         const displayEvent = this.renderEvent();
-
+        console.log(this.props)
         return (
             <div>
                 <h5>Event Display</h5>
