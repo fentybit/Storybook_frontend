@@ -1,35 +1,30 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchUserEvents } from '../../redux/actions/eventsActions';
 
-// useEffect || React Hooks
+function Summary(props) {
+    useEffect(() => {
+        props.fetchUserEvents();
+    }, [])
 
-class Summary extends Component {
-    componentDidMount() {
-        this.props.fetchUserEvents();
-    }
+    const places = (props.events) ? props.events.filter(event => event.location !== '') : null
 
-    render() {
-        const places = (this.props.events) ? this.props.events.filter(event => event.location !== '') : null
-
-        return (
-
-            <div>
-                { (this.props.events)
-                    ?
-                    <>
-                        <h5>All Entries</h5>
-                        <p>Entries | {this.props.events.length}</p>
-                        <p>Categories | {this.props.categories.length}</p>
-                        <p>Places | {places.length}</p>
-                        <p>Photos | TBD</p>
-                    </>
-                    :
-                    <h5>Loading...</h5>
-                }
-            </div>
-        )
-    }
+    return (
+        <div>
+            { (props.events)
+                ?
+                <>
+                    <h5>All Entries</h5>
+                    <p>Entries | {props.events.length}</p>
+                    <p>Categories | {props.categories.length}</p>
+                    <p>Places | {places.length}</p>
+                    <p>Photos | TBD</p>
+                </>
+                :
+                <h5>Loading...</h5>
+            }
+        </div>
+    )
 }
 
 const mapStateToProps = state => {
