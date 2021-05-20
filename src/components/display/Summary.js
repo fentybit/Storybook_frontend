@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { fetchUserCategories } from '../../redux/actions/categoriesActions';
 import { fetchUserEvents } from '../../redux/actions/eventsActions';
 import { fetchUserPhotos } from '../../redux/actions/imagesActions';
 
 function Summary(props) {
     useEffect(() => {
+        props.fetchUserCategories();
         props.fetchUserEvents();
         props.fetchUserPhotos();
     }, [])
@@ -31,9 +33,10 @@ function Summary(props) {
 
 const mapStateToProps = state => {
     return {
+        categories: state.categories,
         events: state.events,
         images: state.images
     }
 }
 
-export default connect(mapStateToProps, { fetchUserEvents, fetchUserPhotos })(Summary);
+export default connect(mapStateToProps, { fetchUserEvents, fetchUserPhotos, fetchUserCategories })(Summary);
