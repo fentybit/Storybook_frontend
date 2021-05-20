@@ -3,7 +3,7 @@ export const fetchUserCategories = () => {
         if (localStorage.getItem('token')) {
             let token = localStorage.getItem('token')
 
-            fetch('http://localhost:3000/api/v1/categories', {
+            fetch('https://your-storybook.herokuapp.com/api/v1/categories', {
                 headers: {
                     'Authorization': `bearer ${token}`
                 }

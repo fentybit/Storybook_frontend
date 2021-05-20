@@ -3,7 +3,7 @@ export const fetchUser = (history) => {
         if (localStorage.getItem('token')) {
             let token = localStorage.getItem('token')
 
-            fetch('http://localhost:3000/api/v1/profile', {
+            fetch('https://your-storybook.herokuapp.com/api/v1/profile', {
                 headers: {
                     'Authorization': `bearer ${token}`
                 }
@@ -34,7 +34,7 @@ export const loginUser = (user, history) => {
     }
 
     return (dispatch) => {
-        fetch('http://localhost:3000/api/v1/login', {
+        fetch('https://your-storybook.herokuapp.com/api/v1/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ export const signupUser = (user, history) => {
     }
 
     return (dispatch) => {
-        fetch('http://localhost:3000/api/v1/users', {
+        fetch('https://your-storybook.herokuapp.com/api/v1/users', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -3,7 +3,7 @@ export const fetchUserPhotos = () => {
         if (localStorage.getItem('token')) {
             let token = localStorage.getItem('token')
 
-            fetch(`http://localhost:3000/api/v1/images`, {
+            fetch('https://your-storybook.herokuapp.com/api/v1/images', {
                 headers: {
                     'Authorization': `bearer ${token}`
                 }

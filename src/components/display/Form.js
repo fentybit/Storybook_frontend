@@ -62,7 +62,7 @@ export class Form extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         if ((this.state.category) && (this.state.category !== 'Please enter Category')) {
-            fetch('http://localhost:3000/api/v1/events', {
+            fetch('https://your-storybook.herokuapp.com/api/v1/events', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -4,7 +4,7 @@ export const fetchEvent = (eventId) => {
             let token = localStorage.getItem('token')
             console.log('Hi, this is fetchEvent')
 
-            fetch(`http://localhost:3000/api/v1/events/${eventId}`, {
+            fetch(`https://your-storybook.herokuapp.com/api/v1/events/${eventId}`, {
                 headers: {
                     'Authorization': `bearer ${token}`
                 }
@@ -20,7 +20,7 @@ export const fetchUserEvents = () => {
         if (localStorage.getItem('token')) {
             let token = localStorage.getItem('token')
 
-            fetch(`http://localhost:3000/api/v1/events`, {
+            fetch('https://your-storybook.herokuapp.com/api/v1/events', {
                 headers: {
                     'Authorization': `bearer ${token}`
                 }
