@@ -1,38 +1,31 @@
-import React, { Component } from 'react';
+export default function EventDisplay(props) {
+    const renderEvent = () => {
+        if (props.events) {
+            const eventId = props.match.params.eventId;
 
-class EventDisplay extends Component {
-    renderEvent = () => {
-        if (this.props.events) {
-            const eventId = this.props.match.params.eventId;
-
-            return this.props.events.filter(event => event.id == eventId)[0];
+            return props.events.filter(event => event.id == eventId)[0];
         }
     }
 
-    render() {
-        const displayEvent = this.renderEvent();
+    return (
+        <div>
+            <h5>Event Display</h5>
+            {(renderEvent())
+                ?
+                <>
+                    <h5>{renderEvent().category.name}</h5>
+                    <p>{renderEvent().title}</p>
+                    <p>{renderEvent().vibe}</p>
+                    <p>{renderEvent().date}</p>
+                    <p>{renderEvent().time}</p>
+                    <p>{renderEvent().location}</p>
+                    <p>{renderEvent().description}</p>
 
-        return (
-            <div>
-                <h5>Event Display</h5>
-                {(displayEvent)
-                    ?
-                    <>
-                        {/* <p>{event.category.name}</p> */}
-                        <p>{displayEvent.title}</p>
-                        <p>{displayEvent.vibe}</p>
-                        <p>{displayEvent.date}</p>
-                        <p>{displayEvent.time}</p>
-                        <p>{displayEvent.location}</p>
-                        <p>{displayEvent.description}</p>
-                        { (displayEvent.images) ? displayEvent.images.map(image => <img src={image.url} style={{ height: '200px' }} />) : null}
-                    </>
-                    :
-                    <h5>Loading...</h5>
-                }
-            </div>
-        )
-    }
+                    { (renderEvent().images) ? renderEvent().images.map(image => <img key={image.id} src={image.url} style={{ height: '200px' }} />) : null}
+                </>
+                :
+                <h5>Loading...</h5>
+            }
+        </div>
+    )
 }
-
-export default EventDisplay;
