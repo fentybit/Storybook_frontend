@@ -61,6 +61,8 @@ export default function EventViewList({ categories, events, props, token, url, u
 
                 <Route path={`${url}/photos`} render={() => <PhotosView />} />
 
+                <Route path={`${url}/:categoryId/:eventId/edit`} render={(routerProps) => <CalendarView {...routerProps} categories={categories} events={events} token={token} user={user} />} />
+
                 <Route path={`${url}/:categoryId/:eventId`} render={(routerProps) => <CalendarView {...routerProps} categories={categories} events={events} token={token} user={user} />} />
 
                 <Route path={`${url}/:categoryId`} render={(routerProps) => <CalendarView {...routerProps} categories={categories} events={events} token={token} user={user} />} />

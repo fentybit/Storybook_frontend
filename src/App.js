@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -12,37 +12,37 @@ import Welcome from './components/user/Welcome';
 import NavBar from './components/user/NavBar';
 import ProfileContainer from './containers/ProfileContainer';
 
-class App extends Component {
-  componentDidMount() {
-    this.props.fetchUser(this.props.history);
-    this.props.fetchUserCategories();
-    this.props.fetchUserEvents();
+function App(props) {
+  useEffect(() => {
+    props.fetchUser(props.history);
+    props.fetchUserCategories();
+    props.fetchUserEvents();
+  }, [])
+
+  const handleLogin = (user) => {
+    props.loginUser(user, props.history)
   }
 
-  handleLogin = (user) => {
-    this.props.loginUser(user, this.props.history)
+  const handleSignup = (user) => {
+    props.signupUser(user, props.history)
   }
 
-  handleSignup = (user) => {
-    this.props.signupUser(user, this.props.history)
-  }
-
-  logout = () => {
+  const logout = () => {
     localStorage.clear()
     window.location.href = '/'
   }
 
-  renderForm = (routerProps) => {
+  const renderForm = (routerProps) => {
     if (routerProps.location.pathname === '/login') {
-      return <Form {...routerProps} formName='Login Form' handleSubmit={this.handleLogin} error={this.props.error} />
+      return <Form {...routerProps} formName='Login Form' handleSubmit={handleLogin} error={props.error} />
     } else if (routerProps.location.pathname === '/signup') {
-      return <Form {...routerProps} formName='SignUp Form' handleSubmit={this.handleSignup} error={this.props.error} />
+      return <Form {...routerProps} formName='SignUp Form' handleSubmit={handleSignup} error={props.error} />
     }
   }
 
-  renderProfile = (routerProps) => {
-    if (localStorage.getItem('token') && (this.props.user.length !== 0)) {
-      return <ProfileContainer {...routerProps} categories={this.props.categories} events={this.props.events} token={this.props.token} user={this.props.user} />
+  const renderProfile = (routerProps) => {
+    if (localStorage.getItem('token') && (props.user.length !== 0)) {
+      return <ProfileContainer {...routerProps} categories={props.categories} events={props.events} token={props.token} user={props.user} />
     } else {
       return (
         <h6>Loading...</h6>
@@ -50,22 +50,20 @@ class App extends Component {
     }
   }
 
-  render() {
-    return (
-      <div div className="App" >
-        <NavBar />
-        <Switch>
-          <Route path='/login' render={this.renderForm} />
-          <Route path='/logout' render={this.logout} />
-          <Route path='/signup' render={this.renderForm} />
-          <Route path='/events' render={this.renderProfile} />
+  return (
+    <div div className="App" >
+      <NavBar />
+      <Switch>
+        <Route path='/login' render={renderForm} />
+        <Route path='/logout' render={logout} />
+        <Route path='/signup' render={renderForm} />
+        <Route path='/events' render={renderProfile} />
 
-          <Route path='/' exact render={() => <Welcome />} />
-          <Route render={() => <Welcome />} />
-        </Switch>
-      </div >
-    );
-  }
+        <Route path='/' exact render={() => <Welcome />} />
+        <Route render={() => <Welcome />} />
+      </Switch>
+    </div >
+  );
 }
 
 const mapStateToProps = state => {

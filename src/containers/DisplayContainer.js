@@ -1,5 +1,6 @@
 import { Switch, Route } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
+import EditForm from '../components/display/EditForm';
 import Form from '../components/display/Form';
 import CategorySummary from '../components/display/CategorySummary';
 import Summary from '../components/display/Summary';
@@ -25,6 +26,8 @@ function DisplayContainer(props) {
                 <Route path={`${url}/map`} render={() => <Summary categories={categories} user={user} />} />
 
                 <Route path={`${url}/newentry`} render={() => <Form categories={categories} history={props.history} token={token} user={user} />} />
+
+                <Route path={`${url}/:categoryId/:eventId/edit`} render={(routerProps) => <EditForm {...routerProps} />} />
 
                 <Route path={`${url}/:categoryId/:eventId`} render={(routerProps) => <EventDisplay {...routerProps} categories={categories} events={events} token={token} user={user} />} />
 

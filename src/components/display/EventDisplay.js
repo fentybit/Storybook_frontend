@@ -7,6 +7,13 @@ export default function EventDisplay(props) {
         }
     }
 
+    const handleClick = () => {
+        const categoryId = props.match.params.categoryId
+        const eventId = props.match.params.eventId
+
+        props.history.push(`/events/${categoryId}/${eventId}/edit`)
+    }
+
     return (
         <div>
             <h5>Event Display</h5>
@@ -26,6 +33,8 @@ export default function EventDisplay(props) {
                 :
                 <h5>Loading...</h5>
             }
+            <br />
+            <button onClick={handleClick}>Edit</button>
         </div>
     )
 }
