@@ -1,31 +1,29 @@
-import React, { Component } from 'react';
-
 import NavBar from '../components/navigation/NavBar';
 import EventViewList from '../components/eventview/EventViewList';
 import DisplayContainer from './DisplayContainer';
 
-export default class ProfileContainer extends Component {
-    render() {
-        return (
-            <div>
-                {
-                    (this.props.user)
-                        ?
-                        <div>
-                            <NavBar categories={this.props.categories} user={this.props.user} />
+export default function ProfileContainer(props) {
+    const { categories, events, match, token, user } = props;
 
-                            <hr />
-                            <EventViewList categories={this.props.categories} events={this.props.events} props={this.props} token={this.props.token} url={this.props.match.url} user={this.props.user} />
+    return (
+        <div>
+            {
+                (user)
+                    ?
+                    <div>
+                        <NavBar categories={categories} user={user} />
 
-                            <hr />
-                            <DisplayContainer categories={this.props.categories} events={this.props.events} token={this.props.token} url={this.props.match.url} user={this.props.user} />
-                        </div>
+                        <hr />
+                        <EventViewList categories={categories} events={events} props={props} token={token} url={match.url} user={user} />
 
-                        :
+                        <hr />
+                        <DisplayContainer categories={categories} events={events} token={token} url={match.url} user={user} />
+                    </div>
 
-                        null
-                }
-            </div>
-        )
-    }
+                    :
+
+                    null
+            }
+        </div>
+    )
 }
