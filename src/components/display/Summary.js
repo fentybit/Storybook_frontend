@@ -7,7 +7,7 @@ function Summary(props) {
     useEffect(() => {
         props.fetchUserEvents();
         props.fetchUserPhotos();
-    })
+    }, [])
 
     const places = (props.events) ? props.events.filter(event => event.location !== '') : null
 

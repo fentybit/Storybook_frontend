@@ -184,7 +184,6 @@ export class Form extends Component {
                             </div>
                         )}
                     </PlacesAutocomplete>
-                    {/* <MapContainer /> */}
 
                     <label htmlFor='description'>Description</label>
                     <textarea name='description' placeholder='Event Description' onChange={this.handleOnChange} value={this.state.description} /><br />

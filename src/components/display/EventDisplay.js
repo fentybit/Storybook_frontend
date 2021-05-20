@@ -17,7 +17,7 @@ export default function EventDisplay(props) {
                     <p>{renderEvent().title}</p>
                     <p>{renderEvent().vibe}</p>
                     <p>{renderEvent().date}</p>
-                    <p>{renderEvent().time}</p>
+                    <p>{renderEvent().time_strftime}</p>
                     <p>{renderEvent().location}</p>
                     <p>{renderEvent().description}</p>
 
