@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, Link } from 'react-router-dom';
 
 import { fetchUserCategories } from '../../redux/actions/categoriesActions';
 
-class NavBar extends Component {
-    componentDidMount() {
-        this.props.fetchUserCategories();
-    }
+function NavBar(props) {
+    useEffect(() => {
+        props.fetchUserCategories();
+    }, [])
 
-    renderCategoriesLink = () => {
-        if (this.props.categories.length > 0) {
-            let userCategories = this.props.categories.sort(function (a, b) {
+    const renderCategoriesLink = () => {
+        if (props.categories.length > 0) {
+            let userCategories = props.categories.sort(function (a, b) {
                 let nameA = a.name.toUpperCase()
                 let nameB = b.name.toUpperCase()
 
@@ -24,32 +24,24 @@ class NavBar extends Component {
         }
     }
 
-    // renderCategoriesLink = () => {
-    //     if (this.props.categories.length > 0) {
-    //         return this.props.categories.map(category => <p><Link key={category.id} to={`/events/${category.id}`}>{category.name}</Link></p>)
-    //     }
-    // }
+    return (
+        <div>
+            <h3>Container 1</h3>
+            <h5>Hello, {props.user.fullname}</h5>
 
-    render() {
-        return (
-            <div>
-                <h3>Container 1</h3>
-                <h5>Hello, {this.props.user.fullname}</h5>
+            { (props.categories.length === 0) ? <h6>Write your first journal entry!</h6> : <h6>All Events</h6>}
+            { renderCategoriesLink()}
 
-                { (this.props.categories.length === 0) ? <h6>Write your first journal entry!</h6> : <h6>All Events</h6>}
-                { this.renderCategoriesLink()}
+            <p>---------------</p>
+            <NavLink to='/events/newentry'>New Entry</NavLink>
+            <p>---------------</p>
 
-                <p>---------------</p>
-                <NavLink to='/events/newentry'>New Entry</NavLink>
-                <p>---------------</p>
-
-                <h6>View</h6>
-                <p><NavLink to='/events/calendar'>Calendar</NavLink></p>
-                <p><NavLink to='/events/map'>Map</NavLink></p>
-                <p><NavLink to='/events/photos'>Photos</NavLink></p>
-            </div>
-        )
-    }
+            <h6>View</h6>
+            <p><NavLink to='/events/calendar'>Calendar</NavLink></p>
+            <p><NavLink to='/events/map'>Map</NavLink></p>
+            <p><NavLink to='/events/photos'>Photos</NavLink></p>
+        </div>
+    )
 }
 
 const mapStateToProps = state => {
