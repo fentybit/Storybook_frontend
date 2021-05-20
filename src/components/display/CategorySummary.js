@@ -16,7 +16,7 @@ export default function CategorySummary({ events, match }) {
 
     return (
         <div>
-            { (categoryEvents())
+            { (events)
                 ?
                 <>
                     <h5>{categoryEvents()[0].category.name}</h5>

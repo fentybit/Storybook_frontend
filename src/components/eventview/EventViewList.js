@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-
 import InfiniteCalendar, {
     Calendar,
     defaultMultipleDateInterpolation,
@@ -14,7 +13,7 @@ import CalendarView from './CalendarView';
 import MapView from './MapView';
 import PhotosView from './PhotosView';
 
-function EventViewList({ categories, events, props, token, url, user }) {
+export default function EventViewList({ categories, events, props, token, url, user }) {
     const today = new Date();
     const lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
 
@@ -40,14 +39,12 @@ function EventViewList({ categories, events, props, token, url, user }) {
         <div div align="center">
             <h3>Container 2</h3>
             <Switch>
-                {/* working */}
                 <Route path={`${url}/calendar/:eventId`} render={() => <InfiniteCalendar Component={withMultipleDates(Calendar)} interpolateSelection={defaultMultipleDateInterpolation} onSelect={date => renderSelectedEventDate(date)} selected={selectedDatesArray} theme={{
                     selectionColor: date => {
                         return (date) ? '#559FFF' : '#559FFF';
                     }
                 }} />} />
 
-                {/* working */}
                 <Route path={`${url}/calendar`} render={() => <InfiniteCalendar Component={withMultipleDates(Calendar)} interpolateSelection={defaultMultipleDateInterpolation} onSelect={date => renderSelectedEventDate(date)} selected={selectedDatesArray} theme={{
                     selectionColor: date => {
                         return (date) ? '#559FFF' : '#559FFF';
@@ -56,29 +53,20 @@ function EventViewList({ categories, events, props, token, url, user }) {
 
                 <Route path={`${url}/map/:eventId`} render={(routerProps) => <MapView {...routerProps} events={events} />} />
 
-                {/* working */}
                 <Route path={`${url}/map`} render={(routerProps) => <MapView {...routerProps} events={events} />} />
 
-                {/* working */}
                 <Route path={`${url}/newentry`} render={() => <InfiniteCalendar width={400} height={600} selected={today} disabledDays={[0, 6]} minDate={lastWeek} />} />
 
                 <Route path={`${url}/photos/:eventId`} render={() => <PhotosView />} />
 
-                {/* working */}
                 <Route path={`${url}/photos`} render={() => <PhotosView />} />
 
-                {/* working */}
                 <Route path={`${url}/:categoryId/:eventId`} render={(routerProps) => <CalendarView {...routerProps} categories={categories} events={events} token={token} user={user} />} />
 
-                {/* working */}
                 <Route path={`${url}/:categoryId`} render={(routerProps) => <CalendarView {...routerProps} categories={categories} events={events} token={token} user={user} />} />
 
-                {/* working */}
                 <Route path={url} render={() => <InfiniteCalendar width={400} height={600} selected={today} disabledDays={[0, 6]} minDate={lastWeek} />} />
             </Switch>
         </div>
     )
-
 }
-
-export default EventViewList;
