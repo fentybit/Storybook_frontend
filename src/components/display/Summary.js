@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchUserEvents } from '../../redux/actions/eventsActions';
+import { fetchUserPhotos } from '../../redux/actions/imagesActions';
 
 function Summary(props) {
     useEffect(() => {
         props.fetchUserEvents();
-    }, [])
+        props.fetchUserPhotos();
+    })
 
     const places = (props.events) ? props.events.filter(event => event.location !== '') : null
 
@@ -18,7 +20,7 @@ function Summary(props) {
                     <p>Entries | {props.events.length}</p>
                     <p>Categories | {props.categories.length}</p>
                     <p>Places | {places.length}</p>
-                    <p>Photos | TBD</p>
+                    <p>Photos | {props.images.length}</p>
                 </>
                 :
                 <h5>Loading...</h5>
@@ -29,8 +31,9 @@ function Summary(props) {
 
 const mapStateToProps = state => {
     return {
-        events: state.events
+        events: state.events,
+        images: state.images
     }
 }
 
-export default connect(mapStateToProps, { fetchUserEvents })(Summary);
+export default connect(mapStateToProps, { fetchUserEvents, fetchUserPhotos })(Summary);
