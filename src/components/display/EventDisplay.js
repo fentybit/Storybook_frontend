@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { fetchEvent } from '../../redux/actions/eventsActions';
+import { fetchEditedEvent } from '../../redux/actions/eventsActions';
 
 function EventDisplay(props) {
     const renderEvent = () => {
@@ -16,8 +16,7 @@ function EventDisplay(props) {
         const categoryId = props.match.params.categoryId
         const eventId = props.match.params.eventId
 
-        props.fetchEvent(eventId);
-        props.history.push(`/events/${categoryId}/${eventId}/edit`);
+        props.fetchEditedEvent(categoryId, eventId, props.history)
     }
 
     return (
@@ -45,4 +44,4 @@ function EventDisplay(props) {
     )
 }
 
-export default connect(null, { fetchEvent })(EventDisplay);
+export default connect(null, { fetchEditedEvent })(EventDisplay);
