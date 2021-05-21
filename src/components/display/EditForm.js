@@ -6,7 +6,8 @@ import PlacesAutocomplete, {
     getLatLng,
 } from 'react-places-autocomplete';
 
-import { fetchEvent } from '../../redux/actions/eventsActions';
+import { fetchUserCategories } from '../../redux/actions/categoriesActions';
+import { fetchEvent, fetchUserEvents } from '../../redux/actions/eventsActions';
 
 function EditForm(props) {
     const { category, event } = props;
@@ -18,7 +19,7 @@ function EditForm(props) {
         vibe: event.vibe,
         title: event.title,
         date: event.date,
-        time: event.strftime,
+        time: event.time,
         location: event.location,
         latitude: event.latitude,
         longitude: event.longitude,
@@ -26,14 +27,13 @@ function EditForm(props) {
         image: event.image
     })
 
-
     const handleImageChange = (event) => {
         const file = event.target.files[0];
 
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = () => {
-            setEntry({ image: reader.result })
+            setEntry({ ...entry, image: reader.result })
         }
     }
 
@@ -41,16 +41,20 @@ function EditForm(props) {
         props.history.push(`/events/${categoryId}/${eventId}`)
     }
 
+    const handleLocationChange = location => {
+        setEntry({ ...entry, location: location })
+    }
+
     const handleOnChange = (event) => {
-        setEntry(event.target.value)
+        setEntry({ ...entry, [event.target.name]: event.target.value })
     }
 
     const handleSelect = location => {
         geocodeByAddress(location)
             .then(results => getLatLng(results[0]))
             .then(latLng => {
-                this.handleLocationChange(location)
-                this.setState({ latitude: latLng.lat, longitude: latLng.lng })
+                handleLocationChange(location)
+                setEntry({ ...entry, location: location, latitude: latLng.lat, longitude: latLng.lng })
                 console.log('SUCCESS: ', latLng.lat, latLng.lng)
             })
             .catch(error => console.error('Error', error));
@@ -59,8 +63,44 @@ function EditForm(props) {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if ((category) && (category !== 'Please enter Category')) {
-            fetch(`https://your-storybook.herokuapp.com/api/v1/events`)
+        // props.patchEvent(entry);
+
+        if ((entry.category) && (entry.category !== 'Please enter Category')) {
+            fetch(`https://your-storybook.herokuapp.com/api/v1/events/${eventId}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `bearer ${props.token}`
+                },
+                body: JSON.stringify({
+                    category: entry.category,
+                    vibe: entry.vibe,
+                    title: entry.title,
+                    date: entry.date,
+                    time: entry.time,
+                    location: entry.location,
+                    latitude: entry.latitude,
+                    longitude: entry.longitude,
+                    description: entry.description,
+                    image: entry.image.url
+                })
+            })
+                .then(resp => resp.json())
+                .then(data => {
+                    setEntry({
+                        category: data.category.name,
+                        vibe: data.event.vibe,
+                        title: data.event.title,
+                        date: data.event.date,
+                        time: data.event.time,
+                        location: data.event.location,
+                        description: data.event.description
+                    });
+                    props.fetchEvent(eventId);
+                    props.fetchUserCategories();
+                    props.fetchUserEvents();
+                    props.history.push(`/events/${categoryId}/${eventId}`);
+                })
         }
     }
 
@@ -110,7 +150,7 @@ function EditForm(props) {
                 <label htmlFor='location'>Location</label>
                 <PlacesAutocomplete
                     value={entry.location}
-                    onChange={handleOnChange}
+                    onChange={handleLocationChange}
                     onSelect={handleSelect}
                 >
                     {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
@@ -176,6 +216,6 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { fetchEvent })(GoogleApiWrapper({
+export default connect(mapStateToProps, { fetchUserCategories, fetchEvent, fetchUserEvents })(GoogleApiWrapper({
     apiKey: (process.env.REACT_APP_GOOGLE_API_KEY)
 })(EditForm));
