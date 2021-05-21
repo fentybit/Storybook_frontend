@@ -1,4 +1,9 @@
-export default function EventDisplay(props) {
+import React from 'react';
+import { connect } from 'react-redux';
+
+import { fetchEvent } from '../../redux/actions/eventsActions';
+
+function EventDisplay(props) {
     const renderEvent = () => {
         if (props.events) {
             const eventId = props.match.params.eventId;
@@ -11,7 +16,8 @@ export default function EventDisplay(props) {
         const categoryId = props.match.params.categoryId
         const eventId = props.match.params.eventId
 
-        props.history.push(`/events/${categoryId}/${eventId}/edit`)
+        props.fetchEvent(eventId);
+        props.history.push(`/events/${categoryId}/${eventId}/edit`);
     }
 
     return (
@@ -28,7 +34,7 @@ export default function EventDisplay(props) {
                     <p>{renderEvent().location}</p>
                     <p>{renderEvent().description}</p>
 
-                    { (renderEvent().images) ? renderEvent().images.map(image => <img key={image.id} src={image.url} style={{ height: '200px' }} />) : null}
+                    { (renderEvent().image) ? <img key={renderEvent().image.id} src={renderEvent().image.url} style={{ height: '200px' }} /> : null}
                 </>
                 :
                 <h5>Loading...</h5>
@@ -38,3 +44,5 @@ export default function EventDisplay(props) {
         </div>
     )
 }
+
+export default connect(null, { fetchEvent })(EventDisplay);

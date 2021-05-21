@@ -1,3 +1,4 @@
+import React from 'react';
 import NavBar from '../components/navigation/NavBar';
 import EventViewList from '../components/eventview/EventViewList';
 import DisplayContainer from './DisplayContainer';

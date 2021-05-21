@@ -2,7 +2,6 @@ export const fetchEvent = (eventId) => {
     return (dispatch) => {
         if (localStorage.getItem('token')) {
             let token = localStorage.getItem('token')
-            console.log('Hi, this is fetchEvent')
 
             fetch(`https://your-storybook.herokuapp.com/api/v1/events/${eventId}`, {
                 headers: {

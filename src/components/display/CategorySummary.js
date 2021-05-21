@@ -1,13 +1,16 @@
+import React from 'react';
+
 export default function CategorySummary({ events, match }) {
+    const categoryId = match.params.categoryId;
+
     const categoryEvents = () => {
         if (events) {
-            const categoryId = match.params.categoryId;
             return events.filter(event => event.category.id == categoryId);
         }
     }
 
     const categoryPhotos = () => {
-        return categoryEvents().filter(event => event.images.length !== 0)
+        return categoryEvents().filter(event => event.image.length !== 0)
     }
 
     const categoryPlaces = () => {
@@ -16,7 +19,7 @@ export default function CategorySummary({ events, match }) {
 
     return (
         <div>
-            { (events)
+            { (categoryEvents())
                 ?
                 <>
                     <h5>{categoryEvents()[0].category.name}</h5>

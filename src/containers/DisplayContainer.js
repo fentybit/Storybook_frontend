@@ -1,3 +1,4 @@
+import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import EditForm from '../components/display/EditForm';
@@ -27,7 +28,7 @@ function DisplayContainer(props) {
 
                 <Route path={`${url}/newentry`} render={() => <Form categories={categories} history={props.history} token={token} user={user} />} />
 
-                <Route path={`${url}/:categoryId/:eventId/edit`} render={(routerProps) => <EditForm {...routerProps} />} />
+                <Route path={`${url}/:categoryId/:eventId/edit`} render={(routerProps) => <EditForm {...routerProps} categories={categories} />} />
 
                 <Route path={`${url}/:categoryId/:eventId`} render={(routerProps) => <EventDisplay {...routerProps} categories={categories} events={events} token={token} user={user} />} />
 

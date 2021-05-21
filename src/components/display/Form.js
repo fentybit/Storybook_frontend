@@ -25,10 +25,7 @@ export class Form extends Component {
 
     handleImageChange = (event) => {
         const file = event.target.files[0];
-        this.previewFile(file);
-    }
 
-    previewFile = (file) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = () => {
@@ -61,6 +58,7 @@ export class Form extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
+
         if ((this.state.category) && (this.state.category !== 'Please enter Category')) {
             fetch('https://your-storybook.herokuapp.com/api/v1/events', {
                 method: 'POST',
