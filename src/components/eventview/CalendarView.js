@@ -5,7 +5,16 @@ export default function CalendarView(props) {
         if (props.events) {
             const categoryId = props.match.params.categoryId;
 
-            return props.events.filter(event => event.category.id == categoryId);
+            const sortedCategoryEvents = props.events.sort(function (a, b) {
+                let dateA = a.date;
+                let dateB = b.date;
+
+                if (dateA > dateB) return -1;
+                if (dateA < dateB) return 1;
+                return 0;
+            })
+
+            return sortedCategoryEvents.filter(event => parseInt(event.category.id) === parseInt(categoryId));
         }
     }
 

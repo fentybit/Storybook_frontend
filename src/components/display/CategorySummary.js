@@ -1,11 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 
-export default function CategorySummary({ events, match }) {
-    const categoryId = match.params.categoryId;
+import { fetchUserCategories } from '../../redux/actions/categoriesActions';
+import { fetchUserEvents } from '../../redux/actions/eventsActions';
+import { fetchUserPhotos } from '../../redux/actions/imagesActions';
+
+function CategorySummary(props) {
+    const categoryId = props.match.params.categoryId;
+
+    useEffect(() => {
+        props.fetchUserCategories();
+        props.fetchUserEvents();
+        props.fetchUserPhotos();
+    }, [])
+
 
     const categoryEvents = () => {
-        if (events) {
-            return events.filter(event => event.category.id == categoryId);
+        if (categoryId && props.events) {
+            return props.events.filter(event => parseInt(event.category.id) === parseInt(categoryId));
+        }
+    }
+
+    const categoryName = () => {
+        if (categoryId && props.events) {
+            const events = props.events.filter(event => parseInt(event.category.id) === parseInt(categoryId));
+
+            return events[0].category.name
         }
     }
 
@@ -19,10 +39,10 @@ export default function CategorySummary({ events, match }) {
 
     return (
         <div>
-            { (categoryEvents())
+            { (props.events && props.categories)
                 ?
                 <>
-                    <h5>{categoryEvents()[0].category.name}</h5>
+                    <h5>{categoryName()}</h5>
                     <p>Entries | {categoryEvents().length}</p>
                     <p>Places | {categoryPlaces().length}</p>
                     <p>Photos | {categoryPhotos().length}</p>
@@ -33,3 +53,13 @@ export default function CategorySummary({ events, match }) {
         </div>
     )
 }
+
+const mapStateToProps = state => {
+    return {
+        categories: state.categories,
+        events: state.events,
+        images: state.images
+    }
+}
+
+export default connect(mapStateToProps, { fetchUserEvents, fetchUserPhotos, fetchUserCategories })(CategorySummary);

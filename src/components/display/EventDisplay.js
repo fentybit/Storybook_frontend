@@ -8,7 +8,7 @@ function EventDisplay(props) {
         if (props.events) {
             const eventId = props.match.params.eventId;
 
-            return props.events.filter(event => event.id == eventId)[0];
+            return props.events.filter(event => parseInt(event.id) === parseInt(eventId))[0];
         }
     }
 
@@ -34,7 +34,7 @@ function EventDisplay(props) {
                     <p>{renderEvent().location}</p>
                     <p>{renderEvent().description}</p>
 
-                    { (renderEvent().image) ? <img key={renderEvent().image.id} src={renderEvent().image.url} style={{ height: '200px' }} /> : null}
+                    { (renderEvent().image) ? <img key={renderEvent().image.id} src={renderEvent().image.url} alt={"chosen"} style={{ height: '200px' }} /> : null}
                 </>
                 :
                 <h5>Loading...</h5>

@@ -63,8 +63,6 @@ function EditForm(props) {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        // props.patchEvent(entry);
-
         if ((entry.category) && (entry.category !== 'Please enter Category')) {
             fetch(`https://your-storybook.herokuapp.com/api/v1/events/${eventId}`, {
                 method: 'PATCH',
@@ -97,9 +95,7 @@ function EditForm(props) {
                         description: data.event.description
                     });
                     props.fetchEvent(eventId);
-                    props.fetchUserCategories();
-                    props.fetchUserEvents();
-                    props.history.push(`/events/${categoryId}/${eventId}`);
+                    props.history.push(`/events/${data.category.id}/${eventId}`);
                 })
         }
     }
