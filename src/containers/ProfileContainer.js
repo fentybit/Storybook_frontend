@@ -4,6 +4,7 @@ import EventViewList from '../components/eventview/EventViewList';
 import DisplayContainer from './DisplayContainer';
 
 import { makeStyles } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
@@ -15,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         height: '100%',
         justify: "flex-end",
+        margin: 'auto',
         padding: theme.spacing(2),
         color: theme.palette.text.secondary,
     },
@@ -26,6 +28,7 @@ export default function ProfileContainer(props) {
 
     return (
         <div>
+            <CssBaseline />
             {
                 (user)
                     ?
@@ -53,6 +56,6 @@ export default function ProfileContainer(props) {
                     :
                     null
             }
-        </div>
+        </div >
     )
 }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 
+import Grid from '@material-ui/core/Grid';
+
 export class MapView extends Component {
     state = {
         showingInfoWindow: false,
@@ -40,38 +42,40 @@ export class MapView extends Component {
 
     render() {
         return (
-            <div style={{ height: '800px' }}>
-                <Map
-                    google={this.props.google}
-                    initialCenter={{
-                        lat: '37.09024',
-                        lng: '-95.712891'
-                    }}
-                    onClick={this.onMapClicked}
-                    zoom={4}
-                >
+            <div>
+                <Grid style={{ position: 'relative', height: '100vh' }}>
+                    <Map
+                        google={this.props.google}
+                        initialCenter={{
+                            lat: '37.09024',
+                            lng: '-95.712891'
+                        }}
+                        onClick={this.onMapClicked}
+                        zoom={4}
+                    >
 
-                    {this.eventLocations().map(event => {
-                        return (< Marker
-                            id={event.id}
-                            name={event.title}
-                            onClick={this.onMarkerClick}
-                            position={{
-                                lat: event.latitude,
-                                lng: event.longitude
-                            }}
-                        />)
-                    }
-                    )}
+                        {this.eventLocations().map(event => {
+                            return (< Marker
+                                id={event.id}
+                                name={event.title}
+                                onClick={this.onMarkerClick}
+                                position={{
+                                    lat: event.latitude,
+                                    lng: event.longitude
+                                }}
+                            />)
+                        }
+                        )}
 
-                    <InfoWindow
-                        marker={this.state.activeMarker}
-                        visible={this.state.showingInfoWindow}>
-                        <div>
-                            <h3>{this.state.eventTitle.name}</h3>
-                        </div>
-                    </InfoWindow>
-                </Map>
+                        <InfoWindow
+                            marker={this.state.activeMarker}
+                            visible={this.state.showingInfoWindow}>
+                            <div>
+                                <h3>{this.state.eventTitle.name}</h3>
+                            </div>
+                        </InfoWindow>
+                    </Map>
+                </Grid>
             </div>
         )
     }
