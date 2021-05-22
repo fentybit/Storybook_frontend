@@ -4,10 +4,23 @@ import { NavLink, Link } from 'react-router-dom';
 
 import { fetchUserCategories } from '../../redux/actions/categoriesActions';
 
+import { makeStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import UILink from '@material-ui/core/Link';
 
+const useStyles = makeStyles((theme) => ({
+    root: {
+        width: '100%',
+        backgroundColor: theme.palette.background.paper,
+    },
+}));
+
 function NavBar(props) {
+    const classes = useStyles();
+
     useEffect(() => {
         props.fetchUserCategories();
     }, [])
@@ -23,69 +36,82 @@ function NavBar(props) {
                 return 0
             })
 
-            return userCategories.map(category => <p><Link key={category.id} to={`/events/${category.id}`}><UILink component="button" variant="body2">{category.name}</UILink></Link></p>)
+            return userCategories.map(category => {
+                return (
+                    <ListItem button>
+                        <Link key={category.id} to={`/events/${category.id}`}>
+                            <UILink component="button" variant="body2">
+                                <ListItemText primary={category.name} />
+                            </UILink>
+                        </Link>
+                    </ListItem>
+                )
+            })
         }
     }
 
     return (
-        <div>
+        <div className={classes.root}>
             <h4>Hello, {props.user.fullname}</h4>
 
             <Divider />
 
-            <p>
-                <NavLink to='/events'>
-                    <UILink component="button" variant="body2">Home</UILink>
-                </NavLink>
-            </p>
+            <List component="nav">
+                <ListItem button>
+                    <NavLink to='/events'>
+                        <UILink component="button" variant="body2"><ListItemText primary="Home" /></UILink>
+                    </NavLink>
+                </ListItem>
 
-            <Divider />
+                <Divider />
 
-            { (props.categories.length === 0) ? <h5>Write your first journal entry!</h5> : <h5>All Events</h5>}
+                {(props.categories.length === 0) ? <h5>Write your first journal entry!</h5> : <h5>All Events</h5>}
 
-            { renderCategoriesLink()}
+                {renderCategoriesLink()}
 
-            <Divider />
+                <Divider />
 
-            <p font-size='21px' line-height='24px' >
-                <NavLink to='/events/newentry'>
-                    <UILink justify='middle' component="button" variant="body2">
-                        New Entry
-                    </UILink>
-                </NavLink>
-            </p>
+                <ListItem button>
+                    <NavLink to='/events/newentry'>
+                        <UILink justify='middle' component="button" variant="body2">
+                            <ListItemText primary="New Entry" />
+                        </UILink>
+                    </NavLink>
+                </ListItem>
 
-            <Divider />
+                <Divider />
 
-            <h5>View</h5>
-            <p>
-                <NavLink to='/events/calendar'>
-                    <UILink component="button" variant="body2">Calendar</UILink>
-                </NavLink>
-            </p>
+                <h5>View</h5>
 
-            <p>
-                <NavLink to='/events/map'>
-                    <UILink component="button" variant="body2">Map</UILink>
-                </NavLink>
-            </p>
+                <ListItem button>
+                    <NavLink to='/events/calendar'>
+                        <UILink component="button" variant="body2"><ListItemText primary="Calendar" /></UILink>
+                    </NavLink>
+                </ListItem>
 
-            <p>
-                <NavLink to='/events/photos'>
-                    <UILink component="button" variant="body2">Photos</UILink>
-                </NavLink>
-            </p>
+                <ListItem button>
+                    <NavLink to='/events/map'>
+                        <UILink component="button" variant="body2"><ListItemText primary="Map" /></UILink>
+                    </NavLink>
+                </ListItem>
 
-            <br />
-            <br />
-            <Divider />
+                <ListItem button>
+                    <NavLink to='/events/photos'>
+                        <UILink component="button" variant="body2"><ListItemText primary="Photos" /></UILink>
+                    </NavLink>
+                </ListItem>
 
-            <p>
-                <NavLink to='/logout'>
-                    <UILink component="button" variant="body2">Logout</UILink>
-                </NavLink>
-            </p>
-        </div>
+                <br />
+                <br />
+                <Divider />
+
+                <ListItem button>
+                    <NavLink to='/logout'>
+                        <UILink component="button" variant="body2"><ListItemText primary="Logout" /></UILink>
+                    </NavLink>
+                </ListItem>
+            </List>
+        </div >
     )
 }
 

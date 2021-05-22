@@ -6,6 +6,11 @@ import { fetchUserPhotos } from '../../redux/actions/imagesActions';
 
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
+import GridListTileBar from '@material-ui/core/GridListTileBar';
+import IconButton from '@material-ui/core/IconButton';
+import InfoIcon from '@material-ui/icons/Info';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -13,6 +18,17 @@ const useStyles = makeStyles((theme) => ({
         '& > * + *': {
             marginLeft: theme.spacing(2),
         },
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
+        overflow: 'hidden',
+        backgroundColor: theme.palette.background.paper,
+    },
+    gridList: {
+        width: 500,
+        height: '100%',
+    },
+    icon: {
+        color: 'rgba(255, 255, 255, 0.54)',
     },
 }));
 
@@ -20,22 +36,38 @@ function PhotosView(props) {
     const classes = useStyles();
 
     useEffect(() => {
-        props.fetchUserPhotos()
+        props.fetchUserPhotos();
     }, [])
 
     return (
-        <div>
-            <h5>Photos View</h5>
+        <div className={classes.root}>
             { (props.images)
                 ?
-                props.images.map(image => <Link key={image.id} to={`/events/photos/${image.event_id}`}><img src={image.url} alt={image.id} style={{ height: '200px' }} /></Link>)
+
+                <GridList GridList cellHeight={180} className={classes.gridList}>
+                    {props.images.map((image) => (
+                        <GridListTile key={image.id}>
+                            <img src={image.url} alt={image.id} />
+                            <GridListTileBar
+                                actionIcon={
+                                    <IconButton aria-label={`info about ${image.id}`} className={classes.icon}>
+                                        <Link key={image.id} to={`/events/photos/${image.event_id}`}>
+                                            <InfoIcon color='secondary' />
+                                        </Link>
+                                    </IconButton>
+                                }
+                            />
+                        </GridListTile>
+                    ))}
+                </GridList>
+
                 :
                 <div className={classes.root}>
                     <CircularProgress color="secondary" />
                 </div>
             }
-        </div>
-    )
+        </div >
+    );
 }
 
 const mapStateToProps = state => {
