@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { resetError } from '../../redux/actions/errorActions';
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -73,9 +74,42 @@ class Form extends Component {
                         <LockTwoToneIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Log in
+                        {(this.props.match.url === '/login') ? "Log In" : "Sign Up"}
                     </Typography>
                     <form classname={classes.form} noValidate onSubmit={this.handleSubmit}>
+                        {(this.props.match.url === '/login')
+                            ?
+                            null
+                            :
+                            <>
+                                <TextField
+                                    variant="outlined"
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    id="firstname"
+                                    label="Firstname"
+                                    name="firstname"
+                                    autoFocus
+                                    onChange={this.handleOnChange}
+                                    value={this.state.firstname}
+                                />
+
+                                <TextField
+                                    variant="outlined"
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    id="lastname"
+                                    label="Lastname"
+                                    name="lastname"
+                                    autoFocus
+                                    onChange={this.handleOnChange}
+                                    value={this.state.lastname}
+                                />
+                            </>
+                        }
+
                         <TextField
                             variant="outlined"
                             margin="normal"
@@ -84,25 +118,10 @@ class Form extends Component {
                             id="username"
                             label="Username"
                             name="username"
-
                             autoFocus
                             onChange={this.handleOnChange}
                             value={this.state.username}
                         />
-
-
-
-                        {(this.props.match.url === '/login')
-                            ?
-                            null
-                            :
-                            <>
-                                <label htmlFor="firstname">Firstname</label>
-                                <input type='text' name='firstname' placeholder='Firstname' onChange={this.handleOnChange} value={this.state.firstname} />
-                                <label htmlFor="lastname">Lastname</label>
-                                <input type='text' name='lastname' placeholder='Lastname' onChange={this.handleOnChange} value={this.state.lastname} />
-                            </>
-                        }
 
                         <TextField
                             variant="outlined"
@@ -123,12 +142,15 @@ class Form extends Component {
                             variant="contained"
                             color="primary"
                             className={classes.submit}>
-                            {(this.props.match.url === '/login') ? "Login" : "Sign Up"}
+                            {(this.props.match.url === '/login') ? "Log In" : "Sign Up"}
                         </Button>
                     </form>
+
+                    <br />
+
                     <Grid item>
-                        <Link href="#" variant="body2">
-                            {"Don't have an account? Sign Up"}
+                        <Link href={(this.props.match.url === '/login') ? "/signup" : "/login"} variant="body2">
+                            {(this.props.match.url === '/login') ? "Don't have an account? Sign Up" : "Have an account? Log In"}
                         </Link>
                     </Grid>
                     {(this.props.error) ? <h6>{this.props.error}</h6> : null}

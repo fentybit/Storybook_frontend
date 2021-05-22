@@ -10,14 +10,26 @@ const NavBar = () => {
             { localStorage.getItem('token')
                 ?
                 <>
-                    <Link component="button" variant="body2" to='/events'>Home</Link>
-                    <MinimizeIcon />
-                    <Link component="button" variant="body2" to='/logout'>Logout</Link>
+                    <NavLink to='/events'>
+                        <Link component="button" variant="body2">Home</Link>
+                    </NavLink>
+
+                    <MinimizeIcon color="disabled" fontSize="medium" />
+
+                    <NavLink to='/logout'>
+                        <Link component="button" variant="body2">Logout</Link>
+                    </NavLink>
                 </>
                 :
                 <>
+                    <NavLink to='/'>
+                        <Link component="button" variant="body2">Welcome</Link>
+                    </NavLink>
+
+                    <MinimizeIcon color="disabled" fontSize="medium" />
+
                     <NavLink to='/login'>
-                        <Link component="button" variant="body2">Login</Link>
+                        <Link component="button" variant="body2">Log In</Link>
                     </NavLink>
 
                     <MinimizeIcon color="disabled" fontSize="medium" />
@@ -27,7 +39,6 @@ const NavBar = () => {
                     </NavLink>
                 </>
             }
-            <hr />
         </div>
     )
 }
