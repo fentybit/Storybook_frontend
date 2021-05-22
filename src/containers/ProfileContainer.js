@@ -36,11 +36,13 @@ export default function ProfileContainer(props) {
                                     <NavBar categories={categories} user={user} />
                                 </Paper>
                             </Grid>
+
                             <Grid item xs={12} md={5}>
                                 <Paper className={classes.paper} elevation={3}>
                                     <EventViewList categories={categories} events={events} props={props} token={token} url={match.url} user={user} />
                                 </Paper>
                             </Grid>
+
                             <Grid item xs={12} md>
                                 <Paper className={classes.paper} elevation={3}>
                                     <DisplayContainer categories={categories} events={events} token={token} url={match.url} user={user} />

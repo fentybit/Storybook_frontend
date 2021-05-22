@@ -37,7 +37,6 @@ export default function EventViewList({ categories, events, props, token, url, u
 
     return (
         <div div align="center">
-            <h3>Container 2</h3>
             <Switch>
                 <Route path={`${url}/calendar/:eventId`} render={() => <InfiniteCalendar Component={withMultipleDates(Calendar)} interpolateSelection={defaultMultipleDateInterpolation} onSelect={date => renderSelectedEventDate(date)} selected={selectedDatesArray} theme={{
                     selectionColor: date => {

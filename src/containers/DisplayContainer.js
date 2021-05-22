@@ -12,7 +12,6 @@ function DisplayContainer(props) {
 
     return (
         <div>
-            <h3>Container 3</h3>
             <Switch>
                 <Route path={`${url}/calendar/:eventId`} render={(routerProps) => <EventDisplay {...routerProps} categories={categories} events={events} token={token} user={user} />} />
 

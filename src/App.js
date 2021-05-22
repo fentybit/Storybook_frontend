@@ -11,6 +11,9 @@ import Welcome from './components/user/Welcome';
 import NavBar from './components/user/NavBar';
 import ProfileContainer from './containers/ProfileContainer';
 
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Grid from '@material-ui/core/Grid';
+
 function App(props) {
   useEffect(() => {
     props.fetchUser(props.history);
@@ -44,13 +47,19 @@ function App(props) {
       return <ProfileContainer {...routerProps} categories={props.categories} events={props.events} token={props.token} user={props.user} />
     } else {
       return (
-        <h6>Loading...</h6>
+        <div>
+          <Grid container spacing={0} direction="column" alignItems="center" justify="center" style={{ minHeight: '80vh' }}>
+            <Grid item xs={3}>
+              <CircularProgress color="secondary" />
+            </Grid>
+          </Grid>
+        </div>
       )
     }
   }
 
   return (
-    <div div className="App" >
+    <div>
       <NavBar />
       <Switch>
         <Route path='/login' render={renderForm} />
@@ -61,7 +70,7 @@ function App(props) {
         <Route path='/' exact render={() => <Welcome />} />
         <Route render={() => <Welcome />} />
       </Switch>
-    </div >
+    </div>
   );
 }
 

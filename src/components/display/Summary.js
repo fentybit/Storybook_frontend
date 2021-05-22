@@ -5,21 +5,11 @@ import { fetchUserCategories } from '../../redux/actions/categoriesActions';
 import { fetchUserEvents } from '../../redux/actions/eventsActions';
 import { fetchUserPhotos } from '../../redux/actions/imagesActions';
 
-import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        '& > * + *': {
-            marginLeft: theme.spacing(2),
-        },
-    },
-}));
+import Divider from '@material-ui/core/Divider';
+import Grid from '@material-ui/core/Grid';
 
 function Summary(props) {
-    const classes = useStyles();
-
     useEffect(() => {
         props.fetchUserCategories();
         props.fetchUserEvents();
@@ -30,19 +20,28 @@ function Summary(props) {
 
     return (
         <div>
-            { (props.events)
-                ?
-                <>
-                    <h5>All Entries</h5>
-                    <p>Entries | {props.events.length}</p>
-                    <p>Categories | {props.categories.length}</p>
-                    <p>Places | {places.length}</p>
-                    <p>Photos | {props.images.length}</p>
-                </>
-                :
-                <div className={classes.root}>
-                    <CircularProgress color="secondary" />
-                </div>
+            {
+                (props.events)
+                    ?
+
+                    <Grid container spacing={0} direction="column" alignItems="center" justify="center" style={{ minHeight: '80vh' }} textAlign="center">
+                        <Grid item xs={3}>
+                            <h4>All Entries</h4>
+                            <Divider />
+                            <p>Entries | {props.events.length}</p>
+                            <p>Categories | {props.categories.length}</p>
+                            <p>Places | {places.length}</p>
+                            <p>Photos | {props.images.length}</p>
+                        </Grid>
+                    </Grid>
+
+                    :
+
+                    <Grid container spacing={0} direction="column" alignItems="center" justify="center" style={{ minHeight: '80vh' }} textAlign="center">
+                        <Grid item xs={3}>
+                            <CircularProgress color="secondary" />
+                        </Grid>
+                    </Grid>
             }
         </div>
     )
