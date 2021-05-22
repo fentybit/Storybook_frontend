@@ -1,6 +1,20 @@
 import { Link } from 'react-router-dom';
 
+import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: 'flex',
+        '& > * + *': {
+            marginLeft: theme.spacing(2),
+        },
+    },
+}));
+
 export default function CalendarView(props) {
+    const classes = useStyles();
+
     const renderCategoryEvents = () => {
         if (props.events) {
             const categoryId = props.match.params.categoryId;
@@ -35,7 +49,10 @@ export default function CalendarView(props) {
                     </div>
                 ))
                 :
-                <h5>Loading...</h5>}
+                <div className={classes.root}>
+                    <CircularProgress color="secondary" />
+                </div>
+            }
         </div>
     )
 }

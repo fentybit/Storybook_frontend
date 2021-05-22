@@ -4,7 +4,21 @@ import { Link } from 'react-router-dom';
 
 import { fetchUserPhotos } from '../../redux/actions/imagesActions';
 
+import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: 'flex',
+        '& > * + *': {
+            marginLeft: theme.spacing(2),
+        },
+    },
+}));
+
 function PhotosView(props) {
+    const classes = useStyles();
+
     useEffect(() => {
         props.fetchUserPhotos()
     }, [])
@@ -16,7 +30,9 @@ function PhotosView(props) {
                 ?
                 props.images.map(image => <Link key={image.id} to={`/events/photos/${image.event_id}`}><img src={image.url} alt={image.id} style={{ height: '200px' }} /></Link>)
                 :
-                <h6>Loading...</h6>
+                <div className={classes.root}>
+                    <CircularProgress color="secondary" />
+                </div>
             }
         </div>
     )

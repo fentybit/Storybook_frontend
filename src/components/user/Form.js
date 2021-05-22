@@ -25,6 +25,7 @@ const classes = makeStyles((theme) => ({
         alignItems: 'center',
     },
     avatar: {
+        color: 'secondary',
         margin: theme.spacing(1),
         backgroundColor: theme.palette.secondary.main,
     },

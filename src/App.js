@@ -6,7 +6,6 @@ import { fetchUser, loginUser, signupUser } from './redux/actions/userActions';
 import { fetchUserCategories } from './redux/actions/categoriesActions';
 import { fetchUserEvents } from './redux/actions/eventsActions';
 
-import './App.css';
 import Form from './components/user/Form';
 import Welcome from './components/user/Welcome';
 import NavBar from './components/user/NavBar';

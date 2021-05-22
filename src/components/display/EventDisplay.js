@@ -3,7 +3,21 @@ import { connect } from 'react-redux';
 
 import { fetchEditedEvent } from '../../redux/actions/eventsActions';
 
+import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: 'flex',
+        '& > * + *': {
+            marginLeft: theme.spacing(2),
+        },
+    },
+}));
+
 function EventDisplay(props) {
+    const classes = useStyles();
+
     const renderEvent = () => {
         if (props.events) {
             const eventId = props.match.params.eventId;
@@ -36,7 +50,9 @@ function EventDisplay(props) {
                     { (renderEvent().image) ? <img key={renderEvent().image.id} src={renderEvent().image.url} alt={"chosen"} style={{ height: '200px' }} /> : null}
                 </>
                 :
-                <h5>Loading...</h5>
+                <div className={classes.root}>
+                    <CircularProgress color="secondary" />
+                </div>
             }
             <br />
             <button onClick={handleClick}>Edit</button>

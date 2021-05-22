@@ -5,7 +5,21 @@ import { fetchUserCategories } from '../../redux/actions/categoriesActions';
 import { fetchUserEvents } from '../../redux/actions/eventsActions';
 import { fetchUserPhotos } from '../../redux/actions/imagesActions';
 
+import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: 'flex',
+        '& > * + *': {
+            marginLeft: theme.spacing(2),
+        },
+    },
+}));
+
 function Summary(props) {
+    const classes = useStyles();
+
     useEffect(() => {
         props.fetchUserCategories();
         props.fetchUserEvents();
@@ -26,7 +40,9 @@ function Summary(props) {
                     <p>Photos | {props.images.length}</p>
                 </>
                 :
-                <h5>Loading...</h5>
+                <div className={classes.root}>
+                    <CircularProgress color="secondary" />
+                </div>
             }
         </div>
     )

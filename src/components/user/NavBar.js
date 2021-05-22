@@ -3,6 +3,8 @@ import { NavLink } from 'react-router-dom';
 
 import Link from '@material-ui/core/Link';
 import MinimizeIcon from '@material-ui/icons/Minimize';
+import Typography from '@material-ui/core/Typography';
+import '@fontsource/roboto';
 
 const NavBar = () => {
     return (
@@ -10,6 +12,7 @@ const NavBar = () => {
             { localStorage.getItem('token')
                 ?
                 <>
+                    <h2>Storybook</h2>
                     <NavLink to='/events'>
                         <Link component="button" variant="body2">Home</Link>
                     </NavLink>
