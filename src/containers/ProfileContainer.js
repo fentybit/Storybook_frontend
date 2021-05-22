@@ -16,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
         height: '100%',
         justify: "flex-end",
         padding: theme.spacing(2),
-        textAlign: 'center',
         color: theme.palette.text.secondary,
     },
 }));
