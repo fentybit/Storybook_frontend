@@ -43,7 +43,7 @@ export class MapView extends Component {
     render() {
         return (
             <div>
-                <Grid style={{ position: 'relative', height: '100vh' }}>
+                <Grid style={{ position: 'relative', height: '87vh' }}>
                     <Map
                         google={this.props.google}
                         initialCenter={{

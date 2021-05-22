@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { fetchUserPhotos } from '../../redux/actions/imagesActions';
 
+import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import GridList from '@material-ui/core/GridList';
@@ -44,22 +45,24 @@ function PhotosView(props) {
             { (props.images)
                 ?
 
-                <GridList GridList cellHeight={180} className={classes.gridList}>
-                    {props.images.map((image) => (
-                        <GridListTile key={image.id}>
-                            <img src={image.url} alt={image.id} />
-                            <GridListTileBar
-                                actionIcon={
-                                    <IconButton aria-label={`info about ${image.id}`} className={classes.icon}>
-                                        <Link key={image.id} to={`/events/photos/${image.event_id}`}>
-                                            <InfoIcon color='secondary' />
-                                        </Link>
-                                    </IconButton>
-                                }
-                            />
-                        </GridListTile>
-                    ))}
-                </GridList>
+                <Grid style={{ position: 'relative', height: '87vh' }}>
+                    <GridList GridList cellHeight={180} className={classes.gridList}>
+                        {props.images.map((image) => (
+                            <GridListTile key={image.id}>
+                                <img src={image.url} alt={image.id} />
+                                <GridListTileBar
+                                    actionIcon={
+                                        <IconButton aria-label={`info about ${image.id}`} className={classes.icon}>
+                                            <Link key={image.id} to={`/events/photos/${image.event_id}`}>
+                                                <InfoIcon color='secondary' />
+                                            </Link>
+                                        </IconButton>
+                                    }
+                                />
+                            </GridListTile>
+                        ))}
+                    </GridList>
+                </Grid>
 
                 :
                 <div className={classes.root}>

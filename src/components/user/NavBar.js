@@ -11,11 +11,10 @@ const NavBar = () => {
         <div>
             { localStorage.getItem('token')
                 ?
-                <>
-                    <Box fontFamily="Monospace" fontSize="h4.fontSize" fontWeight="fontWeightBold" letterSpacing={10} margin='15px' textAlign='left'>
-                        storybook.<CollectionsBookmarkTwoToneIcon fontSize="small" />
-                    </Box>
-                </>
+                <Box fontFamily="Monospace" fontSize="h4.fontSize" fontWeight="fontWeightBold" letterSpacing={10} margin='15px' textAlign='left'>
+                    storybook.<CollectionsBookmarkTwoToneIcon fontSize="small" />
+                </Box>
+
                 :
                 <>
                     <NavLink to='/'>

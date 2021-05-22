@@ -15,9 +15,9 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
         height: '100%',
-        justify: "flex-end",
+        justify: 'flex-end',
         margin: 'auto',
-        padding: theme.spacing(2),
+        padding: theme.spacing(1),
         color: theme.palette.text.secondary,
     },
 }));
