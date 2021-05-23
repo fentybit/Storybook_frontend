@@ -303,7 +303,7 @@ export class Form extends Component {
                     <br />
                     <br />
 
-                    <Button variant="contained" color="primary" type="submit">
+                    <Button variant="contained" style={{ backgroundColor: "#0288d1", color: "#FFF" }} type="submit" >
                         Save
                     </Button>
                 </form>

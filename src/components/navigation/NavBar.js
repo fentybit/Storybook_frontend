@@ -41,7 +41,7 @@ function NavBar(props) {
                 return (
                     <ListItem button>
                         <Link key={category.id} to={`/events/${category.id}`}>
-                            <UILink component="button" variant="body2">
+                            <UILink component="button" style={{ color: "#01579b" }} variant="body2">
                                 <ListItemText primary={category.name} />
                             </UILink>
                         </Link>
@@ -61,7 +61,7 @@ function NavBar(props) {
                 <List component="nav">
                     <ListItem button>
                         <NavLink to='/events'>
-                            <UILink component="button" variant="body2"><ListItemText primary="Home" /></UILink>
+                            <UILink component="button" style={{ color: "#01579b" }} variant="body2"><ListItemText primary="Home" /></UILink>
                         </NavLink>
                     </ListItem>
 
@@ -75,7 +75,7 @@ function NavBar(props) {
 
                     <ListItem button>
                         <NavLink to='/events/newentry'>
-                            <UILink justify='middle' component="button" variant="body2">
+                            <UILink component="button" style={{ color: "#01579b" }} variant="body2">
                                 <ListItemText primary="New Entry" />
                             </UILink>
                         </NavLink>
@@ -87,19 +87,19 @@ function NavBar(props) {
 
                     <ListItem button>
                         <NavLink to='/events/calendar'>
-                            <UILink component="button" variant="body2"><ListItemText primary="Calendar" /></UILink>
+                            <UILink component="button" style={{ color: "#01579b" }} variant="body2"><ListItemText primary="Calendar" /></UILink>
                         </NavLink>
                     </ListItem>
 
                     <ListItem button>
                         <NavLink to='/events/map'>
-                            <UILink component="button" variant="body2"><ListItemText primary="Map" /></UILink>
+                            <UILink component="button" style={{ color: "#01579b" }} variant="body2"><ListItemText primary="Map" /></UILink>
                         </NavLink>
                     </ListItem>
 
                     <ListItem button>
                         <NavLink to='/events/photos'>
-                            <UILink component="button" variant="body2"><ListItemText primary="Photos" /></UILink>
+                            <UILink component="button" style={{ color: "#01579b" }} variant="body2"><ListItemText primary="Photos" /></UILink>
                         </NavLink>
                     </ListItem>
 
@@ -109,7 +109,7 @@ function NavBar(props) {
 
                     <ListItem button>
                         <NavLink to='/logout'>
-                            <UILink component="button" variant="body2"><ListItemText primary="Logout" /></UILink>
+                            <UILink component="button" style={{ color: "#01579b" }} variant="body2"><ListItemText primary="Logout" /></UILink>
                         </NavLink>
                     </ListItem>
                 </List>

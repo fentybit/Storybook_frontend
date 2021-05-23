@@ -86,7 +86,7 @@ function EventDisplay(props) {
                     <br />
 
                     <Box style={{ position: 'relative' }} textAlign='center'>
-                        {(renderEvent().image) ? <img key={renderEvent().image.id} src={renderEvent().image.url} alt={"chosen"} style={{ maxHeight: '40vh' }} /> : null}
+                        {(renderEvent().image) ? <img key={renderEvent().image.id} src={renderEvent().image.url} alt={"chosen"} style={{ height: '100%', width: '100%', objectFit: 'contain' }} /> : null}
                     </Box>
                 </Grid>
 

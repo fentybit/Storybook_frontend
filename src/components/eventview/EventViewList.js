@@ -40,13 +40,35 @@ export default function EventViewList({ categories, events, props, token, url, u
             <Switch>
                 <Route path={`${url}/calendar/:eventId`} render={() => <InfiniteCalendar Component={withMultipleDates(Calendar)} interpolateSelection={defaultMultipleDateInterpolation} onSelect={date => renderSelectedEventDate(date)} selected={selectedDatesArray} theme={{
                     selectionColor: date => {
-                        return (date) ? '#559FFF' : '#559FFF';
+                        return (date) ? '#e91e63' : '#e91e63';
+                    },
+                    textColor: {
+                        default: '#333',
+                        active: '#FFF'
+                    },
+                    weekdayColor: '#03a9f4',
+                    headerColor: '#0288d1',
+                    floatingNav: {
+                        background: '#0277bd',
+                        color: '#FFF',
+                        chevron: '#e91e63'
                     }
                 }} />} />
 
                 <Route path={`${url}/calendar`} render={() => <InfiniteCalendar Component={withMultipleDates(Calendar)} interpolateSelection={defaultMultipleDateInterpolation} onSelect={date => renderSelectedEventDate(date)} selected={selectedDatesArray} theme={{
                     selectionColor: date => {
-                        return (date) ? '#559FFF' : '#559FFF';
+                        return (date) ? '#e91e63' : '#e91e63';
+                    },
+                    textColor: {
+                        default: '#333',
+                        active: '#FFF'
+                    },
+                    weekdayColor: '#03a9f4',
+                    headerColor: '#0288d1',
+                    floatingNav: {
+                        background: '#0277bd',
+                        color: '#FFF',
+                        chevron: '#e91e63'
                     }
                 }} />} />
 
@@ -54,7 +76,20 @@ export default function EventViewList({ categories, events, props, token, url, u
 
                 <Route path={`${url}/map`} render={(routerProps) => <MapView {...routerProps} events={events} />} />
 
-                <Route path={`${url}/newentry`} render={() => <InfiniteCalendar width={400} height={600} selected={today} disabledDays={[0, 6]} minDate={lastWeek} />} />
+                <Route path={`${url}/newentry`} render={() => <InfiniteCalendar width={400} height={600} selected={today} theme={{
+                    selectionColor: '#e91e63',
+                    textColor: {
+                        default: '#333',
+                        active: '#FFF'
+                    },
+                    weekdayColor: '#03a9f4',
+                    headerColor: '#0288d1',
+                    floatingNav: {
+                        background: '#0277bd',
+                        color: '#FFF',
+                        chevron: '#e91e63'
+                    }
+                }} />} />
 
                 <Route path={`${url}/photos/:eventId`} render={() => <PhotosView />} />
 
@@ -66,7 +101,21 @@ export default function EventViewList({ categories, events, props, token, url, u
 
                 <Route path={`${url}/:categoryId`} render={(routerProps) => <CalendarView {...routerProps} categories={categories} events={events} token={token} user={user} />} />
 
-                <Route path={url} render={() => <InfiniteCalendar width={400} height={600} selected={today} disabledDays={[0, 6]} minDate={lastWeek} />} />
+                {/* here */}
+                <Route path={url} render={() => <InfiniteCalendar width={400} height={600} selected={today} theme={{
+                    selectionColor: '#e91e63',
+                    textColor: {
+                        default: '#333',
+                        active: '#FFF'
+                    },
+                    weekdayColor: '#03a9f4',
+                    headerColor: '#0288d1',
+                    floatingNav: {
+                        background: '#0277bd',
+                        color: '#FFF',
+                        chevron: '#e91e63'
+                    }
+                }} />} />
             </Switch>
         </div>
     )
