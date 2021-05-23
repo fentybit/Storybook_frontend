@@ -44,7 +44,7 @@ function EventDisplay(props) {
             {(renderEvent())
                 ?
 
-                <Grid style={{ position: 'relative', height: '87vh' }}>
+                <Grid style={{ position: 'relative', height: '87vh', overflow: 'hidden' }}>
                     <Typography variant="overline" display="block" gutterBottom>
                         Category > <strong>{renderEvent().category.name}</strong>
                     </Typography>
@@ -54,12 +54,12 @@ function EventDisplay(props) {
                     </Typography>
 
                     <Grid container spacing={1} alignItems="stretch">
-                        <Grid item xs={10}>
+                        <Grid item xs>
                             <Typography variant="h5" gutterBottom>
                                 <strong>{renderEvent().title}</strong>
                             </Typography>
                         </Grid>
-                        <Grid item xs textAlignLast="right">
+                        <Grid item xs={2} textAlignLast="right">
                             <Button onClick={handleClick}><EditTwoToneIcon fontSize='small' /></Button>
                         </Grid>
                     </Grid>
