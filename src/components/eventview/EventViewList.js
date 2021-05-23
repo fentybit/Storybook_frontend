@@ -40,7 +40,7 @@ export default function EventViewList({ categories, events, props, token, url, u
             <Switch>
                 <Route path={`${url}/calendar/:eventId`} render={() => <InfiniteCalendar Component={withMultipleDates(Calendar)} interpolateSelection={defaultMultipleDateInterpolation} onSelect={date => renderSelectedEventDate(date)} selected={selectedDatesArray} theme={{
                     selectionColor: date => {
-                        return (date) ? '#e91e63' : '#e91e63';
+                        return (date) ? '#03a9f4' : '#03a9f4';
                     },
                     textColor: {
                         default: '#333',
@@ -57,7 +57,7 @@ export default function EventViewList({ categories, events, props, token, url, u
 
                 <Route path={`${url}/calendar`} render={() => <InfiniteCalendar Component={withMultipleDates(Calendar)} interpolateSelection={defaultMultipleDateInterpolation} onSelect={date => renderSelectedEventDate(date)} selected={selectedDatesArray} theme={{
                     selectionColor: date => {
-                        return (date) ? '#e91e63' : '#e91e63';
+                        return (date) ? '#03a9f4' : '#03a9f4';
                     },
                     textColor: {
                         default: '#333',

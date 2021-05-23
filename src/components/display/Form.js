@@ -27,8 +27,8 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     textField: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
+        marginLeft: theme.spacing(2),
+        marginRight: theme.spacing(2),
         width: 200,
     },
 }));
@@ -137,175 +137,176 @@ export class Form extends Component {
         ));
 
         return (
-            <div className={classes.root}>
-                <form className={classes.root} noValidate autoComplete="off" onSubmit={this.handleSubmit}>
+            <div style={{ margin: '10px' }}>
+                <div className={classes.root}>
+                    <form className={classes.root} noValidate autoComplete="off" onSubmit={this.handleSubmit}>
 
-                    <Grid container spacing={1} alignItems="stretch">
-                        <Grid item xs>
-                            <TextField name='category' fullWidth required id="standard-full-width" label="Category" onChange={this.handleOnChange} placeholder='New Category' value={this.state.category} margin="dense" />
+                        <Grid container spacing={1} alignItems="stretch">
+                            <Grid item xs>
+                                <TextField name='category' fullWidth required id="standard-full-width" label="Category" onChange={this.handleOnChange} placeholder='New Category' value={this.state.category} margin="dense" />
+                            </Grid>
+
+                            {(this.props.categories.length)
+                                ?
+
+                                <Grid item xs={3.5} textAlignLast="end">
+                                    <TextField
+                                        id="select-current-category"
+                                        helperText="Select from existing Category"
+                                        label='Existing Category'
+                                        margin="dense"
+                                        name='category'
+                                        onChange={this.handleOnChange}
+                                        select
+                                        value={this.state.category}
+                                    >
+                                        <MenuItem value='' selected disabled hidden></MenuItem>
+                                        {renderCategoryOptions}
+                                    </TextField>
+                                </Grid>
+
+                                :
+                                null
+                            }
                         </Grid>
 
-                        {(this.props.categories.length)
-                            ?
+                        <TextField id="filled-search" fullWidth margin="dense" name='title' label="Event Title" onChange={this.handleOnChange} value={this.state.title} />
 
-                            <Grid item xs={3.5} textAlignLast="end">
+                        <Grid container spacing={1} alignItems="stretch">
+                            <Grid item xs>
                                 <TextField
-                                    id="select-current-category"
-                                    helperText="Select from existing Category"
-                                    label='Existing Category'
+                                    id="select-currenct-vibe"
+                                    helperText="Please select your mood"
+                                    label='Vibe'
                                     margin="dense"
-                                    name='category'
+                                    name='vibe'
                                     onChange={this.handleOnChange}
                                     select
-                                    value={this.state.category}
+                                    value={this.state.vibe}
                                 >
                                     <MenuItem value='' selected disabled hidden></MenuItem>
-                                    {renderCategoryOptions}
+                                    <MenuItem value='1 rad'>😀 rad</MenuItem>
+                                    <MenuItem value='2 good'>😊 good</MenuItem>
+                                    <MenuItem value='3 meh'>😕 meh</MenuItem>
+                                    <MenuItem value='4 bad'>😞 bad</MenuItem>
+                                    <MenuItem value='5 awful'>😩 awful</MenuItem>
                                 </TextField>
                             </Grid>
 
-                            :
-                            null
-                        }
-                    </Grid>
-
-                    <TextField id="filled-search" fullWidth margin="dense" name='title' label="Event Title" onChange={this.handleOnChange} value={this.state.title} />
-
-                    <Grid container spacing={1} alignItems="stretch">
-                        <Grid item xs>
-
-                            <TextField
-                                id="select-currenct-vibe"
-                                helperText="Please select your mood"
-                                label='Vibe'
-                                margin="dense"
-                                name='vibe'
-                                onChange={this.handleOnChange}
-                                select
-                                value={this.state.vibe}
-                            >
-                                <MenuItem value='' selected disabled hidden></MenuItem>
-                                <MenuItem value='1 rad'>😀 rad</MenuItem>
-                                <MenuItem value='2 good'>😊 good</MenuItem>
-                                <MenuItem value='3 meh'>😕 meh</MenuItem>
-                                <MenuItem value='4 bad'>😞 bad</MenuItem>
-                                <MenuItem value='5 awful'>😩 awful</MenuItem>
-                            </TextField>
-                        </Grid>
-
-                        <Grid item xs>
-                            <TextField
-                                className={classes.textField}
-                                id="date"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                label="Date"
-                                margin="dense"
-                                name="date"
-                                onChange={this.handleOnChange}
-                                type="date"
-                                value={this.state.date}
-                            />
-                        </Grid>
-
-                        <Grid item xs={3.5} textAlignLast="right">
-                            <TextField
-                                className={classes.textField}
-                                id="time"
-                                inputProps={{
-                                    step: 1800, // 30 min
-                                }}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                label="Event Time"
-                                margin="dense"
-                                name="time"
-                                onChange={this.handleOnChange}
-                                type="time"
-                                value={this.state.time}
-                            />
-                        </Grid>
-                    </Grid>
-
-                    <PlacesAutocomplete
-                        value={this.state.location}
-                        onChange={this.handleLocationChange}
-                        onSelect={this.handleSelect}
-                    >
-                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                            <div>
-                                <TextField fullWidth margin="dense" label="Location"
-                                    {...getInputProps({
-                                        placeholder: 'Search Places ...',
-                                        className: 'location-search-input',
-                                    })}
+                            <Grid item xs>
+                                <TextField
+                                    className={classes.textField}
+                                    id="date"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    label="Date"
+                                    margin="dense"
+                                    name="date"
+                                    onChange={this.handleOnChange}
+                                    type="date"
+                                    value={this.state.date}
                                 />
+                            </Grid>
 
-                                <div className="autocomplete-dropdown-container">
-                                    {loading && <div>Loading...</div>}
-                                    {suggestions.map(suggestion => {
-                                        const className = suggestion.active
-                                            ? 'suggestion-item--active'
-                                            : 'suggestion-item';
+                            <Grid item xs={3.5} textAlignLast="right">
+                                <TextField
+                                    className={classes.textField}
+                                    id="time"
+                                    inputProps={{
+                                        step: 1800, // 30 min
+                                    }}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    label="Event Time"
+                                    margin="dense"
+                                    name="time"
+                                    onChange={this.handleOnChange}
+                                    type="time"
+                                    value={this.state.time}
+                                />
+                            </Grid>
+                        </Grid>
 
-                                        const style = suggestion.active
-                                            ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                                            : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                        <PlacesAutocomplete
+                            value={this.state.location}
+                            onChange={this.handleLocationChange}
+                            onSelect={this.handleSelect}
+                        >
+                            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                                <div>
+                                    <TextField fullWidth margin="dense" label="Location"
+                                        {...getInputProps({
+                                            placeholder: 'Search Places ...',
+                                            className: 'location-search-input',
+                                        })}
+                                    />
 
-                                        return (
-                                            <div
-                                                {...getSuggestionItemProps(suggestion, {
-                                                    className,
-                                                    style,
-                                                })}
-                                            >
-                                                <span>{suggestion.description}</span>
-                                            </div>
-                                        );
-                                    })}
+                                    <div className="autocomplete-dropdown-container">
+                                        {loading && <div>Loading...</div>}
+                                        {suggestions.map(suggestion => {
+                                            const className = suggestion.active
+                                                ? 'suggestion-item--active'
+                                                : 'suggestion-item';
+
+                                            const style = suggestion.active
+                                                ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                                                : { backgroundColor: '#ffffff', cursor: 'pointer' };
+
+                                            return (
+                                                <div
+                                                    {...getSuggestionItemProps(suggestion, {
+                                                        className,
+                                                        style,
+                                                    })}
+                                                >
+                                                    <span>{suggestion.description}</span>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
                                 </div>
-                            </div>
+                            )}
+                        </PlacesAutocomplete>
+
+                        <TextField
+                            id="standard-multiline-static"
+                            fullWidth
+                            label="Event Description"
+                            margin="dense"
+                            multiline
+                            name="description"
+                            onChange={this.handleOnChange} value={this.state.description}
+                            placeholder="Event Description"
+                            rows={6}
+                        />
+
+                        <Typography variant="subtitle1" gutterBottom>
+                            <br />
+                            <label htmlFor='image'>Image</label>
+                        </Typography>
+
+                        <Input fullWidth type='file' name='image' onChange={this.handleImageChange} disableUnderline={true} style={{ color: "#616161" }} />
+
+                        {this.state.image && (
+                            <img
+                                src={this.state.image}
+                                alt='chosen'
+                                style={{ height: '50%', width: '50%', objectFit: 'contain', justifyContent: "center" }} />
                         )}
-                    </PlacesAutocomplete>
 
-                    <TextField
-                        id="standard-multiline-static"
-                        fullWidth
-                        label="Event Description"
-                        margin="dense"
-                        multiline
-                        name="description"
-                        onChange={this.handleOnChange} value={this.state.description}
-                        placeholder="Event Description"
-                        rows={6}
-                    />
-
-                    <Typography variant="subtitle1" gutterBottom>
                         <br />
-                        <label htmlFor='image'>Image</label>
-                    </Typography>
+                        <br />
 
-                    <Input fullWidth type='file' name='image' onChange={this.handleImageChange} disableUnderline={true} style={{ color: "#616161" }} />
-
-                    {this.state.image && (
-                        <img
-                            src={this.state.image}
-                            alt='chosen'
-                            style={{ height: '50%', width: '50%', objectFit: 'contain', justifyContent: "center" }} />
-                    )}
-
-                    <br />
-                    <br />
-
-                    <Grid container alignItems="center" style={{ justifyContent: "center" }}>
-                        <Button variant="contained" style={{ backgroundColor: "#0288d1", color: "#FFF" }} type="submit" >
-                            Save
+                        <Grid container alignItems="center" style={{ justifyContent: "center" }}>
+                            <Button variant="contained" style={{ backgroundColor: "#0288d1", color: "#FFF" }} type="submit" >
+                                Save
                         </Button>
-                    </Grid>
-                </form>
-            </div >
+                        </Grid>
+                    </form>
+                </div>
+            </div>
         )
     }
 }

@@ -46,7 +46,7 @@ function EventDisplay(props) {
 
                 <Grid style={{ position: 'relative', height: '87vh', overflow: 'hidden' }}>
                     <Typography variant="overline" display="block" gutterBottom>
-                        Category > <strong>{renderEvent().category.name}</strong>
+                        Category :: <strong>{renderEvent().category.name}</strong>
                     </Typography>
 
                     <Typography variant="caption" display="block" gutterBottom>
