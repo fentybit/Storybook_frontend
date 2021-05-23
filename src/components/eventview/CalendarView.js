@@ -1,14 +1,26 @@
 import { Link } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
+import AddAPhotoTwoToneIcon from '@material-ui/icons/AddAPhotoTwoTone';
+import Avatar from '@material-ui/core/Avatar';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Divider from '@material-ui/core/Divider';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import UILink from '@material-ui/core/Link';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        display: 'flex',
-        '& > * + *': {
-            marginLeft: theme.spacing(2),
-        },
+        flexGrow: 1,
+        margin: '10px',
+    },
+    small: {
+        width: theme.spacing(3),
+        height: theme.spacing(3),
+    },
+    large: {
+        width: theme.spacing(7),
+        height: theme.spacing(7),
     },
 }));
 
@@ -33,25 +45,61 @@ export default function CalendarView(props) {
     }
 
     return (
-        <div>
-            <h5>Calendar View</h5>
+        <div className={classes.root}>
+
             { (props.events)
                 ?
-                renderCategoryEvents().map(event => (
-                    <div key={event.id}>
-                        <p><Link key={event.id} to={`/events/${props.match.params.categoryId}/${event.id}`}>{event.title}</Link></p>
 
-                        <p>{event.date}</p>
-                        <p>{event.time_strftime}</p>
-                        <p>{event.vibe}</p>
-                        <p>{event.description}</p>
-                        <p>----</p>
+                renderCategoryEvents().map(event => (
+                    <div align='left' key={event.id} style={{ maxHeight: '125px', overflow: 'hidden' }} >
+
+                        <Divider style={{ margin: '10px 0' }} />
+
+                        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+                            {(event.image)
+                                ?
+
+                                <Avatar alt={event.id} className={classes.large} src={event.image.url} style={{ margin: '0 10px 10px 0' }} />
+
+                                :
+
+                                <Avatar className={classes.large} style={{ margin: '0 10px 10px 0' }}>
+                                    <AddAPhotoTwoToneIcon />
+                                </Avatar>
+                            }
+
+                            <div>
+                                <Link key={event.id} to={`/events/${props.match.params.categoryId}/${event.id}`}>
+                                    <UILink component="button" style={{ color: "#01579b", fontSize: "16px" }} variant="body2">
+                                        {event.title}
+                                    </UILink>
+                                </Link>
+
+                                <Typography variant="body2" gutterBottom>
+                                    {event.date_strftime} at {event.time_strftime} | {(event.vibe === '1 rad') ? '😀'
+                                        : (event.vibe === '2 good') ? '😊'
+                                            : (event.vibe === '3 meh') ? '😕'
+                                                : (event.vibe === '4 bad') ? '😞'
+                                                    : (event.vibe === '5 awful') ? '😩'
+                                                        : '-'
+                                    }
+                                </Typography>
+                            </div>
+                        </div>
+
+                        <Typography variant="caption" display="block" gutterBottom>
+                            {event.description}
+                        </Typography>
                     </div>
                 ))
+
                 :
-                <div className={classes.root}>
-                    <CircularProgress color="secondary" />
-                </div>
+
+                <Grid container spacing={0} direction="column" alignItems="center" justify="center" style={{ minHeight: '80vh' }}>
+                    <Grid item xs={3}>
+                        <CircularProgress color="secondary" />
+                    </Grid>
+                </Grid>
             }
         </div>
     )

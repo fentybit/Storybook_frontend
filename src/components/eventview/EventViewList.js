@@ -1,6 +1,10 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
+import CalendarView from './CalendarView';
+import MapView from './MapView';
+import PhotosView from './PhotosView';
+
 import InfiniteCalendar, {
     Calendar,
     defaultMultipleDateInterpolation,
@@ -9,13 +13,8 @@ import InfiniteCalendar, {
 import 'react-infinite-calendar/styles.css';
 import { format } from 'date-fns'
 
-import CalendarView from './CalendarView';
-import MapView from './MapView';
-import PhotosView from './PhotosView';
-
 export default function EventViewList({ categories, events, props, token, url, user }) {
     const today = new Date();
-    const lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
 
     const dates = [...new Set(events.map(event => event.date))];
     const filteredAndSortedDates = dates.filter(date => date !== null).sort();
@@ -36,7 +35,7 @@ export default function EventViewList({ categories, events, props, token, url, u
     }
 
     return (
-        <div div align="center">
+        <div align='center'>
             <Switch>
                 <Route path={`${url}/calendar/:eventId`} render={() => <InfiniteCalendar Component={withMultipleDates(Calendar)} interpolateSelection={defaultMultipleDateInterpolation} onSelect={date => renderSelectedEventDate(date)} selected={selectedDatesArray} theme={{
                     selectionColor: date => {
@@ -101,7 +100,6 @@ export default function EventViewList({ categories, events, props, token, url, u
 
                 <Route path={`${url}/:categoryId`} render={(routerProps) => <CalendarView {...routerProps} categories={categories} events={events} token={token} user={user} />} />
 
-                {/* here */}
                 <Route path={url} render={() => <InfiniteCalendar width={400} height={600} selected={today} theme={{
                     selectionColor: '#e91e63',
                     textColor: {

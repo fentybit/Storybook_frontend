@@ -8,7 +8,7 @@ import Box from '@material-ui/core/Box';
 
 const NavBar = () => {
     return (
-        <div>
+        <div align='center'>
             { localStorage.getItem('token')
                 ?
                 <Box fontFamily="Monospace" fontSize="h4.fontSize" fontWeight="fontWeightBold" letterSpacing={10} margin='15px' textAlign='left'>

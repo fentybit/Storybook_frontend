@@ -138,9 +138,6 @@ function EditForm(props) {
                             <TextField name='category' fullWidth required id="standard-full-width" label="Category" onChange={handleOnChange} placeholder='New Category' value={entry.category} margin="dense" />
                         </Grid>
 
-                        {/* <label htmlFor='category'>Category</label>
-                <input type='text' name='category' placeholder='New Category' onChange={handleOnChange} value={entry.category} /> */}
-
                         {(props.categories.length)
                             ?
 
@@ -160,24 +157,13 @@ function EditForm(props) {
                                 </TextField>
                             </Grid>
 
-                            // <>
-                            //     <select name='category' onChange={handleOnChange}>
-                            //         <option value='' selected disabled hidden>select category</option>
-                            //         {renderCategoryOptions}
-                            //     </select>
-                            // </>
-
                             :
                             null
-
                         }
                     </Grid>
                     <br />
 
                     <TextField id="filled-search" fullWidth margin="dense" name='title' label="Event Title" onChange={handleOnChange} placeholder='Event Title' value={entry.title} />
-
-                    {/* <label htmlFor='title'>Event Title</label>
-                <input type='text' name='title' placeholder='Event Title' onChange={handleOnChange} value={entry.title} /><br /> */}
 
                     <Grid container spacing={1} alignItems="stretch">
                         <Grid item xs>
@@ -199,16 +185,6 @@ function EditForm(props) {
                             </TextField>
                         </Grid>
 
-                        {/* <label htmlFor='vibe'>Vibe</label>
-                        <select name='vibe' id='vibe' onChange={handleOnChange}>
-                            <option value='' selected disabled hidden>select mood</option>
-                            <option value='1 rad'>😀 rad</option>
-                            <option value='2 good'>😊 good</option>
-                            <option value='3 meh'>😕 meh</option>
-                            <option value='4 bad'>😞 bad</option>
-                            <option value='5 awful'>😩 awful</option>
-                        </select><br /> */}
-
                         <Grid item xs>
                             <TextField
                                 className={classes.textField}
@@ -224,9 +200,6 @@ function EditForm(props) {
                                 value={entry.date}
                             />
                         </Grid>
-
-                        {/* <label htmlFor='date'>Date</label>
-                        <input type='date' name='date' placeholder='Event Date' onChange={handleOnChange} value={entry.date} /><br /> */}
 
                         <Grid item xs={3.5} textAlignLast="right">
                             <TextField
@@ -248,10 +221,6 @@ function EditForm(props) {
                         </Grid>
                     </Grid>
 
-                    {/* <label htmlFor='time'>Time</label>
-                <input type='time' name='time' placeholder='Event Time' onChange={handleOnChange} value={entry.strftime} /><br /> */}
-
-                    {/* <label htmlFor='location'>Location</label> */}
                     <PlacesAutocomplete
                         value={entry.location}
                         onChange={handleLocationChange}
@@ -271,7 +240,7 @@ function EditForm(props) {
                                         const className = suggestion.active
                                             ? 'suggestion-item--active'
                                             : 'suggestion-item';
-                                        // inline style for demonstration purpose
+
                                         const style = suggestion.active
                                             ? { backgroundColor: '#fafafa', cursor: 'pointer' }
                                             : { backgroundColor: '#ffffff', cursor: 'pointer' };
@@ -303,16 +272,11 @@ function EditForm(props) {
                         rows={6}
                     />
 
-                    {/* <label htmlFor='description'>Description</label>
-                <textarea name='description' placeholder='Event Description' onChange={handleOnChange} value={entry.description} /><br /> */}
-
-                    {/* <label htmlFor='image'>Image</label> */}
                     <Typography variant="subtitle1" gutterBottom>
                         <br />
                         <label htmlFor='image'>Image</label>
                     </Typography>
 
-                    {/* <input type='file' name='image' onChange={handleImageChange} /> */}
                     <Input fullWidth type='file' name='image' onChange={handleImageChange} disableUnderline={true} style={{ color: "#616161" }} />
 
                     {entry.image && (
@@ -332,7 +296,6 @@ function EditForm(props) {
                     </Grid>
                 </form>
 
-                {/* <button onClick={handleCancel}>Cancel</button> */}
                 <Grid container alignItems="center" style={{ justifyContent: "center" }}>
                     <Button variant="contained" style={{ backgroundColor: "#0288d1", color: "#FFF" }} onClick={handleCancel} >
                         Cancel
