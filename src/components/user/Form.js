@@ -10,29 +10,7 @@ import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import LockTwoToneIcon from '@material-ui/icons/LockTwoTone';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
-const classes = makeStyles((theme) => ({
-    paper: {
-        marginTop: theme.spacing(8),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
-    avatar: {
-        color: 'secondary',
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-        width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
-    },
-    submit: {
-        margin: theme.spacing(3, 0, 2),
-    },
-}));
 
 class Form extends Component {
     state = {
@@ -66,92 +44,104 @@ class Form extends Component {
         return (
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
-                <div className={classes.paper} >
-                    <Avatar className={classes.avatar} >
-                        <LockTwoToneIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        {(this.props.match.url === '/login') ? "Log In" : "Sign Up"}
-                    </Typography>
-                    <form classname={classes.form} noValidate onSubmit={this.handleSubmit}>
-                        {(this.props.match.url === '/login')
-                            ?
-                            null
-                            :
-                            <>
-                                <TextField
-                                    variant="outlined"
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    id="firstname"
-                                    label="Firstname"
-                                    name="firstname"
-                                    autoFocus
-                                    onChange={this.handleOnChange}
-                                    value={this.state.firstname}
-                                />
 
-                                <TextField
-                                    variant="outlined"
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    id="lastname"
-                                    label="Lastname"
-                                    name="lastname"
-                                    autoFocus
-                                    onChange={this.handleOnChange}
-                                    value={this.state.lastname}
-                                />
-                            </>
-                        }
+                <Grid
+                    alignItems="center"
+                    container
+                    direction="column"
+                    justify="center"
+                    spacing={0}
+                    style={{ minHeight: '90vh' }}
+                >
+                    <div align='center' >
+                        <Avatar style={{ backgroundColor: '#e91e63', margin: '10px' }} >
+                            <LockTwoToneIcon style={{ backgroundColor: '#e91e63', color: '#FFF' }} />
+                        </Avatar>
 
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="username"
-                            label="Username"
-                            name="username"
-                            autoFocus
-                            onChange={this.handleOnChange}
-                            value={this.state.username}
-                        />
-
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Password"
-                            type="password"
-                            id="password"
-                            value={this.state.password}
-                            onChange={this.handleOnChange}
-                        />
-
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                            className={classes.submit}>
+                        <Typography component="h1" variant="h5">
                             {(this.props.match.url === '/login') ? "Log In" : "Sign Up"}
-                        </Button>
-                    </form>
+                        </Typography>
 
-                    <br />
+                        <form noValidate onSubmit={this.handleSubmit}>
+                            {(this.props.match.url === '/login')
+                                ?
+                                null
+                                :
+                                <>
+                                    <TextField
+                                        autoFocus
+                                        fullWidth
+                                        id="firstname"
+                                        label="Firstname"
+                                        margin="normal"
+                                        name="firstname"
+                                        onChange={this.handleOnChange}
+                                        required
+                                        value={this.state.firstname}
+                                        variant="outlined"
+                                    />
 
-                    <Grid item>
-                        <Link href={(this.props.match.url === '/login') ? "/signup" : "/login"} variant="body2">
-                            {(this.props.match.url === '/login') ? "Don't have an account? Sign Up" : "Have an account? Log In"}
-                        </Link>
-                    </Grid>
-                    {(this.props.error) ? <h6>{this.props.error}</h6> : null}
-                </div>
+                                    <TextField
+                                        autoFocus
+                                        fullWidth
+                                        id="lastname"
+                                        margin="normal"
+                                        label="Lastname"
+                                        name="lastname"
+                                        onChange={this.handleOnChange}
+                                        required
+                                        value={this.state.lastname}
+                                        variant="outlined"
+                                    />
+                                </>
+                            }
+
+                            <TextField
+                                autoFocus
+                                fullWidth
+                                id="username"
+                                label="Username"
+                                margin="normal"
+                                name="username"
+                                onChange={this.handleOnChange}
+                                required
+                                value={this.state.username}
+                                variant="outlined"
+                            />
+
+                            <TextField
+                                fullWidth
+                                id="password"
+                                margin="normal"
+                                name="password"
+                                label="Password"
+                                onChange={this.handleOnChange}
+                                required
+                                type="password"
+                                value={this.state.password}
+                                variant="outlined"
+                            />
+
+                            <Button
+                                fullWidth
+                                style={{ color: "#FFF", backgroundColor: "#01579b" }}
+                                type="submit"
+                                variant="contained"
+                            >
+                                {(this.props.match.url === '/login') ? "Log In" : "Sign Up"}
+                            </Button>
+                        </form>
+
+                        <br />
+
+                        <Grid item>
+                            <Link href={(this.props.match.url === '/login') ? "/signup" : "/login"} style={{ color: "#01579b" }}>
+                                {(this.props.match.url === '/login') ? "Don't have an account? Sign Up" : "Have an account? Log In"}
+                            </Link>
+                        </Grid>
+                        {(this.props.error) ? <h6>{this.props.error}</h6> : null}
+                    </div>
+                </Grid>
             </Container>
         )
     }

@@ -12,25 +12,27 @@ const NavBar = () => {
             { localStorage.getItem('token')
                 ?
                 <Box fontFamily="Monospace" fontSize="h4.fontSize" fontWeight="fontWeightBold" letterSpacing={10} margin='15px' textAlign='left'>
-                    storybook.<CollectionsBookmarkTwoToneIcon fontSize="small" />
+                    storybook
+                    <span style={{ color: '#e91e63' }}>.</span>
+                    <CollectionsBookmarkTwoToneIcon fontSize="small" />
                 </Box>
 
                 :
                 <>
                     <NavLink to='/'>
-                        <Link component="button" variant="body2">Welcome</Link>
+                        <Link component="button" style={{ color: '#01579b' }} variant="body2">Welcome</Link>
                     </NavLink>
 
                     <MinimizeIcon color="disabled" fontSize="medium" />
 
                     <NavLink to='/login'>
-                        <Link component="button" variant="body2">Log In</Link>
+                        <Link component="button" style={{ color: '#01579b' }} variant="body2">Log In</Link>
                     </NavLink>
 
                     <MinimizeIcon color="disabled" fontSize="medium" />
 
                     <NavLink to='/signup'>
-                        <Link component="button" variant="body2">Sign Up</Link>
+                        <Link component="button" style={{ color: '#01579b' }} variant="body2">Sign Up</Link>
                     </NavLink>
                 </>
             }
