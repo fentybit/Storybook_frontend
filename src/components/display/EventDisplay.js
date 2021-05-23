@@ -10,7 +10,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Divider from '@material-ui/core/Divider';
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
@@ -60,7 +59,7 @@ function EventDisplay(props) {
                                 <strong>{renderEvent().title}</strong>
                             </Typography>
                         </Grid>
-                        <Grid item xs={2} textAlignLast="right">
+                        <Grid item xs textAlignLast="right">
                             <Button onClick={handleClick}><EditTwoToneIcon fontSize='small' /></Button>
                         </Grid>
                     </Grid>

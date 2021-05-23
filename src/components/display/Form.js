@@ -9,18 +9,47 @@ import PlacesAutocomplete, {
 import { fetchUserCategories } from '../../redux/actions/categoriesActions';
 import { fetchUserEvents } from '../../redux/actions/eventsActions';
 
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
+import Grid from '@material-ui/core/Grid';
+import Input from '@material-ui/core/Input';
+
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: 'flex',
+        flexwrap: 'wrap',
+        '& .MuiTextField-root': {
+            margin: theme.spacing(1),
+            width: '25ch',
+        },
+    },
+    textField: {
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        width: 200,
+    },
+}));
+
 export class Form extends Component {
-    state = {
-        category: '',
-        vibe: '',
-        title: '',
-        date: '',
-        time: '',
-        location: '',
-        latitude: '',
-        longitude: '',
-        description: '',
-        image: '',
+    constructor(props) {
+        super(props)
+        this.state = {
+            category: '',
+            vibe: '',
+            title: '',
+            date: '',
+            time: '',
+            location: '',
+            latitude: '',
+            longitude: '',
+            description: '',
+            image: '',
+        }
+
     }
 
     handleImageChange = (event) => {
@@ -30,7 +59,7 @@ export class Form extends Component {
         reader.readAsDataURL(file);
         reader.onloadend = () => {
             this.setState({ image: reader.result })
-        }
+        };
     }
 
     handleLocationChange = location => {
@@ -59,7 +88,7 @@ export class Form extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
 
-        if ((this.state.category) && (this.state.category !== 'Please enter Category')) {
+        if ((this.state.category) && (this.state.category !== 'Category is required')) {
             fetch('https://your-storybook.herokuapp.com/api/v1/events', {
                 method: 'POST',
                 headers: {
@@ -95,55 +124,120 @@ export class Form extends Component {
                 }))
         } else {
             event.preventDefault();
-            this.setState({ category: 'Please enter Category' });
+            this.setState({ category: 'Category is required' });
         }
     }
 
-    render() {
-        const userCategories = this.props.categories.map(category => category.name).sort()
 
-        const renderCategoryOptions = userCategories.map(category => <option value={category}>{category}</option>);
+    render() {
+        const classes = this.props;
+
+        const userCategories = this.props.categories.map(category => category.name).sort()
+        const renderCategoryOptions = userCategories.map(category => (
+            <option key={category.id} value={category}>{category}</option>
+        ));
 
         return (
-            <div>
-                <h5>New Entry Form</h5>
-                <form onSubmit={this.handleSubmit}>
-                    <label htmlFor='category'>Category</label>
-                    <input type='text' name='category' placeholder='New Category' onChange={this.handleOnChange} value={this.state.category} />
+            <div className={classes.root}>
+                <form className={classes.root} noValidate autoComplete="off" onSubmit={this.handleSubmit}>
 
-                    {(this.props.categories.length)
-                        ?
-                        <>
-                            <select name='category' onChange={this.handleOnChange}>
-                                <option value='' selected disabled hidden>select category</option>
-                                {renderCategoryOptions}
-                            </select>
-                        </>
-                        :
-                        null
-                    }
-                    <br />
+                    <TextField name='category' fullWidth required id="standard-full-width" label="Category" onChange={this.handleOnChange} placeholder='New Category' value={this.state.category} margin="dense" />
 
-                    <label htmlFor='vibe'>Vibe</label>
-                    <select name='vibe' id='vibe' onChange={this.handleOnChange}>
-                        <option value='' selected disabled hidden>select mood</option>
-                        <option value='1 rad'>😀 rad</option>
-                        <option value='2 good'>😊 good</option>
-                        <option value='3 meh'>😕 meh</option>
-                        <option value='4 bad'>😞 bad</option>
-                        <option value='5 awful'>😩 awful</option>
-                    </select><br />
+                    <Grid container spacing={1} alignItems="stretch">
+                        {(this.props.categories.length)
+                            ?
 
-                    <label htmlFor='title'>Event Title</label>
-                    <input type='text' name='title' placeholder='Event Title' onChange={this.handleOnChange} value={this.state.title} /><br />
+                            <Grid item xs>
+                                <TextField
+                                    margin="dense"
+                                    id="outlined-select-currency-native"
+                                    select
+                                    name='category'
+                                    label='Existing Category'
+                                    value={this.state.category}
+                                    onChange={this.handleOnChange}
+                                    SelectProps={{
+                                        native: true,
+                                    }}
+                                    helperText="Select from existing Category"
+                                    variant="outlined"
+                                >
+                                    <option value='' selected disabled hidden></option>
+                                    {renderCategoryOptions}
+                                </TextField>
+                            </Grid>
+                            :
+                            null
+                        }
+                        <Grid item xs={3.5} textAlignLast="end">
+                            <TextField
+                                id="outlined-select-currency-native"
+                                select
+                                margin="dense"
+                                name='vibe'
+                                label='Vibe'
+                                value={this.state.vibe}
+                                onChange={this.handleOnChange}
+                                SelectProps={{
+                                    native: true,
+                                }}
+                                helperText="Please select your mood"
+                                variant="outlined"
+                            >
+                                <option value='' selected disabled hidden></option>
+                                <option value='1 rad'>😀 rad</option>
+                                <option value='2 good'>😊 good</option>
+                                <option value='3 meh'>😕 meh</option>
+                                <option value='4 bad'>😞 bad</option>
+                                <option value='5 awful'>😩 awful</option>
+                            </TextField>
+                        </Grid>
+                    </Grid>
 
-                    <label htmlFor='date'>Date</label>
-                    <input type='date' name='date' placeholder='Event Date' onChange={this.handleOnChange} value={this.state.date} /><br />
+                    <TextField id="filled-search" fullWidth margin="dense" name='title' label="Event Title" onChange={this.handleOnChange} value={this.state.title} />
 
-                    <label htmlFor='time'>Time</label>
-                    <input type='time' name='time' placeholder='Event Time' onChange={this.handleOnChange} value={this.state.time} /><br />
+                    <Grid container spacing={1} alignItems="stretch">
+                        <Grid item xs>
+                            <TextField
+                                id="date"
+                                margin="dense"
+                                name="date"
+                                type="date"
+                                label="Date"
+                                placeholder='Event Date'
+                                className={classes.textField}
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                                onChange={this.handleOnChange}
+                                value={this.state.date}
+                            />
+                        </Grid>
+                        <Grid item xs={3.5} textAlignLast="right">
+                            <TextField
+                                id="time"
+                                label="Event Time"
+                                margin="dense"
+                                name="time"
+                                type="time"
+                                className={classes.textField}
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                                inputProps={{
+                                    step: 1800, // 30 min
+                                }}
+                                onChange={this.handleOnChange} value={this.state.time}
+                            />
+                        </Grid>
+                    </Grid>
 
-                    <label htmlFor='location'>Location</label>
+                    <Divider style={{ margin: '10px 0' }} />
+
+                    <Typography variant="subtitle1" gutterBottom>
+                        <label htmlFor='location'>Location</label>
+                    </Typography>
+
                     <PlacesAutocomplete
                         value={this.state.location}
                         onChange={this.handleLocationChange}
@@ -183,20 +277,35 @@ export class Form extends Component {
                         )}
                     </PlacesAutocomplete>
 
-                    <label htmlFor='description'>Description</label>
-                    <textarea name='description' placeholder='Event Description' onChange={this.handleOnChange} value={this.state.description} /><br />
+                    <TextField fullWidth
+                        id="standard-multiline-static"
+                        name="description"
+                        margin="dense"
+                        label="Event Description"
+                        multiline
+                        placeholder="Event Description"
+                        rows={5}
+                        onChange={this.handleOnChange} value={this.state.description}
+                    />
 
-                    <label htmlFor='image'>Image</label>
-                    <input type='file' name='image' onChange={this.handleImageChange} />
+                    <Typography variant="subtitle1" gutterBottom>
+                        <label htmlFor='image'>Image</label>
+                    </Typography>
+
+                    <Input fullWidth type='file' name='image' onChange={this.handleImageChange} />
                     {this.state.image && (
                         <img
                             src={this.state.image}
                             alt='chosen'
-                            style={{ height: '200px' }} />
+                            style={{ maxWidth: '40vh' }} />
                     )}
+
+                    <br />
                     <br />
 
-                    <input type='submit' value='Save' />
+                    <Button variant="contained" color="primary" type="submit">
+                        Save
+                    </Button>
                 </form>
             </div >
         )
