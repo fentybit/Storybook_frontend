@@ -1,7 +1,6 @@
 function eventReducer(state = [], action) {
     switch (action.type) {
         case 'GET_EVENT':
-            console.log('eventReducer: ', action.payload.event)
             return action.payload.event
 
         default:

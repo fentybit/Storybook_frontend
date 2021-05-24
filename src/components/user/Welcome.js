@@ -25,9 +25,9 @@ const Welcome = () => (
             </Box>
 
             <Typography variant="subtitle1" gutterBottom>
-                Welcome to your digital journaling app.<br />
-                Create your own story.<br />
-                Create your own storybook.
+                Welcome to your journal.<br />
+                Live your own story.<br />
+                Your storybook.
             </Typography>
         </Grid>
     </div >

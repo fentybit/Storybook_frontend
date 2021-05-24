@@ -1,7 +1,7 @@
 # Storybook
 
 <div align="center">
-  <img src="#">
+  <img src="images/main.gif">
 </div>
 
 <br>
@@ -32,6 +32,12 @@ Welcome to my simplistic version of digital journaling app.<br>
 
 <br>
 
+<div align="center">
+  <img src="images/components.png">
+</div>
+
+<br>
+
 **Models** <br>
 User, Event, Category, Image<br>
 
@@ -47,13 +53,14 @@ User, Event, Category, Image<br>
 
 **Controller** <br>
 ApplicationController<br>
-UsersController<br>
-EventsController<br>
-CategoriesController<br>
-ImagesController<br>
+Api::V1::AuthController<br>
+Api::V1::CategoriesController<br>
+Api::V1::EventsController<br>
+Api::V1::ImagesController<br>
+Api::V1::UsersController<br>
 
 **User Account and Validation** <br>
-JWT Authentication: Log In, Log Out, Sign Up.<br>
+JWT Authentication: Sign Up, Log In and Log Out.<br>
 
 ## API Database
 
@@ -83,7 +90,7 @@ Open Chrome browser, and redirect to 'http://localhost:3000' to start the app.
 
 ## Build Status and Future Improvement
 
-<p>Current project-built was completed in a 2-week timeframe from model association development, MVP for user interface and Material UI implementation. Future cycle of product development as follows:</p>
+<p>Storybook was completed in 2-week timeframe from implementing Rails back-end, ReactJS front-end, Cloudinary API, Google Maps API and Material-UI library. Future cycle of product development as follows:</p>
 
 - [x]
 - [x]

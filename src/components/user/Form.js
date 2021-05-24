@@ -139,7 +139,10 @@ class Form extends Component {
                                 {(this.props.match.url === '/login') ? "Don't have an account? Sign Up" : "Have an account? Log In"}
                             </Link>
                         </Grid>
-                        {(this.props.error) ? <h6>{this.props.error}</h6> : null}
+
+                        <Typography style={{ color: "#e91e63" }} variant="body1" gutterBottom>
+                            {(this.props.error) ? <h6>{this.props.error}</h6> : null}
+                        </Typography>
                     </div>
                 </Grid>
             </Container>
