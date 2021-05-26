@@ -86,7 +86,7 @@ Open Chrome browser, and redirect to 'http://localhost:3000' to start the app.
 
 **Alternatively, it is fully deployed on Netlify!**
 <br>
-<a href="#">Storybook</a>
+<a href="https://your-storybook.netlify.app">Storybook</a>
 
 ## Build Status and Future Improvement
 
