@@ -11,7 +11,7 @@ Welcome to my simplistic version of digital journaling app.<br>
 
 <p><a href="https://github.com/fentybit/Storybook_backend">Back-End GitHub Repo</a></p>
 <p><a href="https://youtu.be/vlcJ1QT3M_M">YouTube Demo</a></p>
-<p><a href="#">DEV Blog</a></p>
+<p><a href="https://dev.to/fentybit/storybook-4p2g">DEV Blog</a></p>
 
 ## About
 
@@ -64,7 +64,8 @@ JWT Authentication: Sign Up, Log In and Log Out.<br>
 
 ## API Database
 
-- [x] <a href="https://developers.google.com/maps/documentation/javascript/places-autocomplete">Google Maps JavaScript API</a>
+- [x] <a href="https://console.cloud.google.com/apis/dashboard">Google Developer API</a>
+- [x] <a href="https://cloudinary.com/">Cloudinary API</a>
 
 ## Installation
 
@@ -82,22 +83,24 @@ $ rails s
 
 <p>Open Chrome browser, and redirect to a new local host to start the app.</p>
 
-Open Chrome browser, and redirect to 'http://localhost:3000' to start the app.
-
 **Alternatively, it is fully deployed on Netlify!**
 <br>
 <a href="https://your-storybook.netlify.app">Storybook</a>
 
 ## Build Status and Future Improvement
 
-<p>Storybook was completed in 2-week timeframe from implementing Rails back-end, ReactJS front-end, Cloudinary API, Google Maps API and Material-UI library. Future cycle of product development as follows:</p>
+<p>Storybook was completed in a 2-week timeframe from implementing Rails back-end, ReactJS front-end, Cloudinary API, Google Maps API and Material-UI library. Future cycle of product development as follows:</p>
 
-- [x]
-- [x]
-- [x]
-- [x]
-- [x]
-- [x]
+- [x] Search Bar. Over the time, the user will have many events, and it gets troublesome when the user needs to immediately access a specific event entry. A search bar to quickly type event title and access the journal entry would be useful.
+- [x] Add `Friend` to model associations. I envision my app to emulate similar concept such as Instagram. Instead of creating a simple journaling app, what about a social journaling platform. Each user can personalize their privacy whether or not they'd like to share with their friends.
+
+<div align="center">
+  <img src="images/erd_future.png">
+</div>
+
+- [x] Adding mood tracker. Current attribute `vibe` to capture my preliminary attempt of gathering user mood data on each event entry. I found a [mood tracker API](https://github.com/drypycode/MoodTracker-API) that I would love to integrate in future project build. User can view their journal entries based on `Mood` under View NavBar.
+- [x] Current event entry only allows one image upload. User should be able to upload multiple images, insert GIF and video upload.
+- [x] Create a toggle track for dark mode. 😎
 
 ## Stack
 
