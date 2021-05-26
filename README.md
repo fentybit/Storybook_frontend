@@ -10,7 +10,7 @@
 Welcome to my simplistic version of digital journaling app.<br>
 
 <p><a href="https://github.com/fentybit/Storybook_backend">Back-End GitHub Repo</a></p>
-<p><a href="#">YouTube Demo</a></p>
+<p><a href="https://youtu.be/vlcJ1QT3M_M">YouTube Demo</a></p>
 <p><a href="#">DEV Blog</a></p>
 
 ## About
@@ -107,7 +107,7 @@ Open Chrome browser, and redirect to 'http://localhost:3000' to start the app.
 - [x] ActiveModel::Serializer
 - [x] Rack CORS
 - [x] React Router
-- [x] React Calendar
+- [x] React Infinite Calendar
 - [x] Google Map React
 - [x] React Places Autocomplete
 - [x] Cloudinary
@@ -115,6 +115,10 @@ Open Chrome browser, and redirect to 'http://localhost:3000' to start the app.
 
 ## Resources
 
-- [x] <a href="https://unsplash.com/">Unsplash</a>
-- [x] <a href="https://www.npmjs.com/package/react-calendar">React Calendar</a>
+- [x] <a href="https://reactjs.org/">ReactJS</a>
+- [x] <a href="https://cloudinary.com/">Cloudinary</a>
+- [x] <a href="https://www.npmjs.com/package/google-maps-react">Google Maps React</a>
+- [x] <a href="https://www.npmjs.com/package/react-google-autocomplete">React Google Autocomplete</a>
+- [x] <a href="https://github.com/clauderic/react-infinite-calendar">React Infinite Calendar</a>
 - [x] <a href="https://material-ui.com/">Material-UI</a>
+- [x] <a href="https://unsplash.com/">Unsplash</a>
