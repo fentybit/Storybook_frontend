@@ -19,7 +19,6 @@ export const fetchUser = (history) => {
                     if (data.jwt) {
                         localStorage.setItem("token", data.jwt);
                         dispatch({ type: 'GET_USER', payload: data });
-                        history.push('/events')
                     }
                 })
         }

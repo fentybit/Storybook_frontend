@@ -67,8 +67,8 @@ function App(props) {
         <Route path='/signup' render={renderForm} />
         <Route path='/events' render={renderProfile} />
 
-        <Route path='/' exact render={() => <Welcome />} />
-        <Route render={() => <Welcome />} />
+        <Route path='/' exact render={(routerProps) => <Welcome {...routerProps} />} />
+        <Route render={(routerProps) => <Welcome {...routerProps} />} />
       </Switch>
     </div>
   );
