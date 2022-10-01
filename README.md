@@ -85,7 +85,10 @@ $ rails s
 
 **Alternatively, it is fully deployed on Netlify!**
 <br>
-<a href="https://your-storybook.netlify.app">Storybook</a>
+<p><a href="https://your-storybook.netlify.app">Storybook</a></p>
+<small>username || password = fentybit</small>
+
+<br>
 
 ## Build Status and Future Improvement
 
